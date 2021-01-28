@@ -2,14 +2,7 @@ import React from "react";
 import Moment from "react-moment";
 import ReactPlayer from "react-player";
 
-import {
-  Card,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-} from "reactstrap";
+import { Card, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 
 export const RibbonCard = ({ ribbon }) => (
   <div className="col-4">

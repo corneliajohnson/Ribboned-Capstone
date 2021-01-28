@@ -31,7 +31,7 @@ export const ApplicationViews = () => {
         {isLoggedIn ? <RibbonList /> : <Redirect to="/login" />}
       </Route>
 
-      <Route exact path="/ribbon">
+      <Route exact path="/ribbon/:ribbonId(\d+)">
         {isLoggedIn ? <RibbonDetail /> : <Redirect to="/login" />}
       </Route>
     </Switch>
