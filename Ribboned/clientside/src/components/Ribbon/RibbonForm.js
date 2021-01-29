@@ -4,6 +4,7 @@ import "./Ribbon.css";
 
 export const RibbonForm = (props) => {
   const [isPublic, setIsPublic] = useState(false);
+  const [ribbon, setRibbon] = useState({});
   const handlePrivacy = () => {
     if (!isPublic) {
       setIsPublic(true);
@@ -12,37 +13,43 @@ export const RibbonForm = (props) => {
     }
     console.log(isPublic);
   };
+
+  const handleControlledInputChange = (event) => {
+    const newRibbon = { ...ribbon };
+    newRibbon[event.target.name] = event.target.value;
+    setRibbon(newRibbon);
+  };
   return (
     <div className="container">
       <div className="w-75 mx-auto p-4">
         <Form className="border p-5">
           <h2 className="text-center">New Ribbon</h2>
           <FormGroup row>
-            <Label for="exampleEmail" lg={2}>
+            <Label for="title" lg={2}>
               Title
             </Label>
             <Col lg={10}>
               <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="with a placeholder"
+                type="text"
+                name="title"
+                onChange={handleControlledInputChange}
+                required="required"
               />
             </Col>
           </FormGroup>
           <Row form>
             <Col md={6}>
               <FormGroup row>
-                <Label for="exampleEmail" lg={2}>
+                <Label for="category" lg={2}>
                   Category
                 </Label>
                 <Col lg={10}>
                   <Input
-                    type="email"
-                    name="email"
-                    id="exampleEmail"
-                    placeholder="with a placeholder"
-                  />
+                    type="select"
+                    name="categoryId"
+                    onChange={handleControlledInputChange}
+                    required="required"
+                  ></Input>
                 </Col>
               </FormGroup>
             </Col>
@@ -53,46 +60,45 @@ export const RibbonForm = (props) => {
                 </Label>
                 <Col lg={10}>
                   <Input
-                    type="email"
-                    name="email"
-                    id="exampleEmail"
-                    placeholder="with a placeholder"
-                  />
+                    type="select"
+                    name="sourceId"
+                    onChange={handleControlledInputChange}
+                    required="required"
+                  ></Input>
                 </Col>
               </FormGroup>
             </Col>
           </Row>
           <FormGroup row>
-            <Label for="exampleEmail" lg={2}>
+            <Label for="url" lg={2}>
               URL
             </Label>
             <Col gl={10}>
               <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="with a placeholder"
+                type="url"
+                name="url"
+                onChange={handleControlledInputChange}
               />
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="exampleEmail" lg={2}>
+            <Label for="decription" lg={2}>
               Decription
             </Label>
             <Col lg={10}>
               <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="with a placeholder"
+                type="textarea"
+                name="decription"
+                onChange={handleControlledInputChange}
+                required="required"
               />
             </Col>
           </FormGroup>
           <FormGroup>
             <div className="button b2 m-1" id="button-18">
               <input
-                type="checkbox"
                 className="checkbox"
+                checked={isPublic}
                 onChange={handlePrivacy}
               />
               <div className="knobs"></div>
