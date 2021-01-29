@@ -7,6 +7,7 @@ import { Register } from "./register/Register";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import { CategoryManager } from "./category/CategoryManager";
 import { RibbonList } from "./ribbon/RibbonList";
+import { RibbonForm } from "./ribbon/RibbonForm";
 
 export const ApplicationViews = () => {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -21,6 +22,10 @@ export const ApplicationViews = () => {
 
       <Route exact path="/">
         {isLoggedIn ? <Home /> : <Redirect to="/login" />}
+      </Route>
+
+      <Route exact path="/ribbon/create">
+        {isLoggedIn ? <RibbonForm /> : <Redirect to="/login" />}
       </Route>
 
       <Route exact path="/categories">
