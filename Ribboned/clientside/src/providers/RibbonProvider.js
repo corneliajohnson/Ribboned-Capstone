@@ -54,7 +54,7 @@ export const RibbonProvider = (props) => {
 
   const deleteRibbon = (id) => {
     getToken().then((token) => {
-      return fetch(`/api/ribbon/${id}`, {
+      return fetch(`${apiUrl}/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,14 +64,14 @@ export const RibbonProvider = (props) => {
   };
 
   const getRibbonById = (id) => {
-    getToken().then((token) => {
-      return fetch(`/api/ribbon/${id}`, {
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((res) => res.json());
-    });
+      }).then((resp) => resp.json())
+    );
   };
 
   const searchRibbons = (searchQuery) => {

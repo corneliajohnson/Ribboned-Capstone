@@ -8,6 +8,7 @@ import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { CategoryProvider } from "./providers/CategoryProvider";
 import { SourceProvider } from "./providers/SourceProvider";
 import { RibbonProvider } from "./providers/RibbonProvider";
+import { SnagProvider } from "./providers/SnagProvider";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,15 +18,17 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <RibbonProvider>
-        <SourceProvider>
-          <CategoryProvider>
-            <UserProfileProvider>
-              <Ribboned />
-            </UserProfileProvider>
-          </CategoryProvider>
-        </SourceProvider>
-      </RibbonProvider>
+      <SnagProvider>
+        <RibbonProvider>
+          <SourceProvider>
+            <CategoryProvider>
+              <UserProfileProvider>
+                <Ribboned />
+              </UserProfileProvider>
+            </CategoryProvider>
+          </SourceProvider>
+        </RibbonProvider>
+      </SnagProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

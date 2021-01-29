@@ -54,7 +54,11 @@ export const SnagProvider = (props) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((res) => res.json());
+      })
+        .then((res) => res.json())
+        .then((snags) => {
+          setSnags(snags);
+        });
     });
   };
 

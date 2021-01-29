@@ -27,7 +27,7 @@ namespace Ribboned.Repositories
 
         public List<Snag> GetByRibbon(int ribbonId)
         {
-            return _context.Snag.Where(s => s.RibbonId == ribbonId).ToList();
+            return _context.Snag.Where(s => s.RibbonId == ribbonId).OrderByDescending(s => s.DateCreated).ToList();
         }
 
         public Snag GetById(int id)

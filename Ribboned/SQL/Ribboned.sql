@@ -8,11 +8,11 @@ USE [Ribboned]
 GO
 
 
+DROP TABLE IF EXISTS [Snag];
 DROP TABLE IF EXISTS [Category];
 DROP TABLE IF EXISTS [Ribbon];
-DROP TABLE IF EXISTS [Snag];
-DROP TABLE IF EXISTS [Source];
 DROP TABLE IF EXISTS [UserProfile];
+DROP TABLE IF EXISTS [Source];
 
 CREATE TABLE [UserProfile] (
   [Id] integer PRIMARY KEY IDENTITY,
@@ -20,6 +20,7 @@ CREATE TABLE [UserProfile] (
   [Email] nvarchar(100) NOT NULL,
   [ImageUrl] nvarchar(255),
   [FirebaseUserId] nvarchar(28) NOT NULL,
+  [uncategorizedId] integer,
 
   CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId),
   CONSTRAINT UQ_Email UNIQUE(Email)
@@ -47,6 +48,9 @@ CREATE TABLE [Ribbon] (
   [URL] nvarchar(255) NOT NULL,
   [DateCreated] datetime NOT NULL,
   [CategoryId] integer NOT NULL,
+  [Thumbnail] nvarchar (255),
+  [IsActive] bit NOT NULL DEFAULT 1,
+  [isPublic] bit NOT NULL DEFAULT 0,
 
  CONSTRAINT [FK_Ribbon_Category] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([Id]),
  CONSTRAINT [FK_Ribbon_Source] FOREIGN KEY ([SourceId]) REFERENCES [Source] ([Id]),
@@ -58,6 +62,7 @@ CREATE TABLE [Snag] (
   [DateCreated] datetime NOT NULL,
   [Note] nvarchar(500) NOT NULL,
   [Seconds] integer NOT NULL,
+  [TimeString] nvarchar(10 )NOT NULL
 
   CONSTRAINT [FK_Snag_Ribbon] FOREIGN KEY ([RibbonId]) REFERENCES [Ribbon] ([Id])
 )
