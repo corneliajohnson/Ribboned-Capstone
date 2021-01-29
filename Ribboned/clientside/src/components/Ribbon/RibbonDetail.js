@@ -1,8 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { Button } from "reactstrap";
+import { useParams, useHistory } from "react-router-dom";
+import { RibbonContext } from "../../providers/RibbonProvider";
 
 export const RibbonDetail = () => {
+  const { getRibbonById } = useContext(RibbonContext);
+  const [ribbon, setRibbon] = useState({});
+  const { ribbonId } = useParams();
+
+  useEffect(() => {
+    getRibbonById(ribbonId).then((response) => {
+      setRibbon(response);
+    });
+  }, []);
+
   const [state, setState] = useState({
     playing: false,
     paused: false,
@@ -72,19 +84,17 @@ export const RibbonDetail = () => {
   return (
     <>
       <div className="container">
-        <h1 className="text-center">Ribbon Title</h1>
+        <h1 className="text-center">{ribbon.title}</h1>
         <div>
           <div className="d-flex justify-content-center">
             <ReactPlayer
               onSeek={handleSeekChange}
               ref={playerRef}
-              // muted={true}
               onPause={paused}
               playing={playing}
               onProgress={handleProgress}
               controls={true}
-              url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-              //url="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+              url={ribbon.url}
             />
           </div>
           <div className="text-center m-3">
