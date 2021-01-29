@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import { Button } from "reactstrap";
 import { useParams, useHistory } from "react-router-dom";
 import { RibbonContext } from "../../providers/RibbonProvider";
+import { RibbonList } from "../snag/RibbonList";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -108,8 +109,9 @@ export const RibbonDetail = () => {
               Add Snag {timeDisplayFormat}
             </Button>
           </div>
+          <RibbonList />
           {/* Snags */}
-          <div className="row p-5">
+          {/* <div className="row p-5">
             <div className="col align-self-center">
               <div class="list-group">
                 <div class="list-group-item list-group-item-action active">
@@ -136,7 +138,7 @@ export const RibbonDetail = () => {
                 ;
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <canvas ref={canvasRef} />
       </div>
