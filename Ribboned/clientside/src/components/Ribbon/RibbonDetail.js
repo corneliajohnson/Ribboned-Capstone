@@ -1,9 +1,9 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import ReactPlayer from "react-player";
-import { Button } from "reactstrap";
 import { useParams, useHistory } from "react-router-dom";
 import { RibbonContext } from "../../providers/RibbonProvider";
-import { RibbonList } from "../snag/RibbonList";
+import { SnagList } from "../snag/SnagList";
+import { SnagAddButton } from "../snag/SnagAddButton";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -22,7 +22,7 @@ export const RibbonDetail = () => {
     duration: 0,
   });
   const [timeDisplayFormat, setTimeDisplayformat] = useState("normal");
-  const [snags, setSnags] = useState([]);
+
   const { playing } = state;
   const { paused } = state;
 
@@ -67,16 +67,6 @@ export const RibbonDetail = () => {
     }
   };
 
-  //add info for snag
-  const addSnag = () => {
-    const snagCopy = [...snags];
-    snagCopy.push({
-      time: playerRef.current.getCurrentTime(),
-      display: format(playerRef.current.getCurrentTime()),
-    });
-    setSnags(snagCopy);
-  };
-
   const handleSeekChange = (e, newValue) => {
     console.log({ newValue });
     setState({ ...state, played: parseFloat(newValue / 100) });
@@ -99,46 +89,16 @@ export const RibbonDetail = () => {
             />
           </div>
           <div className="text-center m-3">
-            <Button
-              className="btn btn-lg btn-secondary w-50"
-              onClick={() => {
-                handlePlayPause();
-                addSnag();
-              }}
-            >
-              Add Snag {timeDisplayFormat}
-            </Button>
+            <SnagAddButton
+              handlePlayPause={handlePlayPause}
+              playerRef={playerRef}
+            />
           </div>
-          <RibbonList />
-          {/* Snags */}
-          {/* <div className="row p-5">
-            <div className="col align-self-center">
-              <div class="list-group">
-                <div class="list-group-item list-group-item-action active">
-                  Ribbon Snags
-                </div>
-                {snags.map((snag) => (
-                  <>
-                    <div class="list-group-item list-group-item-actions">
-                      <Button
-                        className="btn btn-link"
-                        onClick={() => {
-                          //go to seconds stamp of video
-                          playerRef.current.seekTo(snag.time);
-                          //play video
-                          handlePlay();
-                        }}
-                      >
-                        {snag.display}
-                      </Button>
-                      Snag Note
-                    </div>
-                  </>
-                ))}
-                ;
-              </div>
-            </div>
-          </div> */}
+          <SnagList
+            playerRef={playerRef}
+            handlePlay={handlePlay}
+            timeDisplayFormat={timeDisplayFormat}
+          />
         </div>
         <canvas ref={canvasRef} />
       </div>
