@@ -34,6 +34,9 @@ namespace Ribboned.Controllers
             _categoryRepo.Add(category);
             CreatedAtAction("Get", new { category = category.Id }, category);
 
+            up.UncategorizedId = category.Id;
+            _userProfileRepo.Update(up);
+
             return CreatedAtAction(
                 nameof(GetUserProfile),
                 new { firebaseUserId = up.FirebaseUserId },

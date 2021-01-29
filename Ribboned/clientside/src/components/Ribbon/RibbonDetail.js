@@ -1,15 +1,31 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import ReactPlayer from "react-player";
-import { Button } from "reactstrap";
+import { useParams, useHistory } from "react-router-dom";
+import { RibbonContext } from "../../providers/RibbonProvider";
+import { SnagList } from "../snag/SnagList";
+import { SnagAddButton } from "../snag/SnagAddButton";
+import Moment from "react-moment";
+import "./Ribbon.css";
 
 export const RibbonDetail = () => {
+  const { getRibbonById } = useContext(RibbonContext);
+  const [ribbon, setRibbon] = useState({});
+  const [showDescription, setShowDecription] = useState(true);
+  const { ribbonId } = useParams();
+
+  useEffect(() => {
+    getRibbonById(ribbonId).then((response) => {
+      setRibbon(response);
+    });
+  }, []);
+
   const [state, setState] = useState({
     playing: false,
     paused: false,
     duration: 0,
   });
   const [timeDisplayFormat, setTimeDisplayformat] = useState("normal");
-  const [snags, setSnags] = useState([]);
+
   const { playing } = state;
   const { paused } = state;
 
@@ -54,79 +70,72 @@ export const RibbonDetail = () => {
     }
   };
 
-  //add info for snag
-  const addSnag = () => {
-    const snagCopy = [...snags];
-    snagCopy.push({
-      time: playerRef.current.getCurrentTime(),
-      display: format(playerRef.current.getCurrentTime()),
-    });
-    setSnags(snagCopy);
-  };
-
   const handleSeekChange = (e, newValue) => {
     console.log({ newValue });
     setState({ ...state, played: parseFloat(newValue / 100) });
   };
 
+  //togle decription
+  const toggleDecription = () => {
+    if (showDescription) {
+      setShowDecription(false);
+    } else {
+      setShowDecription(true);
+    }
+  };
+
   return (
     <>
       <div className="container">
-        <h1 className="text-center">Ribbon Title</h1>
+        <h1 className="text-center w-75 mx-auto">{ribbon.title}</h1>
         <div>
           <div className="d-flex justify-content-center">
             <ReactPlayer
               onSeek={handleSeekChange}
               ref={playerRef}
-              // muted={true}
               onPause={paused}
               playing={playing}
               onProgress={handleProgress}
               controls={true}
-              url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-              //url="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+              url={ribbon.url}
             />
           </div>
-          <div className="text-center m-3">
-            <Button
-              className="btn btn-lg btn-secondary w-50"
-              onClick={() => {
-                handlePlayPause();
-                addSnag();
-              }}
+          <div>
+            {" "}
+            <p
+              className={
+                showDescription
+                  ? "mx-auto w-50 font-weight-bold"
+                  : "hide-decription"
+              }
             >
-              Add Snag {timeDisplayFormat}
-            </Button>
+              {ribbon.decription}
+            </p>{" "}
+            <a
+              className="mx-auto w-50 float-right"
+              href="#"
+              onClick={toggleDecription}
+            >
+              {showDescription ? "Hide Decription" : "Show Decription"}
+            </a>
           </div>
-          {/* Snags */}
-          <div className="row p-5">
-            <div className="col align-self-center">
-              <div class="list-group">
-                <div class="list-group-item list-group-item-action active">
-                  Ribbon Snags
-                </div>
-                {snags.map((snag) => (
-                  <>
-                    <div class="list-group-item list-group-item-actions">
-                      <Button
-                        className="btn btn-link"
-                        onClick={() => {
-                          //go to seconds stamp of video
-                          playerRef.current.seekTo(snag.time);
-                          //play video
-                          handlePlay();
-                        }}
-                      >
-                        {snag.display}
-                      </Button>
-                      Snag Note
-                    </div>
-                  </>
-                ))}
-                ;
-              </div>
-            </div>
+          <div className="text-muted mx-auto w-50">
+            Ribbion Created:{" "}
+            <Moment format=" MMM D, YYYY" withTitle>
+              {ribbon.createdDateTime}
+            </Moment>
           </div>
+          <div className="text-center m-3">
+            <SnagAddButton
+              handlePlayPause={handlePlayPause}
+              playerRef={playerRef}
+            />
+          </div>
+          <SnagList
+            playerRef={playerRef}
+            handlePlay={handlePlay}
+            timeDisplayFormat={timeDisplayFormat}
+          />
         </div>
         <canvas ref={canvasRef} />
       </div>
