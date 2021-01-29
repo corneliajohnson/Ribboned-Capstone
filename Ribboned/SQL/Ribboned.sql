@@ -8,10 +8,10 @@ USE [Ribboned]
 GO
 
 
-DROP TABLE IF EXISTS [Category];
 DROP TABLE IF EXISTS [Ribbon];
 DROP TABLE IF EXISTS [Snag];
 DROP TABLE IF EXISTS [Source];
+DROP TABLE IF EXISTS [Category];
 DROP TABLE IF EXISTS [UserProfile];
 
 CREATE TABLE [UserProfile] (
@@ -47,6 +47,7 @@ CREATE TABLE [Ribbon] (
   [URL] nvarchar(255) NOT NULL,
   [DateCreated] datetime NOT NULL,
   [CategoryId] integer NOT NULL,
+  [Thumbnail] nvarchar (255)
 
  CONSTRAINT [FK_Ribbon_Category] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([Id]),
  CONSTRAINT [FK_Ribbon_Source] FOREIGN KEY ([SourceId]) REFERENCES [Source] ([Id]),

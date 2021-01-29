@@ -12,7 +12,7 @@ SET IDENTITY_INSERT [UserProfile] OFF
 SET IDENTITY_INSERT [Category] ON
 INSERT INTO [Category] 
 ([Id], [Name], [UserProfileId])
-VALUES (1, 'Other', 1), (2, 'Tech', 2);
+VALUES (1, 'Other', 1),(2, 'Other', 2), (3, 'Other', 3), (4, 'Tech', 1);
 SET IDENTITY_INSERT [Category] OFF
 
 SET IDENTITY_INSERT [Source] ON
@@ -33,7 +33,7 @@ SET IDENTITY_INSERT [Snag] OFF
 
 SET IDENTITY_INSERT [Ribbon] ON
 INSERT INTO [Ribbon]
-([Id], [Title], [Decription],[SourceId],[CategoryId],[URL],[DateCreated])
-VALUES (1, 'Web Development In 2021', 'Decription', 1, 2, 'https://youtu.be/MLIKTBvgAGY', '2020-03-15'),
-(2, '$37K to $125K+ by teaching myself to code and becoming a software engineer', 'Decription', 1, 2, 'https://youtu.be/NyCyknm_n8M', '2020-03-15');
+([Id], [Title], [Decription],[SourceId],[CategoryId],[URL],[DateCreated], [Thumbnail])
+VALUES (1, 'Web Development In 2021', 'Web Development will change in 2021. And industries will. Here is what you should know as a web developer in 2021!', 2, 2, 'https://youtu.be/MLIKTBvgAGY', '2020-03-15', 'http://img.youtube.com/vi/MLIKTBvgAGY/hqdefault.jpg'),
+(2, '$37K to $125K+ by teaching myself to code and becoming a software engineer', 'Hey! In this video, Ill be sharing how I went from making $37.5K as a Business Analyst to over $125K+ by teaching myself how to code and became a self taught software engineer. Ill be sharing insights into software engineering salaries in this video as well, so stay tuned.', 2, 2, 'https://youtu.be/NyCyknm_n8M', '2020-03-15', 'http://img.youtube.com/vi/NyCyknm_n8M/hqdefault.jpg');
 SET IDENTITY_INSERT [Ribbon] OFF

@@ -11,6 +11,7 @@ namespace Ribboned.Models
         public int CategoryId { get; set; }
         public int SourceId { get; set; }
         public string URL { get; set; }
+        public string Thumbnail { get; set; }
         public DateTime DateCreated { get; set; }
         public List<Snag> Snags { get; set; }
         public Category Category { get; set; }

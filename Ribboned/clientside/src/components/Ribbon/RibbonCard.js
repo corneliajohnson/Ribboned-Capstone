@@ -2,20 +2,39 @@ import React from "react";
 import Moment from "react-moment";
 import ReactPlayer from "react-player";
 
-import { Card, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+import {
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardImg,
+} from "reactstrap";
 
 export const RibbonCard = ({ ribbon }) => (
   <div className="col-4">
     <Card style={{ height: "500px" }}>
-      <ReactPlayer
-        top
-        width="100%"
-        height="60%"
-        src="/assets/318x180.svg"
-        alt="Card image cap"
-        controls={false}
-        url={ribbon.url}
-      />
+      {ribbon.thumbnail ? (
+        <CardImg
+          top
+          width="100%"
+          height="60%"
+          src="/assets/318x180.svg"
+          alt="Card image cap"
+          controls={false}
+          src={ribbon.thumbnail}
+        />
+      ) : (
+        <ReactPlayer
+          top
+          width="100%"
+          height="60%"
+          src="/assets/318x180.svg"
+          alt="Card image cap"
+          controls={false}
+          url={ribbon.url}
+        />
+      )}
       <CardBody>
         <CardTitle tag="h5">{ribbon.title}</CardTitle>
         <CardSubtitle tag="h6" className="mb-2 text-muted">
