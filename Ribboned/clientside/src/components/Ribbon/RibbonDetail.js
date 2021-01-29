@@ -5,6 +5,7 @@ import { RibbonContext } from "../../providers/RibbonProvider";
 import { SnagList } from "../snag/SnagList";
 import { SnagAddButton } from "../snag/SnagAddButton";
 import Moment from "react-moment";
+import "./Ribbon.css";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -86,7 +87,7 @@ export const RibbonDetail = () => {
   return (
     <>
       <div className="container">
-        <h1 className="text-center">{ribbon.title}</h1>
+        <h1 className="text-center w-75 mx-auto">{ribbon.title}</h1>
         <div>
           <div className="d-flex justify-content-center">
             <ReactPlayer
@@ -99,14 +100,24 @@ export const RibbonDetail = () => {
               url={ribbon.url}
             />
           </div>
-          <div className="mx-auto w-50 font-weight-bold">
+          <div>
             {" "}
-            <p>
-              {ribbon.decription}{" "}
-              <a href="#" onClick={toggleDecription}>
-                Hide Decription
-              </a>
+            <p
+              className={
+                showDescription
+                  ? "mx-auto w-50 font-weight-bold"
+                  : "hide-decription"
+              }
+            >
+              {ribbon.decription}
             </p>{" "}
+            <a
+              className="mx-auto w-50 float-right"
+              href="#"
+              onClick={toggleDecription}
+            >
+              {showDescription ? "Hide Decription" : "Show Decription"}
+            </a>
           </div>
           <div className="text-muted mx-auto w-50">
             Ribbion Created:{" "}

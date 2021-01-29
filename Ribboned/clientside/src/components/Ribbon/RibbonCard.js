@@ -38,11 +38,15 @@ export const RibbonCard = ({ ribbon }) => (
           />
         )}
         <CardBody>
-          <CardTitle tag="h5">{ribbon.title}</CardTitle>
+          <CardTitle className="ribbon-card-title" tag="h5">
+            {ribbon.title}
+          </CardTitle>
           <CardSubtitle tag="h6" className="mb-2 text-muted">
             <Moment fromNow>{ribbon.dateCreated}</Moment>
           </CardSubtitle>
-          <CardText>{ribbon.decription}</CardText>
+          <CardText className="ribbon-card-decription">
+            {ribbon.decription}
+          </CardText>
           {ribbon.snags.length === 0 ? (
             "No Ribbon Snags"
           ) : (
