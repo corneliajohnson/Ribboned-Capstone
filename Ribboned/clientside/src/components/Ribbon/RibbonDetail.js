@@ -4,10 +4,12 @@ import { useParams, useHistory } from "react-router-dom";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { SnagList } from "../snag/SnagList";
 import { SnagAddButton } from "../snag/SnagAddButton";
+import Moment from "react-moment";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
   const [ribbon, setRibbon] = useState({});
+  const [showDescription, setShowDecription] = useState(true);
   const { ribbonId } = useParams();
 
   useEffect(() => {
@@ -72,6 +74,15 @@ export const RibbonDetail = () => {
     setState({ ...state, played: parseFloat(newValue / 100) });
   };
 
+  //togle decription
+  const toggleDecription = () => {
+    if (showDescription) {
+      setShowDecription(false);
+    } else {
+      setShowDecription(true);
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -87,6 +98,21 @@ export const RibbonDetail = () => {
               controls={true}
               url={ribbon.url}
             />
+          </div>
+          <div className="mx-auto w-50 font-weight-bold">
+            {" "}
+            <p>
+              {ribbon.decription}{" "}
+              <a href="#" onClick={toggleDecription}>
+                Hide Decription
+              </a>
+            </p>{" "}
+          </div>
+          <div className="text-muted mx-auto w-50">
+            Ribbion Created:{" "}
+            <Moment format=" MMM D, YYYY" withTitle>
+              {ribbon.createdDateTime}
+            </Moment>
           </div>
           <div className="text-center m-3">
             <SnagAddButton
