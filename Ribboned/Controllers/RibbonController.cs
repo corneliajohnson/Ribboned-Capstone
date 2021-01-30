@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ribboned.Models;
 using Ribboned.Repositories;
+using System;
 using System.Security.Claims;
 
 namespace Ribboned.Controllers
@@ -20,6 +21,7 @@ namespace Ribboned.Controllers
         [HttpPost]
         public IActionResult Post(Ribbon ribbon)
         {
+            ribbon.DateCreated = DateTime.Now;
             _ribbonRepo.Add(ribbon);
             return CreatedAtAction("Get", new { id = ribbon.Id }, ribbon);
         }

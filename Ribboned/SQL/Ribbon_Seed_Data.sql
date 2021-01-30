@@ -20,7 +20,7 @@ SET  IDENTITY_INSERT [Source] OFF
 SET IDENTITY_INSERT [Category] ON
 INSERT INTO [Category] 
 ([Id], [Name], [UserProfileId])
-VALUES (1, 'Other', 1),(2, 'Other', 2), (3, 'Other', 3), (4, 'Tech', 1);
+VALUES (1, 'uncategorized', 1),(2, 'uncategorized', 2), (3, 'uncategorized', 3), (4, 'Tech', 1);
 SET IDENTITY_INSERT [Category] OFF
 
 SET IDENTITY_INSERT [Snag] ON

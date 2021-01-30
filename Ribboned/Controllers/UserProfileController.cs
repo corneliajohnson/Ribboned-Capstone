@@ -27,7 +27,7 @@ namespace Ribboned.Controllers
             //add a category for all new users
             var category = new Category()
             {
-                Name = "Other",
+                Name = "uncategorized",
                 UserProfileId = up.Id
             };
 

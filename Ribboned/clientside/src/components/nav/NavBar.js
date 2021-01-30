@@ -37,7 +37,7 @@ export const NavBar = (props) => {
               </Link>
             </li>
             <li className="navbar__item nav__addribbonlink">
-              <Link className="navbar__link" to="/create/ribbon">
+              <Link className="navbar__link" to="/ribbon/create">
                 Add Ribbon
               </Link>
             </li>
