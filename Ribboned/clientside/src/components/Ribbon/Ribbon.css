@@ -18,139 +18,40 @@
   display: none;
 }
 
-.knobs,
-.layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.button {
-  position: absolute;
-  /* position: relative;
-  top: 50%; */
-  width: 95px;
-  height: 36px;
-  margin: -20px auto 0 auto;
-  overflow: hidden;
-}
-
-.button.r,
-.button.r .layer {
-  border-radius: 100px;
-}
-
-.button.b2 {
-  border-radius: 2px;
-}
-
-.checkbox {
+.switch {
+  display: inline-block;
   position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
+  width: 50px;
+  height: 25px;
+  border-radius: 20px;
+  background: #dfd9ea;
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: middle;
   cursor: pointer;
-  z-index: 3;
 }
-
-.knobs {
-  z-index: 2;
-}
-
-.layer {
-  width: 100%;
-  background-color: #ebf7fc;
-  transition: 0.3s ease all;
-  z-index: 1;
-}
-
-#button-18 .knobs:before,
-#button-18 .knobs span {
-  content: "YES";
+.switch::before {
+  content: "";
   position: absolute;
-  top: 4px;
-  left: 4px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  background-color: #03a9f4;
-  border-radius: 2px;
+  top: 1px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: #fafafa;
+  border-radius: 50%;
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-#button-18 .knobs:before {
-  top: 50%;
-  left: 8px;
-  width: 20px;
-  height: 10px;
-  margin-top: -5px;
-  background-color: transparent;
-  z-index: 2;
+.switch:active::before {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(128, 128, 128, 0.1);
 }
-
-#button-18 .knobs span {
-  width: 20px;
-  height: 10px;
-  padding: 9px 4px;
-  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-  z-index: 1;
+input:checked + .switch {
+  background: #72da67;
 }
-
-#button-18 .checkbox:active + .knobs:before {
-  left: 10px;
-  width: 46px;
-  height: 4px;
-  color: transparent;
-  margin-top: -2px;
-  background-color: #0095d8;
-  transition: 0.3s ease all;
-  overflow: hidden;
+input:checked + .switch::before {
+  left: 27px;
+  background: #fff;
 }
-
-#button-18 .checkbox:active + .knobs span {
-  width: 58px;
-}
-
-#button-18 .checkbox:checked:active + .knobs:before {
-  left: auto;
-  right: 10px;
-  background-color: #d80000;
-}
-
-#button-18 .checkbox:checked:active + .knobs span {
-  margin-left: -38px;
-}
-
-#button-18 .checkbox:checked + .knobs:before {
-  content: "NO";
-  left: 47px;
-}
-
-#button-18 .checkbox:checked + .knobs span {
-  left: 42px;
-  background-color: #f44336;
-}
-
-#button-18 .checkbox:checked ~ .layer {
-  background-color: #fcebeb;
-}
-
-#ytd-url {
-  display: block;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  padding: 10px 14px;
-  margin: 20px;
-  color: #fff;
-  font-size: 14px;
-  text-decoration: none;
-  background-color: #143240;
-  border-radius: 4px;
-  box-shadow: 0 10px 20px -5px rgba(20, 50, 64, 0.76);
+input:checked + .switch:active::before {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(0, 150, 136, 0.2);
 }
