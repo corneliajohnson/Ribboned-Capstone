@@ -149,7 +149,7 @@ export const RibbonDetail = () => {
             <Moment format=" MMM D, YYYY" withTitle>
               {ribbon.createdDateTime}
             </Moment>
-            <p>{ribbon.category.name}</p>
+            <p>{ribbon.category?.name}</p>
           </div>
           <div className="text-center m-3">
             <SnagAddButton
@@ -164,6 +164,7 @@ export const RibbonDetail = () => {
           />
         </div>
         <canvas ref={canvasRef} />
+        {console.log(ribbon)}
       </div>
     </>
   );
