@@ -56,7 +56,7 @@ namespace Ribboned.Controllers
                 return NotFound();
             }
 
-            if(category.Name == "Other")
+            if(category.Name == "uncategorized")
             {
                 return BadRequest();
             }

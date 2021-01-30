@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react";
+import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -7,13 +8,14 @@ export const RibbonContext = createContext();
 export const RibbonProvider = (props) => {
   const getToken = () => firebase.auth().currentUser.getIdToken();
   const [ribbons, setRibbons] = useState([]);
+  const history = useHistory();
 
   const apiUrl = "/api/ribbon";
 
   const getUserRibbons = () => {
     const userId = JSON.parse(localStorage.getItem("userProfile")).id;
-    getToken().then((token) =>
-      fetch(`${apiUrl}/getbyuser/${userId}`, {
+    getToken().then((token) => {
+      return fetch(`${apiUrl}/getbyuser/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -22,8 +24,8 @@ export const RibbonProvider = (props) => {
         .then((res) => res.json())
         .then((ribbons) => {
           setRibbons(ribbons);
-        })
-    );
+        });
+    });
   };
 
   const updateRibbon = (ribbon) => {
@@ -35,7 +37,7 @@ export const RibbonProvider = (props) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(ribbon),
-      });
+      }).then(() => history.push(`/ribbon/${ribbon.id}`));
     });
   };
 
@@ -48,7 +50,7 @@ export const RibbonProvider = (props) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(ribbon),
-      });
+      }).then(() => history.push("/ribbons"));
     });
   };
 
@@ -76,7 +78,7 @@ export const RibbonProvider = (props) => {
 
   const searchRibbons = (searchQuery) => {
     getToken().then((token) => {
-      fetch(`${apiUrl}/search/${searchQuery}`, {
+      return fetch(`${apiUrl}/search/${searchQuery}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

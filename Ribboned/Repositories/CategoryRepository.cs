@@ -22,7 +22,7 @@ namespace Ribboned.Repositories
         public List<Category> GetByUserId(int userId)
         {
             return _context.Category.Include(c => c.UserProfile)
-                .Where(c => c.UserProfileId == userId && c.Name != "Other").ToList();
+                .Where(c => c.UserProfileId == userId && c.Name != "uncategorized").ToList();
         }
         
         public Category GetById(int id)
@@ -55,11 +55,11 @@ namespace Ribboned.Repositories
         public void Delete(int id, int currentUserId)
         {
             var category = GetById(id);
-            var otherCategory = _context.Category.FirstOrDefault(c => c.Name == "Other" && c.UserProfileId == currentUserId);
+            var otherCategory = _context.Category.FirstOrDefault(c => c.Name == "uncategorized" && c.UserProfileId == currentUserId);
             var relatedRibbons = _context.Ribbon.Where(r => r.CategoryId == category.Id).ToList();
 
-            //update all ribbon categories to other if the category is deleted
-            foreach(Ribbon ribbon in relatedRibbons)
+            //update all ribbon categories to uncategorized if the category is deleted
+            foreach (Ribbon ribbon in relatedRibbons)
             {
                 ribbon.CategoryId = otherCategory.Id;
                 _context.Ribbon.Update(ribbon);
