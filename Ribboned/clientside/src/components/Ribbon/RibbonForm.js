@@ -35,6 +35,7 @@ export const RibbonForm = (props) => {
       : null;
   };
 
+  //based on souce set input fields and public field
   const getChoosenSource = (event) => {
     const source = parseInt(event.target.value);
 
@@ -63,6 +64,16 @@ export const RibbonForm = (props) => {
       });
     } else {
       setIsLoading(false);
+      //clear flieds
+      setRibbon({
+        title: "",
+        decription: "",
+        sourceId: 0,
+        url: "",
+        thumbnail: "",
+        isActive: true,
+        isPublic: false,
+      });
     }
   }, []);
 
