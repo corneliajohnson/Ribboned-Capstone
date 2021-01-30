@@ -10,7 +10,7 @@ export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
   const { getSources, sources } = useContext(SourceContext);
   const { getRibbonById } = useContext(RibbonContext);
-  const [isMakedPublic, setIsPublic] = useState(false);
+  const [isMakedPublic, setIsPublic] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [ribbon, setRibbon] = useState({});
   const [isUrl, setIsUrl] = useState(true);
@@ -219,6 +219,7 @@ export const RibbonForm = (props) => {
               type="checkbox"
               hidden="hidden"
               id="username"
+              defaultChecked={ribbon.isPublic}
               checked={isMakedPublic}
               onChange={handlePrivacy}
             />
