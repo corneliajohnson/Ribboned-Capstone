@@ -28,7 +28,7 @@ export const ApplicationViews = () => {
         {isLoggedIn ? <RibbonForm /> : <Redirect to="/login" />}
       </Route>
 
-      <Route path="/ribbon/edit/:postId(\d+)">
+      <Route path="/ribbon/edit/:ribbonId(\d+)">
         {isLoggedIn ? <RibbonForm /> : <Redirect to="/login" />}
       </Route>
 

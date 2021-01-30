@@ -48,7 +48,7 @@ export const RibbonForm = (props) => {
     getSources();
     getCategories();
     if (ribbonId) {
-      getRibbonById(ribbon).then((ribbon) => {
+      getRibbonById(ribbonId).then((ribbon) => {
         setRibbon(ribbon);
         setIsLoading(false);
       });
@@ -112,6 +112,7 @@ export const RibbonForm = (props) => {
               <Input
                 type="text"
                 name="title"
+                defaultValue={ribbon.title}
                 onChange={handleControlledInputChange}
                 required="required"
               />
@@ -127,6 +128,7 @@ export const RibbonForm = (props) => {
                   <Input
                     type="select"
                     name="categoryId"
+                    value={ribbon.categoryId}
                     onChange={handleControlledInputChange}
                     required="required"
                   >
@@ -149,6 +151,7 @@ export const RibbonForm = (props) => {
                   <Input
                     type="select"
                     name="sourceId"
+                    value={ribbon.sourceId}
                     onChange={(e) => {
                       handleControlledInputChange(e);
                       getChoosenSource(e);
@@ -175,6 +178,7 @@ export const RibbonForm = (props) => {
                 <Input
                   type="url"
                   name="url"
+                  defaultValue={ribbon.url}
                   onChange={handleControlledInputChange}
                 />
               </Col>
@@ -188,6 +192,7 @@ export const RibbonForm = (props) => {
                 <Input
                   type="file"
                   name="url"
+                  defaultValue={ribbon.url}
                   onChange={handleControlledInputChange}
                 />
               </Col>
@@ -202,6 +207,7 @@ export const RibbonForm = (props) => {
               <Input
                 type="textarea"
                 name="decription"
+                defaultValue={ribbon.decription}
                 onChange={handleControlledInputChange}
                 required="required"
               />
