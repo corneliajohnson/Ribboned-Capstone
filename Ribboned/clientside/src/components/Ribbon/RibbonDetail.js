@@ -130,7 +130,7 @@ export const RibbonDetail = () => {
             <p
               className={
                 showDescription
-                  ? "mx-auto w-50 font-weight-bold"
+                  ? "mx-auto w-75 font-weight-bold"
                   : "hide-decription"
               }
             >
@@ -144,11 +144,12 @@ export const RibbonDetail = () => {
               {showDescription ? "Hide Decription" : "Show Decription"}
             </a>
           </div>
-          <div className="text-muted mx-auto w-50">
+          <div className="text-muted mx-auto w-75">
             Ribbion Created:{" "}
             <Moment format=" MMM D, YYYY" withTitle>
               {ribbon.createdDateTime}
             </Moment>
+            <p>{ribbon.category.name}</p>
           </div>
           <div className="text-center m-3">
             <SnagAddButton

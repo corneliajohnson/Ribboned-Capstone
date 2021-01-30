@@ -3,7 +3,7 @@ import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { SourceContext } from "../../providers/SourceProvider";
 import { RibbonContext } from "../../providers/RibbonProvider";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./Ribbon.css";
 
 export const RibbonForm = (props) => {
@@ -16,7 +16,7 @@ export const RibbonForm = (props) => {
   const [ribbon, setRibbon] = useState({});
   const [isUrl, setIsUrl] = useState(true);
   const { ribbonId } = useParams();
-  const history = useHistory();
+
   const defaultCategory = JSON.parse(localStorage.getItem("userProfile"))
     .uncategorizedId;
 
@@ -91,7 +91,7 @@ export const RibbonForm = (props) => {
         categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
         isActive: true,
         isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
-      }).then(() => history.push(`/ribbon/${ribbon.id}`));
+      });
     } else {
       //POST - add
       addRibbon({
@@ -104,7 +104,7 @@ export const RibbonForm = (props) => {
         categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
         isActive: true,
         isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
-      }).then(() => history.push("/ribbons"));
+      });
     }
   };
 

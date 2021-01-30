@@ -3,13 +3,9 @@ import { CategoryContext } from "../../providers/CategoryProvider";
 import { Form, FormGroup, Input, Button, FormText, Card } from "reactstrap";
 
 export const CategoryForm = () => {
-  const {
-    addCategory,
-    category,
-    setCategory,
-    updateCategory,
-    getCategories,
-  } = useContext(CategoryContext);
+  const { addCategory, category, setCategory, updateCategory } = useContext(
+    CategoryContext
+  );
   const userId = JSON.parse(localStorage.getItem("userProfile")).id;
   const [loading, setLoading] = useState(false);
 
