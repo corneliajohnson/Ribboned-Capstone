@@ -9,13 +9,14 @@ import "./Ribbon.css";
 export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
   const { getSources, sources } = useContext(SourceContext);
-  const { getRibbonById } = useContext(RibbonContext);
+  const { getRibbonById, addRibbon, updateRibbon } = useContext(RibbonContext);
   const [isMakedPublic, setIsPublic] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [disablePublic, setDisablePublic] = useState(true);
   const [ribbon, setRibbon] = useState({});
   const [isUrl, setIsUrl] = useState(true);
   const { ribbonId } = useParams();
+  const history = useHistory();
   const defaultCategory = JSON.parse(localStorage.getItem("userProfile"))
     .uncategorizedId;
 
@@ -79,7 +80,7 @@ export const RibbonForm = (props) => {
     setIsLoading(true);
     if (ribbonId) {
       //PUT - update
-      console.log({
+      updateRibbon({
         id: ribbon.id,
         title: ribbon.title,
         decription: ribbon.decription,
@@ -89,11 +90,11 @@ export const RibbonForm = (props) => {
           parseInt(ribbon.sourceId) === 2 ? getYoubeVideoId(ribbon.url) : null,
         categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
         isActive: true,
-        isPublic: isMakedPublic,
-      });
+        isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
+      }).then(() => history.push(`/ribbon/${ribbon.id}`));
     } else {
       //POST - add
-      console.log({
+      addRibbon({
         title: ribbon.title,
         decription: ribbon.decription,
         sourceId: parseInt(ribbon.sourceId),
@@ -102,8 +103,8 @@ export const RibbonForm = (props) => {
           parseInt(ribbon.sourceId) === 2 ? getYoubeVideoId(ribbon.url) : null,
         categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
         isActive: true,
-        isPublic: isMakedPublic,
-      });
+        isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
+      }).then(() => history.push("/ribbons"));
     }
   };
 

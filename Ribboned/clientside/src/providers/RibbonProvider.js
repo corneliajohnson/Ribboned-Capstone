@@ -35,7 +35,7 @@ export const RibbonProvider = (props) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(ribbon),
-      });
+      }).then(getUserRibbons);
     });
   };
 
@@ -48,7 +48,7 @@ export const RibbonProvider = (props) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(ribbon),
-      });
+      }).then(getUserRibbons);
     });
   };
 
@@ -59,7 +59,7 @@ export const RibbonProvider = (props) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      }).then(getUserRibbons);
     });
   };
 
