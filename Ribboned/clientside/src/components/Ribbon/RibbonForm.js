@@ -12,6 +12,7 @@ export const RibbonForm = (props) => {
   const { getRibbonById } = useContext(RibbonContext);
   const [isMakedPublic, setIsPublic] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [disablePublic, setDisablePublic] = useState(true);
   const [ribbon, setRibbon] = useState({});
   const [isUrl, setIsUrl] = useState(true);
   const { ribbonId } = useParams();
@@ -40,6 +41,12 @@ export const RibbonForm = (props) => {
       setIsUrl(false);
     } else {
       setIsUrl(true);
+    }
+
+    if (source === 2) {
+      setDisablePublic(false);
+    } else {
+      setDisablePublic(true);
     }
   };
 
@@ -106,7 +113,7 @@ export const RibbonForm = (props) => {
           <h2 className="text-center">New Ribbon</h2>
           <FormGroup row>
             <Label htmlFor="title" lg={2}>
-              Title
+              Title <span className="text-danger">*</span>
             </Label>
             <Col lg={10}>
               <Input
@@ -145,7 +152,7 @@ export const RibbonForm = (props) => {
             <Col md={6}>
               <FormGroup row>
                 <Label htmlFor="source" lg={2}>
-                  Source
+                  Source <span className="text-danger">*</span>
                 </Label>
                 <Col lg={10}>
                   <Input
@@ -172,7 +179,7 @@ export const RibbonForm = (props) => {
           {isUrl ? (
             <FormGroup row>
               <Label htmlFor="url" lg={2}>
-                URL
+                URL <span className="text-danger">*</span>
               </Label>
               <Col gl={10}>
                 <Input
@@ -186,7 +193,7 @@ export const RibbonForm = (props) => {
           ) : (
             <FormGroup row>
               <Label htmlFor="url" lg={2}>
-                Upload File
+                Upload File <span className="text-danger">*</span>
               </Label>
               <Col gl={10}>
                 <Input
@@ -201,7 +208,7 @@ export const RibbonForm = (props) => {
 
           <FormGroup row>
             <Label htmlFor="decription" lg={2}>
-              Decription
+              Decription <span className="text-danger">*</span>
             </Label>
             <Col lg={10}>
               <Input
@@ -214,17 +221,20 @@ export const RibbonForm = (props) => {
             </Col>
           </FormGroup>
           <Label>Public</Label>
+
           <div>
             <input
               type="checkbox"
               hidden="hidden"
               id="username"
+              disabled={disablePublic}
               defaultChecked={ribbon.isPublic}
               checked={isMakedPublic}
               onChange={handlePrivacy}
             />
             <label className="switch" htmlFor="username"></label>
           </div>
+          <small className="text-muted">Only YouTube videos can public</small>
           <Button className="btn btn-success float-right" disabled={isLoading}>
             Submit
           </Button>
