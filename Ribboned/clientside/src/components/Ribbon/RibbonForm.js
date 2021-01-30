@@ -46,6 +46,7 @@ export const RibbonForm = (props) => {
     if (source === 2) {
       setDisablePublic(false);
     } else {
+      setIsPublic(false);
       setDisablePublic(true);
     }
   };
