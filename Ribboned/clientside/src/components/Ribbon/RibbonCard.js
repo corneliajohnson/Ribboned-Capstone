@@ -10,6 +10,7 @@ import {
   CardTitle,
   CardSubtitle,
   CardImg,
+  Button,
 } from "reactstrap";
 
 export const RibbonCard = ({ ribbon }) => (

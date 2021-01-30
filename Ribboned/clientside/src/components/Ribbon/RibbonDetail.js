@@ -4,7 +4,9 @@ import { useParams, useHistory } from "react-router-dom";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { SnagList } from "../snag/SnagList";
 import { SnagAddButton } from "../snag/SnagAddButton";
+import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 import "./Ribbon.css";
 
 export const RibbonDetail = () => {
@@ -12,6 +14,10 @@ export const RibbonDetail = () => {
   const [ribbon, setRibbon] = useState({});
   const [showDescription, setShowDecription] = useState(true);
   const { ribbonId } = useParams();
+
+  //for management popover
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const toggle = () => setPopoverOpen(!popoverOpen);
 
   useEffect(() => {
     getRibbonById(ribbonId).then((response) => {
@@ -87,6 +93,25 @@ export const RibbonDetail = () => {
   return (
     <>
       <div className="container">
+        <div>
+          <Button className="float-right" id="Popover1" type="button">
+            Manage Ribbon
+          </Button>
+          <Popover
+            placement="bottom"
+            isOpen={popoverOpen}
+            target="Popover1"
+            toggle={toggle}
+          >
+            <PopoverHeader>Manage Ribbon</PopoverHeader>
+            <PopoverBody>
+              <Link to={`/ribbon/edit/${ribbon.id}`}>
+                <Button>Edit</Button>
+              </Link>
+              <Button>Delete</Button>
+            </PopoverBody>
+          </Popover>
+        </div>
         <h1 className="text-center w-75 mx-auto">{ribbon.title}</h1>
         <div>
           <div className="d-flex justify-content-center">

@@ -28,6 +28,10 @@ export const ApplicationViews = () => {
         {isLoggedIn ? <RibbonForm /> : <Redirect to="/login" />}
       </Route>
 
+      <Route path="/ribbon/edit/:postId(\d+)">
+        {isLoggedIn ? <RibbonForm /> : <Redirect to="/login" />}
+      </Route>
+
       <Route exact path="/categories">
         {isLoggedIn ? <CategoryManager /> : <Redirect to="/login" />}
       </Route>
