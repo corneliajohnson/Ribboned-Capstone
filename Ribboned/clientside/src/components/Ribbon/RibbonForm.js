@@ -75,7 +75,7 @@ export const RibbonForm = (props) => {
         isPublic: false,
       });
     }
-  }, []);
+  }, [ribbonId]);
 
   //when field changes, update state. This causes a re-render and updates the view.
   //Controlled component
