@@ -19,7 +19,7 @@ export const NavBar = (props) => {
     if (!isActive) {
       document.querySelector(".container").style.width = "75%";
       document.querySelector(".container").style.float = "right";
-      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      document.body.style.backgroundColor = "rgba(0,0,0,0.1)";
     } else {
       document.querySelector(".container").style.float = "none";
       document.querySelector(".container").style.width = "100%";

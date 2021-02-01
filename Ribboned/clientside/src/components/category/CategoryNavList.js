@@ -39,6 +39,7 @@ export const CategoryNavList = () => {
           <Link className="navbar__link" to="/categories">
             Manager Categories
           </Link>
+          <DropdownItem divider />
           {categories.map((c) => (
             <DropdownItem key={c.id}>
               {" "}

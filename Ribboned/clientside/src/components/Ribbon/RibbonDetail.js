@@ -147,7 +147,7 @@ export const RibbonDetail = () => {
               {ribbon.decription}
             </p>{" "}
             <a
-              className="mx-auto w-50 float-right"
+              className="mx-auto w-75 float-right"
               href="#"
               onClick={toggleDecription}
             >
@@ -159,7 +159,16 @@ export const RibbonDetail = () => {
             <Moment format=" MMM D, YYYY" withTitle>
               {ribbon.createdDateTime}
             </Moment>
-            <p>{ribbon.category?.name}</p>
+            <p>
+              {ribbon.category?.name}
+              <span className="float-right">
+                {ribbon.isPublic ? (
+                  <span className="text-success">Public</span>
+                ) : (
+                  <span className="text-danger">Private</span>
+                )}
+              </span>
+            </p>
           </div>
           <div className="text-center m-3">
             <SnagAddButton
