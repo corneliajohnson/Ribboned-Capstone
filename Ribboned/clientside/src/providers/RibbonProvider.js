@@ -28,6 +28,37 @@ export const RibbonProvider = (props) => {
     });
   };
 
+  const getUserTrashRibbons = () => {
+    const userId = JSON.parse(localStorage.getItem("userProfile")).id;
+    getToken().then((token) => {
+      return fetch(`${apiUrl}/getusertrash/${userId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((ribbons) => {
+          setRibbons(ribbons);
+        });
+    });
+  };
+
+  const getRibbonByCategory = (id) => {
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/getbycategory/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((ribbons) => {
+          setRibbons(ribbons);
+        })
+    );
+  };
+
   const updateRibbon = (ribbon) => {
     getToken().then((token) => {
       return fetch(`${apiUrl}/${ribbon.id}`, {
@@ -97,6 +128,8 @@ export const RibbonProvider = (props) => {
         deleteRibbon,
         searchRibbons,
         getRibbonById,
+        getUserTrashRibbons,
+        getRibbonByCategory,
       }}
     >
       {props.children}

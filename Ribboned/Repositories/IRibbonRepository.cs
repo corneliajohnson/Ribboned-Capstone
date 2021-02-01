@@ -12,5 +12,8 @@ namespace Ribboned.Repositories
         void Update(Ribbon ribbon);
         List<Ribbon> Search(string q, int userId);
         List<Ribbon> GetByMostRecentRibbons(int id);
+
+        List<Ribbon> GetUserTrash(int id);
+        List<Ribbon> GetByCategory(int id);
     }
 }
