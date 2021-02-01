@@ -12,10 +12,12 @@ namespace Ribboned.Controllers
     {
         private readonly IRibbonRepository _ribbonRepo;
         private readonly IUserProfileRepository _userRepo;
-        public RibbonController(IRibbonRepository ribbonRepo, IUserProfileRepository userRepo)
+        private readonly ICategoryRepository _categoryRepo;
+        public RibbonController(IRibbonRepository ribbonRepo, IUserProfileRepository userRepo, ICategoryRepository categoryRepo)
         {
             _ribbonRepo = ribbonRepo;
             _userRepo = userRepo;
+            _categoryRepo = categoryRepo;
         }
 
         [HttpPost]
@@ -49,38 +51,53 @@ namespace Ribboned.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var post = _ribbonRepo.GetById(id);
-            if (post == null)
+            var ribbon = _ribbonRepo.GetById(id);
+            if (ribbon == null)
             {
                 return NotFound();
             }
-            return Ok(post);
+            return Ok(ribbon);
         }
 
         [HttpGet("getbyuser/{id}")]
         public IActionResult GetByUser(int id)
         {
+
             //check that user exist
-            var user = _ribbonRepo.GetByUserId(id);
+            var user = _userRepo.GetById(id);
             if (user == null)
             {
                 BadRequest();
             }
+            var ribbons = _ribbonRepo.GetByUserId(id);
+            return Ok(ribbons);
+        }
 
-            return Ok(user);
+        [HttpGet("getbycategory/{id}")]
+        public IActionResult GetByCategory(int id)
+        {
+            //check that category exist
+            var category = _categoryRepo.GetById(id);
+            if (category == null)
+            {
+                BadRequest();
+            }
+
+            var ribbons = _ribbonRepo.GetByCategory(id);
+            return Ok(ribbons);
         }
 
         [HttpGet("getusertrash/{id}")]
         public IActionResult GetUserTrash(int id)
         {
-            //check that user exist
-            var user = _ribbonRepo.GetUserTrash(id);
+            //check that category exist
+            var user = _userRepo.GetById(id);
             if (user == null)
             {
                 BadRequest();
             }
-
-            return Ok(user);
+            var ribbons = _ribbonRepo.GetUserTrash(id);
+            return Ok(ribbons);
         }
 
 
@@ -88,13 +105,13 @@ namespace Ribboned.Controllers
         public IActionResult GetMostRecentRibbons(int userId)
         {
             //check that user exist
-            var user = _ribbonRepo.GetByMostRecentRibbons(userId);
+            var user = _userRepo.GetById(userId);
             if (user == null)
             {
                 BadRequest();
             }
-
-            return Ok(user);
+            var ribbons = _ribbonRepo.GetByMostRecentRibbons(userId);
+            return Ok(ribbons);
         }
 
         [HttpDelete("{id}")]

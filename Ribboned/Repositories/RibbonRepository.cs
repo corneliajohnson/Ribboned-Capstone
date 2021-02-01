@@ -47,6 +47,14 @@ namespace Ribboned.Repositories
                 .FirstOrDefault(r => r.Id == id);
         }
 
+        public List<Ribbon> GetByCategory(int id)
+        {
+            return _context.Ribbon
+                .Include(r => r.Category.UserProfile)
+                .Include(r => r.Snags)
+                .Where(r => r.CategoryId == id).ToList();
+        }
+
         public void Add(Ribbon ribbon)
         {
             _context.Add(ribbon);

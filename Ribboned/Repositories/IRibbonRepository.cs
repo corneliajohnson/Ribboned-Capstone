@@ -14,5 +14,6 @@ namespace Ribboned.Repositories
         List<Ribbon> GetByMostRecentRibbons(int id);
 
         List<Ribbon> GetUserTrash(int id);
+        List<Ribbon> GetByCategory(int id);
     }
 }
