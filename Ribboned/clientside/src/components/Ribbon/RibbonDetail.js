@@ -1,13 +1,16 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import ReactPlayer from "react-player";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { SnagList } from "../snag/SnagList";
 import { SnagAddButton } from "../snag/SnagAddButton";
 import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import { RibbonTrashMove } from "./RibbonTrashMove";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import "./Ribbon.css";
+import { RibbonRestore } from "./RibbonRestore";
+import { RibbonDelete } from "./RibbonDelete";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -104,12 +107,19 @@ export const RibbonDetail = () => {
             toggle={toggle}
           >
             <PopoverHeader>Manage Ribbon</PopoverHeader>
-            <PopoverBody>
-              <Link to={`/ribbon/edit/${ribbon.id}`}>
-                <Button>Edit</Button>
-              </Link>
-              <Button>Delete</Button>
-            </PopoverBody>
+            {ribbon.isActive ? (
+              <PopoverBody>
+                <Link to={`/ribbon/edit/${ribbon.id}`}>
+                  <Button>Edit</Button>
+                </Link>
+                <RibbonTrashMove ribbon={ribbon} />
+              </PopoverBody>
+            ) : (
+              <PopoverBody>
+                <RibbonRestore ribbon={ribbon} />
+                <RibbonDelete ribbon={ribbon} />
+              </PopoverBody>
+            )}
           </Popover>
         </div>
         <h1 className="text-center w-75 mx-auto">{ribbon.title}</h1>
@@ -137,7 +147,7 @@ export const RibbonDetail = () => {
               {ribbon.decription}
             </p>{" "}
             <a
-              className="mx-auto w-50 float-right"
+              className="mx-auto w-75 float-right"
               href="#"
               onClick={toggleDecription}
             >
@@ -149,7 +159,16 @@ export const RibbonDetail = () => {
             <Moment format=" MMM D, YYYY" withTitle>
               {ribbon.createdDateTime}
             </Moment>
-            <p>{ribbon.category?.name}</p>
+            <p>
+              {ribbon.category?.name}
+              <span className="float-right">
+                {ribbon.isPublic ? (
+                  <span className="text-success">Public</span>
+                ) : (
+                  <span className="text-danger">Private</span>
+                )}
+              </span>
+            </p>
           </div>
           <div className="text-center m-3">
             <SnagAddButton
@@ -164,7 +183,6 @@ export const RibbonDetail = () => {
           />
         </div>
         <canvas ref={canvasRef} />
-        {console.log(ribbon)}
       </div>
     </>
   );

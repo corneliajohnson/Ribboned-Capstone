@@ -3,11 +3,11 @@ import { RibbonContext } from "../../providers/RibbonProvider";
 
 import { RibbonCard } from "./RibbonCard";
 
-export const RibbonList = () => {
-  const { getUserRibbons, ribbons } = useContext(RibbonContext);
+export const RibbonTrashList = () => {
+  const { getUserTrashRibbons, ribbons } = useContext(RibbonContext);
 
   useEffect(() => {
-    getUserRibbons();
+    getUserTrashRibbons();
   }, []);
 
   if (!ribbons) {
@@ -18,7 +18,7 @@ export const RibbonList = () => {
     <div className="container">
       <h1>Ribbons</h1>
       {ribbons.length === 0 ? (
-        <p className="text-center">None</p>
+        <p className="text-center">Trash Empty</p>
       ) : (
         <div className="row">
           {ribbons.map((ribbon) => (

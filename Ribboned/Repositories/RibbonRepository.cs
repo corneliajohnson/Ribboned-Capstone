@@ -22,7 +22,12 @@ namespace Ribboned.Repositories
 
         public List<Ribbon> GetByUserId(int id)
         {
-            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id).ToList();
+            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.IsActive == true).ToList();
+        }
+
+        public List<Ribbon> GetUserTrash(int id)
+        {
+            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.IsActive == false).ToList();
         }
 
         public List<Ribbon> GetByMostRecentRibbons(int id)
@@ -40,6 +45,14 @@ namespace Ribboned.Repositories
                 .Include(r => r.Category.UserProfile)
                 .Include(r => r.Snags)
                 .FirstOrDefault(r => r.Id == id);
+        }
+
+        public List<Ribbon> GetByCategory(int id)
+        {
+            return _context.Ribbon
+                .Include(r => r.Category.UserProfile)
+                .Include(r => r.Snags)
+                .Where(r => r.CategoryId == id).ToList();
         }
 
         public void Add(Ribbon ribbon)

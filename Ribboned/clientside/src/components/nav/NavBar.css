@@ -15,9 +15,10 @@ nav {
   transform: translateX(-300px);
   transition: transform 0.3s ease-in-out;
   border-right: 1px #000 solid;
+  z-index: 10;
 }
 
-nav:after {
+#openClose {
   content: "";
   background: #000;
   height: 80px;
@@ -36,6 +37,7 @@ nav:after {
 .navbar__item {
   list-style: none;
   flex: none;
+  cursor: pointer;
 }
 
 .nav__ribbonlink {
@@ -54,8 +56,8 @@ nav:after {
 .nav__addcategorylink {
   position: absolute;
   left: 0;
-  left: 10px;
-  margin-top: 70%;
+  left: -37%;
+  margin-top: 75%;
 }
 
 .logo {
@@ -63,4 +65,12 @@ nav:after {
   top: 10%;
   left: 0;
   margin-top: 20%;
+}
+
+.noscroll {
+  overflow: hidden;
+}
+
+#root {
+  z-index: -1;
 }

@@ -3,7 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "../../img/RibbonedWordOnly.png";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
-import { List, NavLink } from "reactstrap";
+import { List } from "reactstrap";
+import { CategoryNavList } from "../category/CategoryNavList";
 
 export const NavBar = (props) => {
   const { getCurrentUser, logout } = useContext(UserProfileContext);
@@ -11,8 +12,19 @@ export const NavBar = (props) => {
   const history = useHistory();
   const [isActive, setActive] = useState(false);
 
-  const toggleClass = () => {
-    setActive(!isActive);
+  const toggleClass = (e) => {
+    if (e.target.id === "openClose") {
+      setActive(!isActive);
+    }
+    if (!isActive) {
+      document.querySelector(".container").style.width = "75%";
+      document.querySelector(".container").style.float = "right";
+      document.body.style.backgroundColor = "rgba(0,0,0,0.1)";
+    } else {
+      document.querySelector(".container").style.float = "none";
+      document.querySelector(".container").style.width = "100%";
+      document.body.style.backgroundColor = "white";
+    }
   };
 
   const logoutAndReturn = () => {
@@ -24,7 +36,10 @@ export const NavBar = (props) => {
   return (
     <>
       {user ? (
-        <nav className={isActive ? "openNav" : null} onClick={toggleClass}>
+        <nav id="mySideNav" className={isActive ? "openNav" : ""}>
+          <a href="#">
+            <div id="openClose" onClick={toggleClass}></div>
+          </a>
           <List className="navbar">
             <li className="navbar__item active fixed-top">
               <Link className="navbar__link" to="/account m-5">
@@ -41,20 +56,24 @@ export const NavBar = (props) => {
                 Add Ribbon
               </Link>
             </li>
-            <li className="navbar__item nav__addcategorylink">
-              <Link className="navbar__link" to="/categories">
-                Categories
-              </Link>
-            </li>
+            <CategoryNavList />
             <li className="navbar__item nav__ribbonlink">
               <Link className="navbar__link" to="/ribbons">
                 My Ribbons
               </Link>
             </li>
+            <li
+              className="navbar__item fixed-bottom ml-2"
+              style={{ marginBottom: "30%" }}
+            >
+              <Link className="navbar__link" to="/ribbons/trash">
+                Trash
+              </Link>
+            </li>
             <li className="navbar__item fixed-bottom ml-2 mb-5">
-              <NavLink className="navbar__link" onClick={logoutAndReturn}>
+              <Link className="navbar__link" onClick={logoutAndReturn}>
                 Log Out
-              </NavLink>
+              </Link>
             </li>
           </List>
         </nav>

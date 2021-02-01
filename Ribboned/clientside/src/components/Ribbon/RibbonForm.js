@@ -1,10 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Col,
+  Row,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Progress,
+} from "reactstrap";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { SourceContext } from "../../providers/SourceProvider";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { useParams } from "react-router-dom";
 import "./Ribbon.css";
+import { storage } from "../../firebase";
 
 export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
@@ -15,10 +25,52 @@ export const RibbonForm = (props) => {
   const [disablePublic, setDisablePublic] = useState(true);
   const [ribbon, setRibbon] = useState({});
   const [isUrl, setIsUrl] = useState(true);
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  //TODO set loading for file to wait on url
+  const [fileLoading, setFileLoading] = useState(false);
+
   const { ribbonId } = useParams();
 
   const defaultCategory = JSON.parse(localStorage.getItem("userProfile"))
     .uncategorizedId;
+
+  //image upload
+  const handleUploadChange = (e) => {
+    if (e.target.files[0]) {
+      setFile(e.target.files[0]);
+      setFileLoading(true);
+    }
+  };
+
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`videos/${file.name}`).put(file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (error) => {
+        console.log(error);
+        setFileLoading(false);
+      },
+      () => {
+        storage
+          .ref("videos")
+          .child(file.name)
+          .getDownloadURL()
+          .then((url) => {
+            setUrl(url);
+            setFileLoading(false);
+          });
+      }
+    );
+  };
 
   //toggle public and private
   const handlePrivacy = () => {
@@ -38,15 +90,17 @@ export const RibbonForm = (props) => {
   //based on souce set input fields and public field
   const getChoosenSource = (event) => {
     const source = parseInt(event.target.value);
-
     if (source === 3) {
       setIsUrl(false);
+      setRibbon({ ...ribbon, sourceId: 3, url: "" });
     } else {
       setIsUrl(true);
+      setUrl("");
     }
 
     if (source === 2) {
       setDisablePublic(false);
+      setIsUrl(true);
     } else {
       setIsPublic(false);
       setDisablePublic(true);
@@ -87,35 +141,46 @@ export const RibbonForm = (props) => {
 
   const handleSaveRibbon = (e) => {
     e.preventDefault();
-    //disable the button - no extra clicks
-    setIsLoading(true);
-    if (ribbonId) {
-      //PUT - update
-      updateRibbon({
-        id: ribbon.id,
-        title: ribbon.title,
-        decription: ribbon.decription,
-        sourceId: parseInt(ribbon.sourceId),
-        url: ribbon.url,
-        thumbnail:
-          parseInt(ribbon.sourceId) === 2 ? getYoubeVideoId(ribbon.url) : null,
-        categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
-        isActive: true,
-        isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
-      });
-    } else {
-      //POST - add
-      addRibbon({
-        title: ribbon.title,
-        decription: ribbon.decription,
-        sourceId: parseInt(ribbon.sourceId),
-        url: ribbon.url,
-        thumbnail:
-          parseInt(ribbon.sourceId) === 2 ? getYoubeVideoId(ribbon.url) : null,
-        categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
-        isActive: true,
-        isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
-      });
+    if (file != null) {
+      handleUpload();
+    }
+
+    if (!fileLoading) {
+      //disable the button - no extra clicks
+      setIsLoading(true);
+      if (ribbonId) {
+        //PUT - update
+        updateRibbon({
+          id: ribbon.id,
+          title: ribbon.title,
+          decription: ribbon.decription,
+          sourceId: parseInt(ribbon.sourceId),
+          url: url || ribbon.url,
+          thumbnail:
+            parseInt(ribbon.sourceId) === 2
+              ? getYoubeVideoId(ribbon.url)
+              : null,
+          categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
+          isActive: true,
+          isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
+          dateCreated: ribbon.dateCreated,
+        });
+      } else {
+        //POST - add
+        addRibbon({
+          title: ribbon.title,
+          decription: ribbon.decription,
+          sourceId: parseInt(ribbon.sourceId),
+          url: url || ribbon.url,
+          thumbnail:
+            parseInt(ribbon.sourceId) === 2
+              ? getYoubeVideoId(ribbon.url)
+              : null,
+          categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
+          isActive: true,
+          isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
+        });
+      }
     }
   };
 
@@ -204,19 +269,25 @@ export const RibbonForm = (props) => {
               </Col>
             </FormGroup>
           ) : (
-            <FormGroup row>
-              <Label htmlFor="url" lg={2}>
-                Upload File <span className="text-danger">*</span>
-              </Label>
-              <Col gl={10}>
-                <Input
-                  type="file"
-                  name="url"
-                  defaultValue={ribbon.url}
-                  onChange={handleControlledInputChange}
-                />
-              </Col>
-            </FormGroup>
+            <>
+              <FormGroup row>
+                <Label htmlFor="url" lg={2}>
+                  Upload File <span className="text-danger">*</span>
+                </Label>
+                <Col gl={10}>
+                  <Input
+                    type="file"
+                    name="url"
+                    accept=".mp4,.webm,.ogg"
+                    defaultValue={ribbon.url}
+                    onChange={handleUploadChange}
+                  />
+                </Col>
+              </FormGroup>
+              <Progress color="primary" value={progress}>
+                {progress}%
+              </Progress>
+            </>
           )}
 
           <FormGroup row>
@@ -247,10 +318,17 @@ export const RibbonForm = (props) => {
             />
             <label className="switch" htmlFor="username"></label>
           </div>
-          <small className="text-muted">Only YouTube videos can public</small>
+          <small className="text-muted">
+            Only YouTube videos can be public
+          </small>
           <Button className="btn btn-success float-right" disabled={isLoading}>
             Submit
           </Button>
+          <div>
+            <small className="text-warning">
+              {!isUrl ? "Ribbon added when video loads" : ""}
+            </small>
+          </div>
         </Form>
       </div>
     </div>

@@ -1,14 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
-
 import { RibbonCard } from "./RibbonCard";
+import { useParams } from "react-router-dom";
 
-export const RibbonList = () => {
-  const { getUserRibbons, ribbons } = useContext(RibbonContext);
+export const RibbonListByCategory = () => {
+  const { getRibbonByCategory, ribbons } = useContext(RibbonContext);
+  const { categoryId } = useParams();
 
   useEffect(() => {
-    getUserRibbons();
-  }, []);
+    getRibbonByCategory(categoryId);
+  }, [categoryId]);
 
   if (!ribbons) {
     return null;
