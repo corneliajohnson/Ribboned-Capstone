@@ -10,6 +10,7 @@ import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import "./Ribbon.css";
 import { RibbonRestore } from "./RibbonRestore";
+import { RibbonDelete } from "./RibbonDelete";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -116,7 +117,7 @@ export const RibbonDetail = () => {
             ) : (
               <PopoverBody>
                 <RibbonRestore ribbon={ribbon} />
-                <RibbonTrashMove ribbon={ribbon} />
+                <RibbonDelete ribbon={ribbon} />
               </PopoverBody>
             )}
           </Popover>
