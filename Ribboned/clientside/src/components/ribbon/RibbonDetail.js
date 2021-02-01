@@ -96,8 +96,8 @@ export const RibbonDetail = () => {
   return (
     <>
       <div className="container">
-        <div>
-          <Button className="float-right" id="Popover1" type="button">
+        <div className="row d-flex">
+          <Button className="ml-auto" id="Popover1" type="button">
             Manage Ribbon
           </Button>
           <Popover
@@ -122,7 +122,9 @@ export const RibbonDetail = () => {
             )}
           </Popover>
         </div>
-        <h1 className="text-center m-4 mx-auto">{ribbon.title}</h1>
+        <div className="row">
+          <h1 className="text-center m-4 mx-auto">{ribbon.title}</h1>
+        </div>
         <div>
           <div className="d-flex justify-content-center">
             <ReactPlayer
@@ -167,6 +169,7 @@ export const RibbonDetail = () => {
               handlePlay={handlePlay}
               handlePause={handlePause}
               playing={playing}
+              ribbonId={ribbon.id}
             />
           </div>
           <SnagList

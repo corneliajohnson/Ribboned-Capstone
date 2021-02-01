@@ -9,10 +9,11 @@ export const SnagAddButton = ({
   handlePause,
   handlePlay,
   playing,
+  ribbonId,
 }) => {
   const [showTextBox, setShowTextBox] = useState(false);
 
-  const textBox = () => {
+  const textBoxToggle = () => {
     showTextBox ? setShowTextBox(false) : setShowTextBox(true);
   };
 
@@ -42,11 +43,9 @@ export const SnagAddButton = ({
     });
   };
 
+  //pause and play video toggle
   useEffect(() => {
-    if (showTextBox) {
-      handlePause();
-    }
-    console.log(playing);
+    playing ? handlePause() : handlePlay();
   }, [showTextBox]);
 
   return (
@@ -55,14 +54,20 @@ export const SnagAddButton = ({
         <Button
           className="btn btn-lg btn-secondary w-50"
           onClick={() => {
-            textBox();
+            textBoxToggle();
+            handlePlay();
           }}
         >
           Add Snag {timeDisplayFormat}
         </Button>
       </div>
       <div className={showTextBox ? "showSnagNote" : "hideSnagNote"}>
-        <SnagTextBox />
+        <SnagTextBox
+          handlePlay={handlePlay}
+          textBoxToggle={textBoxToggle}
+          timeDisplayFormat={timeDisplayFormat}
+          ribbonId={ribbonId}
+        />
       </div>
     </>
   );

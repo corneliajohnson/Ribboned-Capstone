@@ -7,6 +7,7 @@ export const SnagContext = createContext();
 export const SnagProvider = (props) => {
   const getToken = () => firebase.auth().currentUser.getIdToken();
   const [snags, setSnags] = useState([]);
+  const [snag, setSnag] = useState({});
 
   const apiUrl = "/api/snag";
 
