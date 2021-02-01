@@ -13,27 +13,29 @@ export const SnagList = ({ playerRef, handlePlay, snags }) => {
             Ribbon Snags
           </div>
           {snags.map((snag) => {
-            <div key={snag.id} class="list-group-item list-group-item-actions">
-              {snag?.note}
-            </div>;
+            return (
+              <div
+                key={snag.id}
+                class="list-group-item list-group-item-actions"
+              >
+                <Button
+                  className="btn btn-link"
+                  onClick={() => {
+                    //go to seconds stamp of video
+                    playerRef.current.seekTo(snag.seconds);
+                    //play video
+                    handlePlay();
+                  }}
+                >
+                  {snag.timeString}
+                </Button>
+                <span>{snag.note}</span>
+                <span className="float-right">Edit Delete</span>
+              </div>
+            );
           })}
         </div>
       </div>
     </div>
   );
 };
-
-// <div class="list-group-item list-group-item-actions">
-//   <Button
-//     className="btn btn-link"
-//     onClick={() => {
-//       //go to seconds stamp of video
-//       playerRef.current.seekTo(snag.time);
-//       //play video
-//       handlePlay();
-//     }}
-//   >
-//     {snag.display}
-//   </Button>
-//   Snag Note
-// </div>;
