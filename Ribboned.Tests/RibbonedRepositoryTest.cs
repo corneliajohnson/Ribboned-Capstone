@@ -30,6 +30,9 @@ namespace Ribboned.Tests
                 CategoryId = 2,
                 SourceId = 2,
                 URL = "www.url.com",
+                Thumbnail = null,
+                IsActive = true,
+                IsPublic = true,
                 DateCreated = DateTime.Now - TimeSpan.FromDays(365),
             };
 
@@ -275,7 +278,7 @@ namespace Ribboned.Tests
 
             var category1 = new Category()
             {
-                Name = "Other",
+                Name = "uncategorized",
                 UserProfileId = 1
             };
 
@@ -301,6 +304,9 @@ namespace Ribboned.Tests
                 CategoryId = 1,
                 SourceId = 1,
                 URL = "www.url.com",
+                Thumbnail = null,
+                IsActive = true,
+                IsPublic = true,
                 DateCreated = DateTime.Now - TimeSpan.FromDays(365),
             };
             var ribbon2 = new Ribbon()
@@ -310,6 +316,9 @@ namespace Ribboned.Tests
                 CategoryId = 1,
                 SourceId = 1,
                 URL = "www.url.com",
+                Thumbnail = null,
+                IsActive = true,
+                IsPublic = true,
                 DateCreated = DateTime.Now - TimeSpan.FromDays(365),
             };
 
@@ -320,6 +329,9 @@ namespace Ribboned.Tests
                 CategoryId = 2,
                 SourceId = 2,
                 URL = "www.url.com",
+                Thumbnail = null,
+                IsActive = true,
+                IsPublic = true,
                 DateCreated = DateTime.Now - TimeSpan.FromDays(365),
             };
 
@@ -330,6 +342,9 @@ namespace Ribboned.Tests
                 CategoryId = 3,
                 SourceId = 2,
                 URL = "www.url.com",
+                Thumbnail = null,
+                IsActive = true,
+                IsPublic = true,
                 DateCreated = DateTime.Now - TimeSpan.FromDays(365),
             };
             _context.Add(ribbon1);

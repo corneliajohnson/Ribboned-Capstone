@@ -12,8 +12,8 @@ namespace Ribboned.Models
         public int SourceId { get; set; }
         public string URL { get; set; }
         public string Thumbnail { get; set; }
-        public bool isActive { get; set; }
-        public bool isPublic { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsPublic { get; set; }
         public DateTime DateCreated { get; set; }
         public List<Snag> Snags { get; set; }
         public Category Category { get; set; }

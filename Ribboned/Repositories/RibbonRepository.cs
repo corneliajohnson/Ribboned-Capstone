@@ -22,12 +22,12 @@ namespace Ribboned.Repositories
 
         public List<Ribbon> GetByUserId(int id)
         {
-            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.isActive == true).ToList();
+            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.IsActive == true).ToList();
         }
 
         public List<Ribbon> GetUserTrash(int id)
         {
-            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.isActive == false).ToList();
+            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.IsActive == false).ToList();
         }
 
         public List<Ribbon> GetByMostRecentRibbons(int id)
