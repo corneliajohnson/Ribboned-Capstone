@@ -1,0 +1,15 @@
+.hideSnagBtn {
+  display: none;
+}
+
+.showSnagBtn {
+  display: "inline";
+}
+
+.hideSnagNote {
+  display: none;
+}
+
+.showSnagNote {
+  display: "inline";
+}
