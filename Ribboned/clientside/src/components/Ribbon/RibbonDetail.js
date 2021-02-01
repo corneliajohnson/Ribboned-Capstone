@@ -122,7 +122,7 @@ export const RibbonDetail = () => {
             )}
           </Popover>
         </div>
-        <h1 className="text-center w-75 mx-auto">{ribbon.title}</h1>
+        <h1 className="text-center m-4 mx-auto">{ribbon.title}</h1>
         <div>
           <div className="d-flex justify-content-center">
             <ReactPlayer
@@ -135,22 +135,12 @@ export const RibbonDetail = () => {
               url={ribbon.url}
             />
           </div>
-          <div>
+          <div className="mx-auto w-75 font-weight-bold">
             {" "}
-            <p
-              className={
-                showDescription
-                  ? "mx-auto w-75 font-weight-bold"
-                  : "hide-decription"
-              }
-            >
+            <p className={showDescription ? "" : "hide-decription"}>
               {ribbon.decription}
             </p>{" "}
-            <a
-              className="mx-auto w-75 float-right"
-              href="#"
-              onClick={toggleDecription}
-            >
+            <a href="#" className="float-right" onClick={toggleDecription}>
               {showDescription ? "Hide Decription" : "Show Decription"}
             </a>
           </div>
@@ -174,6 +164,8 @@ export const RibbonDetail = () => {
             <SnagAddButton
               handlePlayPause={handlePlayPause}
               playerRef={playerRef}
+              playing={playing}
+              timeDisplayFormat={timeDisplayFormat}
             />
           </div>
           <SnagList

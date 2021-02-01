@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Button } from "reactstrap";
+
 export const SnagAddButton = ({
   playerRef,
   timeDisplayFormat,
@@ -40,6 +41,7 @@ export const SnagAddButton = ({
       }}
     >
       Add Snag {timeDisplayFormat}
+      {console.log(timeDisplayFormat)}
     </Button>
   );
 };
