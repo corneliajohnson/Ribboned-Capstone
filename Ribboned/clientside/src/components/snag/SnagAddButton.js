@@ -1,11 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "reactstrap";
+import { SnagTextBox } from "./SnagTextBox";
+import "./Snag.css";
 
 export const SnagAddButton = ({
   playerRef,
   timeDisplayFormat,
   handlePlayPause,
 }) => {
+  const [showTextBox, setShowTextBox] = useState(false);
+
+  const textBox = () => {
+    showTextBox ? setShowTextBox(false) : setShowTextBox(true);
+  };
+
   //format time
   const format = (seconds) => {
     if (isNaN(seconds)) {
@@ -33,15 +41,22 @@ export const SnagAddButton = ({
   };
 
   return (
-    <Button
-      className="btn btn-lg btn-secondary w-50"
-      onClick={() => {
-        handlePlayPause();
-        addSnag();
-      }}
-    >
-      Add Snag {timeDisplayFormat}
-      {console.log(timeDisplayFormat)}
-    </Button>
+    <>
+      <div className={showTextBox ? "hideSnagBtn" : "showSnagBtn"}>
+        <Button
+          className="btn btn-lg btn-secondary w-50 "
+          onClick={() => {
+            handlePlayPause();
+            textBox();
+          }}
+        >
+          Add Snag {timeDisplayFormat}
+          {console.log(timeDisplayFormat)}
+        </Button>
+      </div>
+      <div className={showTextBox ? "showSnagNote" : "hideSnagNote"}>
+        <SnagTextBox />
+      </div>
+    </>
   );
 };
