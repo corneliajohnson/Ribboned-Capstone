@@ -3,7 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "../../img/RibbonedWordOnly.png";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
-import { List, NavLink } from "reactstrap";
+import { List } from "reactstrap";
+import { CategoryNavList } from "../category/CategoryNavList";
 
 export const NavBar = (props) => {
   const { getCurrentUser, logout } = useContext(UserProfileContext);
@@ -11,8 +12,10 @@ export const NavBar = (props) => {
   const history = useHistory();
   const [isActive, setActive] = useState(false);
 
-  const toggleClass = () => {
-    setActive(!isActive);
+  const toggleClass = (e) => {
+    if (e.target.id === "openClose") {
+      setActive(!isActive);
+    }
   };
 
   const logoutAndReturn = () => {
@@ -25,6 +28,7 @@ export const NavBar = (props) => {
     <>
       {user ? (
         <nav className={isActive ? "openNav" : null} onClick={toggleClass}>
+          <div id="openClose"></div>
           <List className="navbar">
             <li className="navbar__item active fixed-top">
               <Link className="navbar__link" to="/account m-5">
@@ -41,11 +45,7 @@ export const NavBar = (props) => {
                 Add Ribbon
               </Link>
             </li>
-            <li className="navbar__item nav__addcategorylink">
-              <Link className="navbar__link" to="/categories">
-                Categories
-              </Link>
-            </li>
+            <CategoryNavList />
             <li className="navbar__item nav__ribbonlink">
               <Link className="navbar__link" to="/ribbons">
                 My Ribbons

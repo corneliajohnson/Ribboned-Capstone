@@ -10,6 +10,7 @@ import { RibbonList } from "./ribbon/RibbonList";
 import { RibbonForm } from "./ribbon/RibbonForm";
 import { RibbonTrashMove } from "./ribbon/RibbonTrashMove";
 import { RibbonTrashList } from "./ribbon/RibbonTrashList";
+import { RibbonListByCategory } from "./ribbon/RibbonListByCategory";
 
 export const ApplicationViews = () => {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -40,6 +41,10 @@ export const ApplicationViews = () => {
 
       <Route exact path="/categories">
         {isLoggedIn ? <CategoryManager /> : <Redirect to="/login" />}
+      </Route>
+
+      <Route path="/ribbon/category/:categoryId(\d+)">
+        {isLoggedIn ? <RibbonListByCategory /> : <Redirect to="/login" />}
       </Route>
 
       <Route exact path="/ribbons">

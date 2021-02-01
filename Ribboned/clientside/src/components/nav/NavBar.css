@@ -17,7 +17,7 @@ nav {
   border-right: 1px #000 solid;
 }
 
-nav:after {
+#openClose {
   content: "";
   background: #000;
   height: 80px;
