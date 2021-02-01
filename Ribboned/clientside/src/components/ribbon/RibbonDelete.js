@@ -7,7 +7,7 @@ export const RibbonDelete = ({ ribbon }) => {
   const [pendingDelete, setPendingDelete] = useState(false);
 
   const handleDelete = () => {
-    deleteRibbon(ribbon.id); //.then(getUserTrashRibbons);
+    deleteRibbon(ribbon.id); //.then(() => history("/"))
     setPendingDelete(false);
   };
 

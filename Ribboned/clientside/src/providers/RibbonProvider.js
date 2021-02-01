@@ -68,7 +68,7 @@ export const RibbonProvider = (props) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(ribbon),
-      }).then(() => history.push(`/ribbon/${ribbon.id}`));
+      }); //.then(() => history.push(`/ribbon/${ribbon.id}`));
     });
   };
 

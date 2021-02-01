@@ -43,8 +43,8 @@ export const RibbonDetail = () => {
   const canvasRef = useRef(null);
 
   //play pause toggle
-  const handlePlayPause = () => {
-    setState({ ...state, playing: !state.playing });
+  const handlePause = () => {
+    setState({ ...state, playing: false });
   };
 
   const handlePlay = () => {
@@ -122,35 +122,25 @@ export const RibbonDetail = () => {
             )}
           </Popover>
         </div>
-        <h1 className="text-center w-75 mx-auto">{ribbon.title}</h1>
+        <h1 className="text-center m-4 mx-auto">{ribbon.title}</h1>
         <div>
           <div className="d-flex justify-content-center">
             <ReactPlayer
               onSeek={handleSeekChange}
               ref={playerRef}
-              onPause={paused}
+              onPause={handlePause}
               playing={playing}
               onProgress={handleProgress}
               controls={true}
               url={ribbon.url}
             />
           </div>
-          <div>
+          <div className="mx-auto w-75 font-weight-bold">
             {" "}
-            <p
-              className={
-                showDescription
-                  ? "mx-auto w-75 font-weight-bold"
-                  : "hide-decription"
-              }
-            >
+            <p className={showDescription ? "" : "hide-decription"}>
               {ribbon.decription}
             </p>{" "}
-            <a
-              className="mx-auto w-75 float-right"
-              href="#"
-              onClick={toggleDecription}
-            >
+            <a href="#" className="float-right" onClick={toggleDecription}>
               {showDescription ? "Hide Decription" : "Show Decription"}
             </a>
           </div>
@@ -172,8 +162,11 @@ export const RibbonDetail = () => {
           </div>
           <div className="text-center m-3">
             <SnagAddButton
-              handlePlayPause={handlePlayPause}
               playerRef={playerRef}
+              timeDisplayFormat={timeDisplayFormat}
+              handlePlay={handlePlay}
+              handlePause={handlePause}
+              playing={playing}
             />
           </div>
           <SnagList
