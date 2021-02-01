@@ -15,6 +15,7 @@ nav {
   transform: translateX(-300px);
   transition: transform 0.3s ease-in-out;
   border-right: 1px #000 solid;
+  z-index: 10;
 }
 
 #openClose {
@@ -68,4 +69,8 @@ nav {
 
 .noscroll {
   overflow: hidden;
+}
+
+#root {
+  z-index: -1;
 }

@@ -36,13 +36,9 @@ export const NavBar = (props) => {
   return (
     <>
       {user ? (
-        <nav
-          id="mySideNav"
-          className={isActive ? "openNav" : ""}
-          onClick={toggleClass}
-        >
+        <nav id="mySideNav" className={isActive ? "openNav" : ""}>
           <a href="#">
-            <div id="openClose"></div>
+            <div id="openClose" onClick={toggleClass}></div>
           </a>
           <List className="navbar">
             <li className="navbar__item active fixed-top">
