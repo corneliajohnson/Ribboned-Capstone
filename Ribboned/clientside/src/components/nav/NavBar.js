@@ -16,6 +16,15 @@ export const NavBar = (props) => {
     if (e.target.id === "openClose") {
       setActive(!isActive);
     }
+    if (!isActive) {
+      document.querySelector(".container").style.width = "75%";
+      document.querySelector(".container").style.float = "right";
+      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    } else {
+      document.querySelector(".container").style.float = "none";
+      document.querySelector(".container").style.width = "100%";
+      document.body.style.backgroundColor = "white";
+    }
   };
 
   const logoutAndReturn = () => {
@@ -27,8 +36,14 @@ export const NavBar = (props) => {
   return (
     <>
       {user ? (
-        <nav className={isActive ? "openNav" : null} onClick={toggleClass}>
-          <div id="openClose"></div>
+        <nav
+          id="mySideNav"
+          className={isActive ? "openNav" : ""}
+          onClick={toggleClass}
+        >
+          <a href="#">
+            <div id="openClose"></div>
+          </a>
           <List className="navbar">
             <li className="navbar__item active fixed-top">
               <Link className="navbar__link" to="/account m-5">

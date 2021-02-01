@@ -36,6 +36,7 @@ nav {
 .navbar__item {
   list-style: none;
   flex: none;
+  cursor: pointer;
 }
 
 .nav__ribbonlink {
@@ -63,4 +64,8 @@ nav {
   top: 10%;
   left: 0;
   margin-top: 20%;
+}
+
+.noscroll {
+  overflow: hidden;
 }
