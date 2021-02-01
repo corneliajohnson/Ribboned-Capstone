@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { SnagContext } from "../../providers/SnagProvider";
 
@@ -9,9 +9,15 @@ export const SnagTextBox = ({
   ribbonId,
   seconds,
 }) => {
-  const { addSnag, updateSnag, getByRibbonById } = useContext(SnagContext);
+  const { addSnag, updateSnag, getByRibbonById, snags } = useContext(
+    SnagContext
+  );
   const [snag, setSnag] = useState({});
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getByRibbonById(ribbonId);
+  }, []);
 
   const handleInputControl = (event) => {
     const newSnag = { ...snag };
@@ -31,7 +37,7 @@ export const SnagTextBox = ({
           ribbonId: ribbonId,
           note: snag.note,
           timeString: timeDisplayFormat,
-          seconds: seconds,
+          seconds: parseInt(seconds),
         });
         handlePlay();
         textBoxToggle();

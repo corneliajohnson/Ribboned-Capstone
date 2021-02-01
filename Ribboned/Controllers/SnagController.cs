@@ -12,14 +12,23 @@ namespace Ribboned.Controllers
     public class SnagController : ControllerBase
     {
         private readonly ISnagRepository _snagRepo;
-        public SnagController(ISnagRepository snagRepo)
+        private readonly IRibbonRepository _ribbonRepo;
+        public SnagController(ISnagRepository snagRepo, IRibbonRepository ribbonRepo)
         {
             _snagRepo = snagRepo;
+            _ribbonRepo = ribbonRepo;
         }
 
         [HttpGet("getbyribbon/{id}")]
         public IActionResult Get(int id)
         {
+            //check if ribbon exist
+            var ribbon = _ribbonRepo.GetById(id);
+            if(ribbon == null)
+            {
+                return BadRequest();
+            };
+
             return Ok(_snagRepo.GetByRibbon(id));
         }
 
