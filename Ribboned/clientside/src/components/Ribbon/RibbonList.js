@@ -16,7 +16,6 @@ export const RibbonList = () => {
 
   return (
     <div className="container">
-      {console.log(ribbons)}
       <h1>Ribbons</h1>
       {ribbons.length === 0 ? (
         <p className="text-center">None</p>

@@ -164,7 +164,6 @@ export const RibbonDetail = () => {
           />
         </div>
         <canvas ref={canvasRef} />
-        {console.log(ribbon)}
       </div>
     </>
   );
