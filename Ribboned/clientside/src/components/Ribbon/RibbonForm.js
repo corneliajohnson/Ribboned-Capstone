@@ -155,7 +155,7 @@ export const RibbonForm = (props) => {
           title: ribbon.title,
           decription: ribbon.decription,
           sourceId: parseInt(ribbon.sourceId),
-          url: url ? url : ribbon.url,
+          url: url || ribbon.url,
           thumbnail:
             parseInt(ribbon.sourceId) === 2
               ? getYoubeVideoId(ribbon.url)
@@ -277,6 +277,7 @@ export const RibbonForm = (props) => {
                   <Input
                     type="file"
                     name="url"
+                    accept=".mp4,.webm,.ogg"
                     defaultValue={ribbon.url}
                     onChange={handleUploadChange}
                   />
