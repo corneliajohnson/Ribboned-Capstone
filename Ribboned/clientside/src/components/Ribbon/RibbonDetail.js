@@ -5,9 +5,11 @@ import { RibbonContext } from "../../providers/RibbonProvider";
 import { SnagList } from "../snag/SnagList";
 import { SnagAddButton } from "../snag/SnagAddButton";
 import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import { RibbonTrashMove } from "./RibbonTrashMove";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import "./Ribbon.css";
+import { RibbonRestore } from "./RibbonRestore";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -104,15 +106,19 @@ export const RibbonDetail = () => {
             toggle={toggle}
           >
             <PopoverHeader>Manage Ribbon</PopoverHeader>
-            <PopoverBody>
-              <Link to={`/ribbon/edit/${ribbon.id}`}>
-                <Button>Edit</Button>
-              </Link>
-              <Button>
-                Delete
-                <Link to={`/ribbon/delete/${ribbon.id}`}></Link>
-              </Button>
-            </PopoverBody>
+            {ribbon.isActive ? (
+              <PopoverBody>
+                <Link to={`/ribbon/edit/${ribbon.id}`}>
+                  <Button>Edit</Button>
+                </Link>
+                <RibbonTrashMove ribbon={ribbon} />
+              </PopoverBody>
+            ) : (
+              <PopoverBody>
+                <RibbonRestore ribbon={ribbon} />
+                <RibbonTrashMove ribbon={ribbon} />
+              </PopoverBody>
+            )}
           </Popover>
         </div>
         <h1 className="text-center w-75 mx-auto">{ribbon.title}</h1>

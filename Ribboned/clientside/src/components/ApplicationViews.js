@@ -9,6 +9,7 @@ import { CategoryManager } from "./category/CategoryManager";
 import { RibbonList } from "./ribbon/RibbonList";
 import { RibbonForm } from "./ribbon/RibbonForm";
 import { RibbonTrashMove } from "./ribbon/RibbonTrashMove";
+import { RibbonTrashList } from "./ribbon/RibbonTrashList";
 
 export const ApplicationViews = () => {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -47,6 +48,9 @@ export const ApplicationViews = () => {
 
       <Route exact path="/ribbon/:ribbonId(\d+)">
         {isLoggedIn ? <RibbonDetail /> : <Redirect to="/login" />}
+      </Route>
+      <Route exact path="/ribbons/trash">
+        {isLoggedIn ? <RibbonTrashList /> : <Redirect to="/login" />}
       </Route>
     </Switch>
   );

@@ -51,10 +51,18 @@ export const NavBar = (props) => {
                 My Ribbons
               </Link>
             </li>
+            <li
+              className="navbar__item fixed-bottom ml-2"
+              style={{ marginBottom: "30%" }}
+            >
+              <Link className="navbar__link" to="/ribbons/trash">
+                Trash
+              </Link>
+            </li>
             <li className="navbar__item fixed-bottom ml-2 mb-5">
-              <NavLink className="navbar__link" onClick={logoutAndReturn}>
+              <Link className="navbar__link" onClick={logoutAndReturn}>
                 Log Out
-              </NavLink>
+              </Link>
             </li>
           </List>
         </nav>

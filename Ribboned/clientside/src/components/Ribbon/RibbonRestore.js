@@ -3,12 +3,12 @@ import { RibbonContext } from "../../providers/RibbonProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { useHistory } from "react-router-dom";
 
-export const RibbonTrashMove = ({ ribbon }) => {
+export const RibbonRestore = ({ ribbon }) => {
   const { updateRibbon } = useContext(RibbonContext);
-  const [pendingTrash, setPendingTrash] = useState(false);
+  const [pendingRestore, setPendingRestore] = useState(false);
   const history = useHistory();
 
-  const handleTrash = () => {
+  const handleRestore = () => {
     updateRibbon({
       id: ribbon.id,
       title: ribbon.title,
@@ -17,28 +17,29 @@ export const RibbonTrashMove = ({ ribbon }) => {
       url: ribbon.url,
       thumbnail: ribbon.thumbnail,
       categoryId: ribbon.categoryId,
-      isActive: false,
+      isActive: true,
       isPublic: ribbon.isPublic,
       dateCreated: ribbon.dateCreated,
     });
-    setPendingTrash(false);
+    //.then(() => history.push("/ribbons/trash"));
+    setPendingRestore(false);
   };
 
   return (
     <>
       <Button
-        className="btn btn-sm btn-danger"
-        onClick={(e) => setPendingTrash(true)}
+        className="btn btn-sm btn-info"
+        onClick={(e) => setPendingRestore(true)}
       >
-        Delete
+        Restore
       </Button>
-      <Modal isOpen={pendingTrash}>
-        <ModalHeader>Delete {ribbon.title}?</ModalHeader>
-        <ModalBody>Are you sure you want to delete this ribbon?</ModalBody>
+      <Modal isOpen={pendingRestore}>
+        <ModalHeader>Restore {ribbon.title}?</ModalHeader>
+        <ModalBody>Are you sure you want to restore this ribbon?</ModalBody>
         <ModalFooter>
-          <Button onClick={(e) => setPendingTrash(false)}>No, Cancel</Button>
-          <Button className="btn btn-outline-danger" onClick={handleTrash}>
-            Yes, Delete
+          <Button onClick={(e) => setPendingRestore(false)}>No, Cancel</Button>
+          <Button className="btn btn-outline-info" onClick={handleRestore}>
+            Yes, Restore
           </Button>
         </ModalFooter>
       </Modal>
