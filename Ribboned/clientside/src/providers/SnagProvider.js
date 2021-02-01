@@ -47,9 +47,9 @@ export const SnagProvider = (props) => {
     });
   };
 
-  const getByRibbonById = (ribbonId) => {
-    getToken().then((token) => {
-      return fetch(`/api/snag/getbyribbon/${ribbonId}`, {
+  const getByRibbonById = (id) => {
+    getToken().then((token) =>
+      fetch(`${apiUrl}/getbyribbon/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -58,8 +58,8 @@ export const SnagProvider = (props) => {
         .then((res) => res.json())
         .then((snags) => {
           setSnags(snags);
-        });
-    });
+        })
+    );
   };
 
   return (

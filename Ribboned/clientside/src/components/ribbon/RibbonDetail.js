@@ -16,6 +16,7 @@ export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
   const [ribbon, setRibbon] = useState({});
   const [showDescription, setShowDecription] = useState(true);
+  const [snags, setSnags] = useState([]);
   const { ribbonId } = useParams();
 
   //for management popover
@@ -25,6 +26,7 @@ export const RibbonDetail = () => {
   useEffect(() => {
     getRibbonById(ribbonId).then((response) => {
       setRibbon(response);
+      setSnags(response.snags);
     });
   }, []);
 
@@ -176,6 +178,7 @@ export const RibbonDetail = () => {
             playerRef={playerRef}
             handlePlay={handlePlay}
             timeDisplayFormat={timeDisplayFormat}
+            snags={snags}
           />
         </div>
         <canvas ref={canvasRef} />
