@@ -70,6 +70,20 @@ namespace Ribboned.Controllers
             return Ok(user);
         }
 
+        [HttpGet("getusertrash/{id}")]
+        public IActionResult GetUserTrash(int id)
+        {
+            //check that user exist
+            var user = _ribbonRepo.GetUserTrash(id);
+            if (user == null)
+            {
+                BadRequest();
+            }
+
+            return Ok(user);
+        }
+
+
         [HttpGet("mostrecentribbons/{id}")]
         public IActionResult GetMostRecentRibbons(int userId)
         {

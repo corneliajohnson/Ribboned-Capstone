@@ -26,6 +26,9 @@ export const CategoryDelete = ({ category }) => {
       <Modal isOpen={pendingDelete}>
         <ModalHeader>Delete {category.name}?</ModalHeader>
         <ModalBody>Are you sure you want to delete this category?</ModalBody>
+        <ModalBody className="text-warning">
+          Ribbons with this category will be uncategorized.
+        </ModalBody>
         <ModalFooter>
           <Button onClick={(e) => setPendingDelete(false)}>No, Cancel</Button>
           <Button className="btn btn-outline-danger" onClick={handleDelete}>

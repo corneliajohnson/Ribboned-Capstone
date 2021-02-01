@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import ReactPlayer from "react-player";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { SnagList } from "../snag/SnagList";
 import { SnagAddButton } from "../snag/SnagAddButton";
@@ -108,7 +108,10 @@ export const RibbonDetail = () => {
               <Link to={`/ribbon/edit/${ribbon.id}`}>
                 <Button>Edit</Button>
               </Link>
-              <Button>Delete</Button>
+              <Button>
+                Delete
+                <Link to={`/ribbon/delete/${ribbon.id}`}></Link>
+              </Button>
             </PopoverBody>
           </Popover>
         </div>
