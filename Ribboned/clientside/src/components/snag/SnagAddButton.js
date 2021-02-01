@@ -6,7 +6,9 @@ import "./Snag.css";
 export const SnagAddButton = ({
   playerRef,
   timeDisplayFormat,
-  handlePlayPause,
+  handlePause,
+  handlePlay,
+  playing,
 }) => {
   const [showTextBox, setShowTextBox] = useState(false);
 
@@ -40,18 +42,23 @@ export const SnagAddButton = ({
     });
   };
 
+  useEffect(() => {
+    if (showTextBox) {
+      handlePause();
+    }
+    console.log(playing);
+  }, [showTextBox]);
+
   return (
     <>
       <div className={showTextBox ? "hideSnagBtn" : "showSnagBtn"}>
         <Button
-          className="btn btn-lg btn-secondary w-50 "
+          className="btn btn-lg btn-secondary w-50"
           onClick={() => {
-            handlePlayPause();
             textBox();
           }}
         >
           Add Snag {timeDisplayFormat}
-          {console.log(timeDisplayFormat)}
         </Button>
       </div>
       <div className={showTextBox ? "showSnagNote" : "hideSnagNote"}>

@@ -43,8 +43,8 @@ export const RibbonDetail = () => {
   const canvasRef = useRef(null);
 
   //play pause toggle
-  const handlePlayPause = () => {
-    setState({ ...state, playing: !state.playing });
+  const handlePause = () => {
+    setState({ ...state, playing: false });
   };
 
   const handlePlay = () => {
@@ -128,7 +128,7 @@ export const RibbonDetail = () => {
             <ReactPlayer
               onSeek={handleSeekChange}
               ref={playerRef}
-              onPause={paused}
+              onPause={handlePause}
               playing={playing}
               onProgress={handleProgress}
               controls={true}
@@ -162,10 +162,11 @@ export const RibbonDetail = () => {
           </div>
           <div className="text-center m-3">
             <SnagAddButton
-              handlePlayPause={handlePlayPause}
               playerRef={playerRef}
-              playing={playing}
               timeDisplayFormat={timeDisplayFormat}
+              handlePlay={handlePlay}
+              handlePause={handlePause}
+              playing={playing}
             />
           </div>
           <SnagList

@@ -12,7 +12,7 @@ import {
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { SourceContext } from "../../providers/SourceProvider";
 import { RibbonContext } from "../../providers/RibbonProvider";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "./Ribbon.css";
 import { storage } from "../../firebase";
 
@@ -28,6 +28,7 @@ export const RibbonForm = (props) => {
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
+  const history = useHistory();
 
   //TODO set loading for file to wait on url
   const [fileLoading, setFileLoading] = useState(false);
@@ -164,7 +165,7 @@ export const RibbonForm = (props) => {
           isActive: true,
           isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
           dateCreated: ribbon.dateCreated,
-        });
+        }).then(() => history.push(`/ribbon/${ribbon.id}`));
       } else {
         //POST - add
         addRibbon({

@@ -20,7 +20,7 @@ export const RibbonTrashMove = ({ ribbon }) => {
       isActive: false,
       isPublic: ribbon.isPublic,
       dateCreated: ribbon.dateCreated,
-    });
+    }).then(() => history.push("/ribbons"));
     setPendingTrash(false);
   };
 
