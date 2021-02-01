@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { SnagContext } from "../../providers/SnagProvider";
 
 export const SnagTextBox = ({
@@ -7,6 +7,7 @@ export const SnagTextBox = ({
   handlePlay,
   timeDisplayFormat,
   ribbonId,
+  seconds,
 }) => {
   const { addSnag, updateSnag, getSnags } = useContext(SnagContext);
   const [snag, setSnag] = useState({});
@@ -22,7 +23,12 @@ export const SnagTextBox = ({
     e.preventDefault();
     if (snag.id) {
     } else {
-      console.log(snag.note);
+      console.log({
+        ribbonId: ribbonId,
+        note: snag.note,
+        timeString: timeDisplayFormat,
+        seconds: seconds,
+      });
       handlePlay();
       textBoxToggle();
     }
@@ -39,8 +45,11 @@ export const SnagTextBox = ({
           required="required"
         />
       </FormGroup>
-      <Button onClick={textBoxToggle}>Cancel</Button>
-      <Button disabled={loading}>Save</Button>
+      <FormText className="float-right">{snag.note.length}/500</FormText>
+      <div className="d-flex justify-content-around">
+        <Button onClick={textBoxToggle}>Cancel</Button>
+        <Button disabled={loading}>Save</Button>
+      </div>
     </Form>
   );
 };
