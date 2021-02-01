@@ -12,6 +12,8 @@ export const SnagList = ({ playerRef, handlePlay }) => {
     getByRibbonById(ribbonId);
   }, []);
 
+  if (!snags) return null;
+
   return (
     <div className="row p-5">
       <div className="col align-self-center">

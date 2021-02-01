@@ -9,7 +9,7 @@ export const SnagTextBox = ({
   ribbonId,
   seconds,
 }) => {
-  const { addSnag, updateSnag, getSnags } = useContext(SnagContext);
+  const { addSnag, updateSnag, getByRibbonById } = useContext(SnagContext);
   const [snag, setSnag] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -21,18 +21,25 @@ export const SnagTextBox = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (snag.id) {
+    if (snag.note.trim() === "") {
+      console.log("blank");
     } else {
-      console.log({
-        ribbonId: ribbonId,
-        note: snag.note,
-        timeString: timeDisplayFormat,
-        seconds: seconds,
-      });
-      handlePlay();
-      textBoxToggle();
+      if (snag.id) {
+        console.log("foredit");
+      } else {
+        addSnag({
+          ribbonId: ribbonId,
+          note: snag.note,
+          timeString: timeDisplayFormat,
+          seconds: seconds,
+        });
+        handlePlay();
+        textBoxToggle();
+      }
     }
   };
+
+  if (!snag) return null;
 
   return (
     <Form onSubmit={handleSubmit} className="border mx-auto p-3 w-75">
@@ -45,7 +52,7 @@ export const SnagTextBox = ({
           required="required"
         />
       </FormGroup>
-      <FormText className="float-right">{snag.note.length}/500</FormText>
+      <FormText className="float-right">{snag.note?.length}/500</FormText>
       <div className="d-flex justify-content-around">
         <Button onClick={textBoxToggle}>Cancel</Button>
         <Button disabled={loading}>Save</Button>
