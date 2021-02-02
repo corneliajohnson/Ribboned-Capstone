@@ -6,14 +6,16 @@ export const CategoryDelete = ({ category }) => {
   const { deleteCategory, getCategories } = useContext(CategoryContext);
   const [pendingDelete, setPendingDelete] = useState(false);
 
-  useEffect(() => {
-    getCategories();
-  }, [pendingDelete]);
+  // useEffect(() => {
+  //   getCategories();
+  // }, [pendingDelete]);
 
   const handleDelete = () => {
-    deleteCategory(category.id);
+    deleteCategory(category.id).then(getCategories);
     setPendingDelete(false);
   };
+
+  if (!category) return null;
 
   return (
     <>

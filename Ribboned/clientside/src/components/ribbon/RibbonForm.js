@@ -180,7 +180,7 @@ export const RibbonForm = (props) => {
           categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
           isActive: true,
           isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
-        });
+        }).then(() => history.push("/ribbons"));
       }
     }
   };

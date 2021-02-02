@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 export const RibbonDelete = ({ ribbon }) => {
-  const { deleteRibbon, getUserTrashRibbons } = useContext(RibbonContext);
+  const { deleteRibbon } = useContext(RibbonContext);
   const [pendingDelete, setPendingDelete] = useState(false);
+  const history = useHistory();
 
   const handleDelete = () => {
-    deleteRibbon(ribbon.id); //.then(() => history("/"))
+    deleteRibbon(ribbon.id).then(() => history("/ribbons/trash"));
     setPendingDelete(false);
   };
 
