@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { YouTubeSearch } from "./youtube/YouTubeSearch";
 import Logo from "../img/RibbonedWordOnly.png";
 import { SnagContext } from "../providers/SnagProvider";
+import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import {
   ListGroup,
@@ -18,7 +19,6 @@ export const Home = () => {
   }, []);
 
   if (!snags) return null;
-
   return (
     <>
       <div className="container">
@@ -33,14 +33,16 @@ export const Home = () => {
             <ListGroupItem active>
               <ListGroupItemHeading>Recent Ribbon Snags</ListGroupItemHeading>
               <ListGroupItemText>
-                See your lastest ribbon snags made here
+                See your lastest ribbon snags made here...
               </ListGroupItemText>
             </ListGroupItem>
             {snags.map((snag) => {
               return (
-                <ListGroupItem>
+                <ListGroupItem key={snag.id} href="#" action>
                   <ListGroupItemHeading>
-                    {snag.ribbon?.title}
+                    <Link to={`/ribbon/${snag.ribbon?.id}`}>
+                      {snag.ribbon?.title}
+                    </Link>
                   </ListGroupItemHeading>
                   <ListGroupItemText className="text-muted">
                     <Moment fromNow>{snag.dateCreated}</Moment>{" "}
