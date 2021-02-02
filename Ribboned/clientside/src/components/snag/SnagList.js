@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { useParams } from "react-router-dom";
-import { Button, Table, ListGroup, ListGroupItem } from "reactstrap";
+import { SnagDelete } from "./SnagDelete";
 
 export const SnagList = ({ playerRef, handlePlay, playing }) => {
   const { getRibbonById } = useContext(RibbonContext);
   const [snags, setSnags] = useState([]);
   const { ribbonId } = useParams();
 
+  //get ribbon with snags
   useEffect(() => {
     getRibbonById(ribbonId).then((response) => {
       setSnags(response.snags);
@@ -19,7 +20,7 @@ export const SnagList = ({ playerRef, handlePlay, playing }) => {
   return (
     <div>
       <h3 className="text-center">Ribbon Snags</h3>
-      <table class="table table-hover">
+      <table className="table table-hover">
         <thead>
           <tr className="bg-primary text-white">
             <td width="10%">Time</td>
@@ -30,7 +31,7 @@ export const SnagList = ({ playerRef, handlePlay, playing }) => {
         <tbody>
           {snags.map((snag) => {
             return (
-              <tr>
+              <tr key={snag.id}>
                 <td className="float-left">
                   <a
                     className="btn btn-link p-2"
@@ -45,7 +46,9 @@ export const SnagList = ({ playerRef, handlePlay, playing }) => {
                   </a>
                 </td>
                 <td className="text-wrap">{snag.note}</td>
-                <td>Edit Delete</td>
+                <td>
+                  Edit <SnagDelete snag={snag} />
+                </td>
               </tr>
             );
           })}
@@ -54,20 +57,3 @@ export const SnagList = ({ playerRef, handlePlay, playing }) => {
     </div>
   );
 };
-// <ListGroupItem href="#" action>
-//   <span>
-//     <Button
-//       className="btn btn-link"
-//       onClick={() => {
-//         //go to seconds stamp of video
-//         playerRef.current.seekTo(snag.seconds);
-//         //play video
-//         handlePlay();
-//       }}
-//     >
-//       {snag.timeString}
-//     </Button>
-//   </span>
-//   <span>{snag.note}</span>
-//   <span>Edit Delete</span>
-// </ListGroupItem>
