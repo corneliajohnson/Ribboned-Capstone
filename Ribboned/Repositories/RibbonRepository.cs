@@ -43,7 +43,7 @@ namespace Ribboned.Repositories
         {
             return _context.Ribbon
                 .Include(r => r.Category.UserProfile)
-                .Include(r => r.Snags)
+                .Include(r => r.Snags.OrderBy(s =>s.Seconds))
                 .FirstOrDefault(r => r.Id == id);
         }
 
