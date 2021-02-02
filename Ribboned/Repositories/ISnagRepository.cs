@@ -10,5 +10,6 @@ namespace Ribboned.Repositories
         Snag GetById(int id);
         List<Snag> GetByRibbon(int ribbonId);
         void Update(Snag snag);
+        List<Snag> GetMostRecentSnags(int userId);
     }
 }

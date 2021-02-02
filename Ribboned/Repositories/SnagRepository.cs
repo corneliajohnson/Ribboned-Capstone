@@ -22,7 +22,10 @@ namespace Ribboned.Repositories
 
         public List<Snag> GetMostRecentSnags(int userId)
         {
-            return _context.Snag.Where(s => s.Ribbon.Category.UserProfileId == userId).ToList();
+            return _context.Snag
+                .Include(s => s.Ribbon)
+                .Where(s => s.Ribbon.Category.UserProfileId == userId)
+                .OrderByDescending(s => s.DateCreated).Take(5).ToList();
         }
 
         public List<Snag> GetByRibbon(int ribbonId)
