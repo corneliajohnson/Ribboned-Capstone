@@ -11,7 +11,7 @@ export const SnagProvider = (props) => {
   const apiUrl = "/api/snag";
 
   const updateSnag = (snag) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/${snag.id}`, {
         method: "PUT",
         headers: {
@@ -24,7 +24,7 @@ export const SnagProvider = (props) => {
   };
 
   const addSnag = (snag) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -37,7 +37,7 @@ export const SnagProvider = (props) => {
   };
 
   const deleteSnag = (id) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`/api/snag/${id}`, {
         method: "DELETE",
         headers: {
@@ -48,8 +48,8 @@ export const SnagProvider = (props) => {
   };
 
   const getByRibbonById = (id) => {
-    getToken().then((token) =>
-      fetch(`${apiUrl}/getbyribbon/${id}`, {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/getbyribbon/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -58,8 +58,8 @@ export const SnagProvider = (props) => {
         .then((res) => res.json())
         .then((snags) => {
           setSnags(snags);
-        })
-    );
+        });
+    });
   };
 
   return (

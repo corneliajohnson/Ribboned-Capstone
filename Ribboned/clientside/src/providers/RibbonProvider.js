@@ -14,7 +14,7 @@ export const RibbonProvider = (props) => {
 
   const getUserRibbons = () => {
     const userId = JSON.parse(localStorage.getItem("userProfile")).id;
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/getbyuser/${userId}`, {
         method: "GET",
         headers: {
@@ -30,7 +30,7 @@ export const RibbonProvider = (props) => {
 
   const getUserTrashRibbons = () => {
     const userId = JSON.parse(localStorage.getItem("userProfile")).id;
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/getusertrash/${userId}`, {
         method: "GET",
         headers: {
@@ -45,8 +45,8 @@ export const RibbonProvider = (props) => {
   };
 
   const getRibbonByCategory = (id) => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/getbycategory/${id}`, {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/getbycategory/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -55,12 +55,12 @@ export const RibbonProvider = (props) => {
         .then((res) => res.json())
         .then((ribbons) => {
           setRibbons(ribbons);
-        })
-    );
+        });
+    });
   };
 
   const updateRibbon = (ribbon) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/${ribbon.id}`, {
         method: "PUT",
         headers: {
@@ -69,12 +69,11 @@ export const RibbonProvider = (props) => {
         },
         body: JSON.stringify(ribbon),
       });
-      //.then(() => history.push(`/ribbon/${ribbon.id}`));
     });
   };
 
   const addRibbon = (ribbon) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -87,7 +86,7 @@ export const RibbonProvider = (props) => {
   };
 
   const deleteRibbon = (id) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/${id}`, {
         method: "DELETE",
         headers: {
@@ -98,18 +97,18 @@ export const RibbonProvider = (props) => {
   };
 
   const getRibbonById = (id) => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/${id}`, {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((resp) => resp.json())
-    );
+      }).then((resp) => resp.json());
+    });
   };
 
   const searchRibbons = (searchQuery) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/search/${searchQuery}`, {
         method: "GET",
         headers: {

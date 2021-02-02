@@ -82,7 +82,6 @@ export const RibbonForm = (props) => {
   const getYoubeVideoId = (url) => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
-    console.log(match && match[7].length == 11 ? match[7] : null);
     return match && match[7].length == 11
       ? `http://img.youtube.com/vi/${match[7]}/hqdefault.jpg`
       : null;
@@ -163,7 +162,7 @@ export const RibbonForm = (props) => {
               : null,
           categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
           isActive: true,
-          isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
+          isPublic: parseInt(ribbon.sourceId) === 2 ? ribbon.isPublic : false,
           dateCreated: ribbon.dateCreated,
         }).then(() => history.push(`/ribbon/${ribbon.id}`));
       } else {
@@ -172,14 +171,18 @@ export const RibbonForm = (props) => {
           title: ribbon.title,
           decription: ribbon.decription,
           sourceId: parseInt(ribbon.sourceId),
-          url: url || ribbon.url,
+          url: parseInt(ribbon.sourceId) === 3 ? url : ribbon.url,
           thumbnail:
             parseInt(ribbon.sourceId) === 2
               ? getYoubeVideoId(ribbon.url)
               : null,
           categoryId: ribbon.categoryId ? ribbon.categoryId : defaultCategory,
           isActive: true,
-          isPublic: parseInt(ribbon.sourceId) === 2 ? isMakedPublic : false,
+          isPublic: !isMakedPublic
+            ? false
+            : parseInt(ribbon.sourceId) === 2
+            ? isMakedPublic
+            : false,
         }).then(() => history.push("/ribbons"));
       }
     }
