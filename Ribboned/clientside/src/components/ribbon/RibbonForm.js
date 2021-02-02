@@ -203,6 +203,7 @@ export const RibbonForm = (props) => {
                 name="title"
                 defaultValue={ribbon.title}
                 onChange={handleControlledInputChange}
+                maxLength="100"
                 required="required"
               />
             </Col>
@@ -267,6 +268,7 @@ export const RibbonForm = (props) => {
                 <Input
                   type="url"
                   name="url"
+                  maxLength="255"
                   defaultValue={ribbon.url}
                   onChange={handleControlledInputChange}
                 />
@@ -304,6 +306,7 @@ export const RibbonForm = (props) => {
                 name="decription"
                 defaultValue={ribbon.decription}
                 onChange={handleControlledInputChange}
+                maxLength="255"
                 required="required"
               />
             </Col>

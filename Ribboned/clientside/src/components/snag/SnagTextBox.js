@@ -51,6 +51,7 @@ export const SnagTextBox = ({
           onChange={handleInputControl}
           name="note"
           required="required"
+          maxLength="255"
         />
       </FormGroup>
       <FormText className="float-right">{snag.note?.length}/500</FormText>
