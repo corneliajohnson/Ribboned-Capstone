@@ -2,17 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { useParams } from "react-router-dom";
 import { SnagDelete } from "./SnagDelete";
+import { SnagContext } from "../../providers/SnagProvider";
 
 export const SnagList = ({ playerRef, handlePlay, playing }) => {
-  const { getRibbonById } = useContext(RibbonContext);
-  const [snags, setSnags] = useState([]);
+  const { getByRibbonById, snags } = useContext(SnagContext);
   const { ribbonId } = useParams();
 
-  //get ribbon with snags
   useEffect(() => {
-    getRibbonById(ribbonId).then((response) => {
-      setSnags(response.snags);
-    });
+    getByRibbonById(ribbonId);
   }, [playing]);
 
   if (!snags) return null;

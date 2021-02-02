@@ -1,19 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SnagContext } from "../../providers/SnagProvider";
-import { RibbonContext } from "../../providers/RibbonProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export const SnagDelete = ({ snag }) => {
-  const { deleteSnag } = useContext(SnagContext);
-  const { getRibbonById } = useContext(RibbonContext);
-  const [snags, setSnags] = useState([]);
+  const { deleteSnag, getByRibbonById } = useContext(SnagContext);
   const [pendingDelete, setPendingDelete] = useState(false);
 
   //get ribbon with snags
   useEffect(() => {
-    getRibbonById(snag.ribbonId).then((response) => {
-      setSnags(response.snags);
-    });
+    getByRibbonById(snag.ribbonId);
   }, [pendingDelete]);
 
   const handleDelete = () => {
