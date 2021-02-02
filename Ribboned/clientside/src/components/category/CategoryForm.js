@@ -44,6 +44,7 @@ export const CategoryForm = () => {
               name="name"
               value={category.name}
               onChange={handleInputControl}
+              maxLength="50"
               required="required"
             />
             <FormText>Duplicates will not be displayed.</FormText>

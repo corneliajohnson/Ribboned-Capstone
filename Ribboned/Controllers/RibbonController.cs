@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ribboned.Models;
 using Ribboned.Repositories;
 using System;
@@ -8,6 +9,7 @@ namespace Ribboned.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RibbonController : Controller
     {
         private readonly IRibbonRepository _ribbonRepo;

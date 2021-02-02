@@ -1,44 +1,56 @@
-import React, { useContext, useEffect } from "react";
-import { SnagContext } from "../../providers/SnagProvider";
+import React, { useContext, useEffect, useState } from "react";
+import { RibbonContext } from "../../providers/RibbonProvider";
 import { useParams } from "react-router-dom";
-import { Button } from "reactstrap";
-import ReactPlayer from "react-player";
+import { SnagDelete } from "./SnagDelete";
+import { SnagContext } from "../../providers/SnagProvider";
 
-export const SnagList = ({ playerRef, handlePlay }) => {
+export const SnagList = ({ playerRef, handlePlay, playing }) => {
   const { getByRibbonById, snags } = useContext(SnagContext);
   const { ribbonId } = useParams();
 
   useEffect(() => {
     getByRibbonById(ribbonId);
-  }, []);
+  }, [playing]);
+
+  if (!snags) return null;
 
   return (
-    <div className="row p-5">
-      <div className="col align-self-center">
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action active">
-            Ribbon Snags
-          </div>
-          {snags.map((snag) => (
-            <>
-              <div class="list-group-item list-group-item-actions">
-                <Button
-                  className="btn btn-link"
-                  onClick={() => {
-                    //go to seconds stamp of video
-                    playerRef.current.seekTo(snag.time);
-                    //play video
-                    handlePlay();
-                  }}
-                >
-                  {snag.display}
-                </Button>
-                Snag Note
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
+    <div>
+      <h3 className="text-center">Ribbon Snags</h3>
+      <table className="table table-hover">
+        <thead>
+          <tr className="bg-primary text-white">
+            <td width="10%">Time</td>
+            <td width="70%">Note</td>
+            <td width="20%"></td>
+          </tr>
+        </thead>
+        <tbody>
+          {snags.map((snag) => {
+            return (
+              <tr key={snag.id}>
+                <td className="float-left">
+                  <a
+                    className="btn btn-link p-2"
+                    onClick={() => {
+                      //go to seconds stamp of video
+                      playerRef.current.seekTo(snag.seconds);
+                      //play video
+                      handlePlay();
+                    }}
+                  >
+                    {snag.timeString}
+                  </a>
+                </td>
+                <td className="text-wrap">{snag.note}</td>
+                <td>
+                  Edit <SnagDelete snag={snag} />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

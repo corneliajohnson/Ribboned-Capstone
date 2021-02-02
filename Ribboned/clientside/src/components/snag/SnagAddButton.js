@@ -9,10 +9,12 @@ export const SnagAddButton = ({
   handlePause,
   handlePlay,
   playing,
+  ribbonId,
 }) => {
   const [showTextBox, setShowTextBox] = useState(false);
+  const [currentSeconds, setCurrentSeconds] = useState(0);
 
-  const textBox = () => {
+  const textBoxToggle = () => {
     showTextBox ? setShowTextBox(false) : setShowTextBox(true);
   };
 
@@ -42,11 +44,13 @@ export const SnagAddButton = ({
     });
   };
 
+  //get current seconds int
   useEffect(() => {
-    if (showTextBox) {
-      handlePause();
-    }
-    console.log(playing);
+    setCurrentSeconds(playerRef.current.getCurrentTime());
+  }, [timeDisplayFormat]);
+  //pause and play video toggle
+  useEffect(() => {
+    playing ? handlePause() : handlePlay();
   }, [showTextBox]);
 
   return (
@@ -55,14 +59,21 @@ export const SnagAddButton = ({
         <Button
           className="btn btn-lg btn-secondary w-50"
           onClick={() => {
-            textBox();
+            textBoxToggle();
+            handlePlay();
           }}
         >
           Add Snag {timeDisplayFormat}
         </Button>
       </div>
       <div className={showTextBox ? "showSnagNote" : "hideSnagNote"}>
-        <SnagTextBox />
+        <SnagTextBox
+          handlePlay={handlePlay}
+          textBoxToggle={textBoxToggle}
+          timeDisplayFormat={timeDisplayFormat}
+          ribbonId={ribbonId}
+          seconds={currentSeconds}
+        />
       </div>
     </>
   );

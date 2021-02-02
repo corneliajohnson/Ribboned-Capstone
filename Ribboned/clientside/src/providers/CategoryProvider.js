@@ -12,8 +12,8 @@ export const CategoryProvider = (props) => {
 
   const getCategories = () => {
     const userId = JSON.parse(localStorage.getItem("userProfile")).id;
-    getToken().then((token) =>
-      fetch(`${apiUrl}/getbyuserid/${userId}`, {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/getbyuserid/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -22,12 +22,12 @@ export const CategoryProvider = (props) => {
         .then((res) => res.json())
         .then((categories) => {
           setCategories(categories);
-        })
-    );
+        });
+    });
   };
 
   const updateCategory = (category) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/${category.id}`, {
         method: "PUT",
         headers: {
@@ -40,7 +40,7 @@ export const CategoryProvider = (props) => {
   };
 
   const addCategory = (category) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -53,7 +53,7 @@ export const CategoryProvider = (props) => {
   };
 
   const deleteCategory = (id) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`/api/category/${id}`, {
         method: "DELETE",
         headers: {

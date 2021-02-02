@@ -1,21 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
-import { CategoryContext } from "../../providers/CategoryProvider";
+import { SnagContext } from "../../providers/SnagProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
-export const CategoryDelete = ({ category }) => {
-  const { deleteCategory, getCategories } = useContext(CategoryContext);
+export const SnagDelete = ({ snag }) => {
+  const { deleteSnag, getByRibbonById } = useContext(SnagContext);
   const [pendingDelete, setPendingDelete] = useState(false);
 
-  // useEffect(() => {
-  //   getCategories();
-  // }, [pendingDelete]);
+  //get ribbon with snags
+  useEffect(() => {
+    getByRibbonById(snag.ribbonId);
+  }, [pendingDelete]);
 
   const handleDelete = () => {
-    deleteCategory(category.id).then(getCategories);
+    deleteSnag(snag.id);
     setPendingDelete(false);
   };
-
-  if (!category) return null;
 
   return (
     <>
@@ -26,11 +25,10 @@ export const CategoryDelete = ({ category }) => {
         Delete
       </Button>
       <Modal isOpen={pendingDelete}>
-        <ModalHeader>Delete {category.name}?</ModalHeader>
-        <ModalBody>Are you sure you want to delete this category?</ModalBody>
-        <ModalBody className="text-warning">
-          Ribbons with this category will be uncategorized.
-        </ModalBody>
+        <ModalHeader className="d-inline-block text-truncate">
+          Delete {snag.note}?
+        </ModalHeader>
+        <ModalBody>Are you sure you want to delete this snag?</ModalBody>
         <ModalFooter>
           <Button onClick={(e) => setPendingDelete(false)}>No, Cancel</Button>
           <Button className="btn btn-outline-danger" onClick={handleDelete}>

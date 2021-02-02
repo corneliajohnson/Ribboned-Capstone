@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -11,7 +11,7 @@ export const SnagProvider = (props) => {
   const apiUrl = "/api/snag";
 
   const updateSnag = (snag) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`${apiUrl}/${snag.id}`, {
         method: "PUT",
         headers: {
@@ -24,7 +24,7 @@ export const SnagProvider = (props) => {
   };
 
   const addSnag = (snag) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -37,7 +37,7 @@ export const SnagProvider = (props) => {
   };
 
   const deleteSnag = (id) => {
-    getToken().then((token) => {
+    return getToken().then((token) => {
       return fetch(`/api/snag/${id}`, {
         method: "DELETE",
         headers: {
@@ -47,9 +47,9 @@ export const SnagProvider = (props) => {
     });
   };
 
-  const getByRibbonById = (ribbonId) => {
-    getToken().then((token) => {
-      return fetch(`/api/snag/getbyribbon/${ribbonId}`, {
+  const getByRibbonById = (id) => {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/getbyribbon/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
