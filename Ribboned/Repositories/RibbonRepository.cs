@@ -52,7 +52,7 @@ namespace Ribboned.Repositories
             return _context.Ribbon
                 .Include(r => r.Category.UserProfile)
                 .Include(r => r.Snags)
-                .Where(r => r.CategoryId == id).ToList();
+                .Where(r => r.CategoryId == id && r.IsActive == true).ToList();
         }
 
         public void Add(Ribbon ribbon)
