@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { RibbonContext } from "../../providers/RibbonProvider";
 import { useParams } from "react-router-dom";
 import { SnagDelete } from "./SnagDelete";
 import { SnagContext } from "../../providers/SnagProvider";
+import { SnagEdit } from "./SnagEdit";
 
 export const SnagList = ({ playerRef, handlePlay, playing }) => {
   const { getByRibbonById, snags } = useContext(SnagContext);
@@ -44,7 +44,8 @@ export const SnagList = ({ playerRef, handlePlay, playing }) => {
                 </td>
                 <td className="text-wrap">{snag.note}</td>
                 <td>
-                  Edit <SnagDelete snag={snag} />
+                  <SnagEdit snag={snag} />
+                  <SnagDelete snag={snag} />
                 </td>
               </tr>
             );
