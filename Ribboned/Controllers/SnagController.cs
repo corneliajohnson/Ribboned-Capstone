@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Ribboned.Models;
 using Ribboned.Repositories;
 using System;
+using System.Security.Claims;
 
 namespace Ribboned.Controllers
 {
@@ -13,10 +14,12 @@ namespace Ribboned.Controllers
     {
         private readonly ISnagRepository _snagRepo;
         private readonly IRibbonRepository _ribbonRepo;
-        public SnagController(ISnagRepository snagRepo, IRibbonRepository ribbonRepo)
+        private readonly IUserProfileRepository _userRepo;
+        public SnagController(ISnagRepository snagRepo, IRibbonRepository ribbonRepo, IUserProfileRepository userRepo)
         {
             _snagRepo = snagRepo;
             _ribbonRepo = ribbonRepo;
+            _userRepo = userRepo;
         }
 
         [HttpGet("getbyribbon/{id}")]
@@ -30,6 +33,19 @@ namespace Ribboned.Controllers
             };
 
             return Ok(_snagRepo.GetByRibbon(id));
+        }
+
+        [HttpGet("getmostrecentsnags")]
+        public IActionResult GetMostRecentSnags()
+        {
+            //check if ribbon exist
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return BadRequest();
+            };
+
+            return Ok(_snagRepo.GetMostRecentSnags(user.Id));
         }
 
         [HttpPost]
@@ -68,6 +84,13 @@ namespace Ribboned.Controllers
         {
             _snagRepo.Delete(id);
             return NoContent();
+        }
+
+        // private method to get the current user.
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userRepo.GetByFirebaseUserId(firebaseUserId);
         }
     }
 }

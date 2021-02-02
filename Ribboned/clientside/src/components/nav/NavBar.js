@@ -47,7 +47,7 @@ export const NavBar = (props) => {
               </Link>
             </li>
             <li className="navbar__item fixed-top">
-              <Link className="navbar__link" to="/account">
+              <Link className="navbar__link" to="/">
                 <img className="logo" alt="ribboned logo" src={Logo} />
               </Link>
             </li>
