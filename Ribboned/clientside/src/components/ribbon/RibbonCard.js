@@ -10,13 +10,12 @@ import {
   CardTitle,
   CardSubtitle,
   CardImg,
-  Button,
 } from "reactstrap";
 
 export const RibbonCard = ({ ribbon }) => (
   <div className="col-sm-12 col-md-6 col-lg-4">
     <Link to={`/ribbon/${ribbon.id}`}>
-      <Card style={{ height: "500px" }}>
+      <Card style={{ height: "550px" }}>
         {ribbon.thumbnail ? (
           <CardImg
             top
@@ -52,23 +51,25 @@ export const RibbonCard = ({ ribbon }) => (
             "No Ribbon Snags"
           ) : (
             <>
-              <CardText>Ribbon Snags</CardText>
-              {ribbon.snags[0] ? (
-                <CardText>
-                  {ribbon.snags[0].note}{" "}
-                  <Moment fromNow>{ribbon.snags[0].dateCreated}</Moment>{" "}
-                </CardText>
-              ) : (
-                ""
-              )}
-              {ribbon.snags[1] ? (
-                <CardText>
-                  {ribbon.snags[1].note}{" "}
-                  <Moment fromNow>{ribbon.snags[1].dateCreated}</Moment>{" "}
-                </CardText>
-              ) : (
-                ""
-              )}
+              <div>
+                <CardText className="p-0 m-0">Recent Ribbon Snags</CardText>
+                {ribbon.snags[0] ? (
+                  <CardText className="text-truncate p-0 m-0">
+                    <Moment fromNow>{ribbon.snags[0].dateCreated}</Moment>{" "}
+                    {ribbon.snags[0].note}{" "}
+                  </CardText>
+                ) : (
+                  ""
+                )}
+                {ribbon.snags[1] ? (
+                  <CardText className="text-truncate p-0 m-0">
+                    <Moment fromNow>{ribbon.snags[1].dateCreated}</Moment>{" "}
+                    {ribbon.snags[1].note}{" "}
+                  </CardText>
+                ) : (
+                  ""
+                )}
+              </div>
             </>
           )}
         </CardBody>

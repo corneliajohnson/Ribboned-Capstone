@@ -24,6 +24,8 @@ export const RibbonTrashMove = ({ ribbon }) => {
     setPendingTrash(false);
   };
 
+  if (!ribbon) return null;
+
   return (
     <>
       <Button

@@ -20,10 +20,11 @@ export const RibbonRestore = ({ ribbon }) => {
       isActive: true,
       isPublic: ribbon.isPublic,
       dateCreated: ribbon.dateCreated,
-    });
-    //.then(() => history.push("/ribbons/trash"));
+    }).then(() => history.push("/ribbons/trash"));
     setPendingRestore(false);
   };
+
+  if (!ribbon) return null;
 
   return (
     <>
