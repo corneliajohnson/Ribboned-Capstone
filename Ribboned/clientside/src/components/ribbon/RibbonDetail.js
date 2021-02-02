@@ -15,8 +15,8 @@ import { RibbonDelete } from "./RibbonDelete";
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
   const [ribbon, setRibbon] = useState({});
-  const [showDescription, setShowDecription] = useState(true);
   const [snags, setSnags] = useState([]);
+  const [showDescription, setShowDecription] = useState(true);
   const { ribbonId } = useParams();
 
   //for management popover
@@ -179,6 +179,7 @@ export const RibbonDetail = () => {
             handlePlay={handlePlay}
             timeDisplayFormat={timeDisplayFormat}
             snags={snags}
+            playing={playing}
           />
         </div>
         <canvas ref={canvasRef} />
