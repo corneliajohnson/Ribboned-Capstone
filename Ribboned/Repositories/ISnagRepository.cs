@@ -11,5 +11,6 @@ namespace Ribboned.Repositories
         List<Snag> GetByRibbon(int ribbonId);
         void Update(Snag snag);
         List<Snag> GetMostRecentSnags(int userId);
+        List<Snag> GetAllUserSnags(int userId);
     }
 }

@@ -48,6 +48,19 @@ namespace Ribboned.Controllers
             return Ok(_snagRepo.GetMostRecentSnags(user.Id));
         }
 
+        [HttpGet("usersnags")]
+        public IActionResult UserSnags()
+        {
+            //check if ribbon exist
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return BadRequest();
+            };
+
+            return Ok(_snagRepo.GetAllUserSnags(user.Id));
+        }
+
         [HttpPost]
         public IActionResult Post(Snag snag)
         {

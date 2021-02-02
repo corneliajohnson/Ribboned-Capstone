@@ -77,6 +77,21 @@ export const SnagProvider = (props) => {
     });
   };
 
+  const getUserSnags = () => {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/usersnags`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((snags) => {
+          setSnags(snags);
+        });
+    });
+  };
+
   return (
     <SnagContext.Provider
       value={{
@@ -86,6 +101,7 @@ export const SnagProvider = (props) => {
         deleteSnag,
         getByRibbonById,
         getRecentSnags,
+        getUserSnags,
       }}
     >
       {props.children}

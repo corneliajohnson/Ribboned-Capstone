@@ -42,7 +42,7 @@ export const NavBar = (props) => {
           </a>
           <List className="navbar">
             <li className="navbar__item active fixed-top">
-              <Link className="navbar__link" to="/account m-5">
+              <Link className="navbar__link" to="/account">
                 Account
               </Link>
             </li>
