@@ -14,7 +14,7 @@ import {
 
 export const SnagEdit = ({ snag }) => {
   const { getByRibbonById, updateSnag } = useContext(SnagContext);
-  const [pendingDelete, setPendingDelete] = useState(false);
+  const [pendingEdit, setPendingEdit] = useState(false);
   const [inputWarning, setInputWarning] = useState(false);
   const [snagToEdit, setSnagToEdit] = useState({});
 
@@ -31,7 +31,7 @@ export const SnagEdit = ({ snag }) => {
       updateSnag({ ...snag, note: snagToEdit.note }).then(
         getByRibbonById(snag.ribbonId)
       );
-      setPendingDelete(false);
+      setPendingEdit(false);
     }
   };
 
@@ -39,11 +39,11 @@ export const SnagEdit = ({ snag }) => {
     <>
       <Button
         className="btn btn-sm btn-primary"
-        onClick={(e) => setPendingDelete(true)}
+        onClick={(e) => setPendingEdit(true)}
       >
         Edit
       </Button>
-      <Modal isOpen={pendingDelete}>
+      <Modal isOpen={pendingEdit}>
         <ModalHeader className="d-inline-block text-truncate">
           Edit snag
         </ModalHeader>
@@ -67,7 +67,7 @@ export const SnagEdit = ({ snag }) => {
           <FormText className="float-right">{snag.note?.length}/500</FormText>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={(e) => setPendingDelete(false)}>No, Cancel</Button>
+          <Button onClick={(e) => setPendingEdit(false)}>No, Cancel</Button>
           <Button className="btn btn-outline-primary" onClick={handleEdit}>
             Yes, Update
           </Button>
