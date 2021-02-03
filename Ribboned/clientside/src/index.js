@@ -8,21 +8,24 @@ import { CategoryProvider } from "./providers/CategoryProvider";
 import { SourceProvider } from "./providers/SourceProvider";
 import { RibbonProvider } from "./providers/RibbonProvider";
 import { SnagProvider } from "./providers/SnagProvider";
+import { AvatarProvider } from "./providers/AvatarProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <SnagProvider>
-        <RibbonProvider>
-          <SourceProvider>
-            <CategoryProvider>
-              <UserProfileProvider>
-                <Ribboned />
-              </UserProfileProvider>
-            </CategoryProvider>
-          </SourceProvider>
-        </RibbonProvider>
-      </SnagProvider>
+      <AvatarProvider>
+        <SnagProvider>
+          <RibbonProvider>
+            <SourceProvider>
+              <CategoryProvider>
+                <UserProfileProvider>
+                  <Ribboned />
+                </UserProfileProvider>
+              </CategoryProvider>
+            </SourceProvider>
+          </RibbonProvider>
+        </SnagProvider>
+      </AvatarProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

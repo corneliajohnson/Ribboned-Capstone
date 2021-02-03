@@ -3,6 +3,7 @@ import { Card, Row, Col, CardImg, CardText } from "reactstrap";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { SnagContext } from "../../providers/SnagProvider";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
+import { AvatarPicker } from "./AvatarPicker";
 
 export const AccountDetail = () => {
   const { getUserRibbons, ribbons } = useContext(RibbonContext);
@@ -30,6 +31,7 @@ export const AccountDetail = () => {
         <Row>
           <Col s="12" md="4">
             <CardImg src={userProfile.avatar?.imageURL} />
+            <AvatarPicker />
           </Col>
           <Col s="12" md="6">
             <CardText>Username: {userProfile.userName}</CardText>

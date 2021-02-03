@@ -11,8 +11,8 @@ export const AvatarProvider = (props) => {
   const apiUrl = "/api/avatar";
 
   const getAvatars = () => {
-    getToken().then((token) =>
-      fetch(`${apiUrl}`, {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -21,8 +21,8 @@ export const AvatarProvider = (props) => {
         .then((res) => res.json())
         .then((avatars) => {
           setAvatars(avatars);
-        })
-    );
+        });
+    });
   };
 
   return (
