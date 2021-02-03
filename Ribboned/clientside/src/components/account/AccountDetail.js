@@ -26,21 +26,23 @@ export const AccountDetail = () => {
 
   return (
     <div className="container">
-      <h1 className="text">Account</h1>
-      <Card className="w-50 border-0">
-        <Row>
-          <Col s="12" md="4">
-            <CardImg src={userProfile.avatar?.imageURL} />
-            <AvatarPicker />
-          </Col>
-          <Col s="12" md="6">
-            <CardText>Username: {userProfile.userName}</CardText>
-            <CardText>Email: {userProfile.email}</CardText>
-            <CardText>Current Ribbons: {ribbons.length}</CardText>
-            <CardText>Ribbon Snags: {snags.length}</CardText>
-          </Col>
-        </Row>
-      </Card>
+      <h1 className="text-center">Account</h1>
+      <div className="d-flex align-self-center w-75 mx-auto">
+        <Card className=" border-0">
+          <Row>
+            <Col s="12" md="4">
+              <CardImg src={userProfile.avatar?.imageURL} />
+              <AvatarPicker />
+            </Col>
+            <Col s="12" md="6" className="mt-5">
+              <CardText>Username: {userProfile.userName}</CardText>
+              <CardText>Email: {userProfile.email}</CardText>
+              <CardText>Current Ribbons: {ribbons.length}</CardText>
+              <CardText>Ribbon Snags: {snags.length}</CardText>
+            </Col>
+          </Row>
+        </Card>
+      </div>
     </div>
   );
 };

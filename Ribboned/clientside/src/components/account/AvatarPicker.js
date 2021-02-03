@@ -8,24 +8,26 @@ export const AvatarPicker = (props) => {
   const { getUserById, updateUser } = useContext(UserProfileContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [userProfile, setUserProfile] = useState({});
+  //for modal toggle
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   useEffect(() => {
     getUserById()
       .then((res) => setUserProfile(res))
       .then(getAvatars);
-  }, []);
+  }, [selectedImage, userProfile]);
 
-  //for modal toggle
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
-
-  const handleAvatar = () => {
-    //updateUser({ ...userProfile, avatarId: selectedImage })
-    //   .then(() => toggle())
-    // .then(() => setSelectedImage(null));
+  const handleAvatar = (e) => {
+    //debugger;
+    e.preventDefault();
+    updateUser({ ...userProfile, avatarId: selectedImage })
+      .then(() => toggle())
+      .then(() => setSelectedImage(null));
   };
 
   if (!avatars) return null;
+  if (!userProfile) return null;
 
   return (
     <div>

@@ -11,7 +11,6 @@ namespace Ribboned.Models
         [Required]
         [MaxLength(100)]
         public string Email { get; set; }
-        [MaxLength(255)]
         [Required]
         public int AvatarId { get; set; }
         public string FirebaseUserId { get; set; }
