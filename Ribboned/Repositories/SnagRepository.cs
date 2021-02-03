@@ -20,6 +20,13 @@ namespace Ribboned.Repositories
             return _context.Snag.ToList();
         }
 
+        public List<Snag> GetAllUserSnags(int userId)
+        {
+            return _context.Snag
+                .Include(s => s.Ribbon)
+                .Where(s => s.Ribbon.Category.UserProfileId == userId).ToList();
+        }
+
         public List<Snag> GetMostRecentSnags(int userId)
         {
             return _context.Snag

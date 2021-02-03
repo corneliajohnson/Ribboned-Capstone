@@ -18,13 +18,14 @@ namespace Ribboned.Repositories
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
             return _context.UserProfile
+                .Include(up => up.Avatar)
                 .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
 
         }
 
         public List<UserProfile> GetAll()
         {
-            return _context.UserProfile.ToList();
+            return _context.UserProfile.Include(up => up.Avatar).ToList();
         }
 
         public void Add(UserProfile up)
@@ -35,15 +36,6 @@ namespace Ribboned.Repositories
 
         public void Update(UserProfile up)
         {
-            var local = _context.Set<UserProfile>()
-              .Local
-                .FirstOrDefault(entry => entry.Id.Equals(up.Id));
-            //check if local is not null
-            if (local != null)
-            {
-                //  detach
-                _context.Entry(local).State = EntityState.Detached;
-            }
             _context.Entry(up).State = EntityState.Modified;
             _context.SaveChanges();
         }
@@ -51,13 +43,15 @@ namespace Ribboned.Repositories
         public UserProfile GetByFireBaseId(string firebaseUserId)
         {
             return _context.UserProfile
-        .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
+                .Include(up => up.Avatar)
+                .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
         }
 
         public UserProfile GetById(int id)
         {
             return _context.UserProfile
-        .FirstOrDefault(up => up.Id == id);
+                .Include(up => up.Avatar)
+                .FirstOrDefault(up => up.Id == id);
         }
     }
 }

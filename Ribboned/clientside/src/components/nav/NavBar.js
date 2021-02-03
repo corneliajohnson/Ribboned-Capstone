@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "../../img/RibbonedWordOnly.png";
@@ -7,7 +7,15 @@ import { List } from "reactstrap";
 import { CategoryNavList } from "../category/CategoryNavList";
 
 export const NavBar = (props) => {
-  const { getCurrentUser, logout } = useContext(UserProfileContext);
+  const { getCurrentUser, logout, getUserById } = useContext(
+    UserProfileContext
+  );
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    getUserById().then((res) => setUserProfile(res));
+  }, []);
+
   const user = getCurrentUser();
   const history = useHistory();
   const [isActive, setActive] = useState(false);
@@ -19,11 +27,9 @@ export const NavBar = (props) => {
     if (!isActive) {
       document.querySelector(".container").style.width = "75%";
       document.querySelector(".container").style.float = "right";
-      document.body.style.backgroundColor = "rgba(0,0,0,0.1)";
     } else {
       document.querySelector(".container").style.float = "none";
       document.querySelector(".container").style.width = "100%";
-      document.body.style.backgroundColor = "white";
     }
   };
 
@@ -41,12 +47,20 @@ export const NavBar = (props) => {
             <div id="openClose" onClick={toggleClass}></div>
           </a>
           <List className="navbar">
-            <li className="navbar__item active fixed-top">
-              <Link className="navbar__link" to="/account m-5">
-                Account
+            <li className="navbar__item active fixed-top m-3">
+              <Link className="navbar__link" to="/account">
+                <img
+                  src={userProfile.avatar?.imageURL}
+                  alt="avatar"
+                  style={{
+                    width: "50px",
+                    borderRadius: "50%",
+                    border: "black, 3px, solid",
+                  }}
+                />
               </Link>
             </li>
-            <li className="navbar__item fixed-top">
+            <li className="navbar__item fixed-top mt-5">
               <Link className="navbar__link" to="/">
                 <img className="logo" alt="ribboned logo" src={Logo} />
               </Link>

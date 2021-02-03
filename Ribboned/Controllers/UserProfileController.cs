@@ -34,6 +34,7 @@ namespace Ribboned.Controllers
             _categoryRepo.Add(category);
             CreatedAtAction("Get", new { category = category.Id }, category);
 
+            up.AvatarId = 1; //add a default image for all new users
             up.UncategorizedId = category.Id;
             _userProfileRepo.Update(up);
 
@@ -45,7 +46,7 @@ namespace Ribboned.Controllers
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, UserProfile up)
-        {
+        { 
             if (id != up.Id)
             {
                 return BadRequest();
@@ -59,6 +60,12 @@ namespace Ribboned.Controllers
         public IActionResult GetUserProfile(string firebaseUserId)
         {
             return Ok(_userProfileRepo.GetByFirebaseUserId(firebaseUserId));
+        }
+
+        [HttpGet("userId/{Id}")]
+        public IActionResult GetUserProfileById(int id)
+        {
+            return Ok(_userProfileRepo.GetById(id));
         }
 
 

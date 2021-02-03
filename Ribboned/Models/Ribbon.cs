@@ -11,7 +11,7 @@ namespace Ribboned.Models
         [MaxLength(100)]
         public string Title { get; set; }
         [Required]
-        [MaxLength(255)]
+        [MaxLength(500)]
         public string Decription { get; set; }
         [Required]
         public int CategoryId { get; set; }

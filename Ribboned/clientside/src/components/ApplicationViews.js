@@ -11,6 +11,7 @@ import { RibbonForm } from "./ribbon/RibbonForm";
 import { RibbonTrashMove } from "./ribbon/RibbonTrashMove";
 import { RibbonTrashList } from "./ribbon/RibbonTrashList";
 import { RibbonListByCategory } from "./ribbon/RibbonListByCategory";
+import { AccountDetail } from "./account/AccountDetail";
 
 export const ApplicationViews = () => {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -19,6 +20,7 @@ export const ApplicationViews = () => {
       <Route exact path="/login">
         <Login />
       </Route>
+
       <Route exact path="/register">
         <Register />
       </Route>
@@ -54,8 +56,13 @@ export const ApplicationViews = () => {
       <Route exact path="/ribbon/:ribbonId(\d+)">
         {isLoggedIn ? <RibbonDetail /> : <Redirect to="/login" />}
       </Route>
+
       <Route exact path="/ribbons/trash">
         {isLoggedIn ? <RibbonTrashList /> : <Redirect to="/login" />}
+      </Route>
+
+      <Route exact path="/account">
+        {isLoggedIn ? <AccountDetail /> : <Redirect to="/login" />}
       </Route>
     </Switch>
   );

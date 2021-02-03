@@ -58,14 +58,26 @@ export const UserProfileProvider = (props) => {
   const getToken = () => firebase.auth().currentUser.getIdToken();
 
   const getUserProfile = (firebaseUserId) => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/${firebaseUserId}`, {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/${firebaseUserId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((resp) => resp.json())
-    );
+      }).then((resp) => resp.json());
+    });
+  };
+
+  const getUserById = () => {
+    const user = getCurrentUser();
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/userId/${user.id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((resp) => resp.json());
+    });
   };
 
   const saveUser = (userProfile) => {
@@ -79,6 +91,19 @@ export const UserProfileProvider = (props) => {
         body: JSON.stringify(userProfile),
       }).then((resp) => resp.json())
     );
+  };
+
+  const updateUser = (user) => {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/${user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(user),
+      });
+    });
   };
 
   const getCurrentUser = () => {
@@ -98,6 +123,8 @@ export const UserProfileProvider = (props) => {
         register,
         getToken,
         getCurrentUser,
+        getUserById,
+        updateUser,
       }}
     >
       {isFirebaseReady ? (
