@@ -1,4 +1,4 @@
-  USE [master]
+USE [master]
 
 IF db_id('Ribboned') IS NULL
   CREATE DATABASE [Ribboned]
@@ -7,21 +7,28 @@ GO
 USE [Ribboned]
 GO
 
-
 DROP TABLE IF EXISTS [Snag];
 DROP TABLE IF EXISTS [Category];
 DROP TABLE IF EXISTS [Ribbon];
 DROP TABLE IF EXISTS [UserProfile];
 DROP TABLE IF EXISTS [Source];
+DROP TABLE IF EXISTS [Avatar];
+
+
+CREATE TABLE [Avatar] (
+  [Id] integer PRIMARY KEY IDENTITY,
+  [ImageURL] nvarchar(500) NOT NULL
+)
 
 CREATE TABLE [UserProfile] (
   [Id] integer PRIMARY KEY IDENTITY,
   [UserName] nvarchar(50) NOT NULL,
   [Email] nvarchar(100) NOT NULL,
-  [ImageUrl] nvarchar(255),
+  [AvatarId] integer NOT NULL ,
   [FirebaseUserId] nvarchar(28) NOT NULL,
-  [uncategorizedId] integer,
+  [UncategorizedId] integer,
 
+  CONSTRAINT [FK_UserProfile_Avatar] FOREIGN KEY ([AvatarId]) REFERENCES [Avatar] ([Id]),
   CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId),
   CONSTRAINT UQ_Email UNIQUE(Email)
 )
@@ -43,7 +50,7 @@ CREATE TABLE [Category] (
 CREATE TABLE [Ribbon] (
   [Id] integer PRIMARY KEY IDENTITY,
   [Title] nvarchar(100) NOT NULL,
-  [Decription] nvarchar(255),
+  [Decription] nvarchar(500),
   [SourceId] integer NOT NULL,
   [URL] nvarchar(255) NOT NULL,
   [DateCreated] datetime NOT NULL,
