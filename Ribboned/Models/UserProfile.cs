@@ -12,8 +12,11 @@ namespace Ribboned.Models
         [MaxLength(100)]
         public string Email { get; set; }
         [MaxLength(255)]
-        public string ImageUrl { get; set; }
+        [Required]
+        public int AvatarId { get; set; }
         public string FirebaseUserId { get; set; }
         public int UncategorizedId { get; set; }
+
+        public Avatar Avatar { get; set; }
     }
 }
