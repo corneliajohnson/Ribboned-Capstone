@@ -1,14 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export const CategoryDelete = ({ category }) => {
   const { deleteCategory, getCategories } = useContext(CategoryContext);
   const [pendingDelete, setPendingDelete] = useState(false);
-
-  // useEffect(() => {
-  //   getCategories();
-  // }, [pendingDelete]);
 
   const handleDelete = () => {
     deleteCategory(category.id).then(getCategories);

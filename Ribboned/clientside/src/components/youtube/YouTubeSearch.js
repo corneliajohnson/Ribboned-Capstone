@@ -4,12 +4,11 @@ import { Input } from "reactstrap";
 export const YouTubeSearch = () => {
   return (
     <>
-      <div>
-        YouTube Search:
+      <div className="my-3">
         <Input
           type="text"
           className="w-100 input--wide"
-          placeholder="Search... "
+          placeholder="YoutTube Search... "
         />
       </div>
     </>

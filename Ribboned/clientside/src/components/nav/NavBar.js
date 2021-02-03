@@ -85,7 +85,11 @@ export const NavBar = (props) => {
               </Link>
             </li>
             <li className="navbar__item fixed-bottom ml-2 mb-5">
-              <Link className="navbar__link" onClick={logoutAndReturn}>
+              <Link
+                className="navbar__link"
+                to="/login"
+                onClick={logoutAndReturn}
+              >
                 Log Out
               </Link>
             </li>
