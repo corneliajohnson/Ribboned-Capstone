@@ -30,7 +30,7 @@ export const AvatarPicker = (props) => {
   if (!userProfile) return null;
 
   return (
-    <div>
+    <div className="text-center">
       <Button color="primary" onClick={toggle}>
         Change Avatar
       </Button>
