@@ -93,6 +93,19 @@ export const UserProfileProvider = (props) => {
     );
   };
 
+  const updateUser = (user) => {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/${user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(user),
+      });
+    });
+  };
+
   const getCurrentUser = () => {
     const user = localStorage.getItem("userProfile");
     if (!user) {
@@ -111,6 +124,7 @@ export const UserProfileProvider = (props) => {
         getToken,
         getCurrentUser,
         getUserById,
+        updateUser,
       }}
     >
       {isFirebaseReady ? (

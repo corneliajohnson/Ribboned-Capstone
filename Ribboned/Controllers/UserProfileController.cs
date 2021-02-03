@@ -46,7 +46,7 @@ namespace Ribboned.Controllers
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, UserProfile up)
-        {
+        { 
             if (id != up.Id)
             {
                 return BadRequest();
