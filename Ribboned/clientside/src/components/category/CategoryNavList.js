@@ -28,7 +28,6 @@ export const CategoryNavList = () => {
   return (
     <>
       <Dropdown
-        li
         color="link"
         className="navbar__item nav__addcategorylink"
         isOpen={dropdownOpen}

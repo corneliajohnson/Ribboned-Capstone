@@ -9,23 +9,26 @@ import { SourceProvider } from "./providers/SourceProvider";
 import { RibbonProvider } from "./providers/RibbonProvider";
 import { SnagProvider } from "./providers/SnagProvider";
 import { AvatarProvider } from "./providers/AvatarProvider";
+import { YouTubeProvider } from "./providers/YouTubeProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <AvatarProvider>
-        <SnagProvider>
-          <RibbonProvider>
-            <SourceProvider>
-              <CategoryProvider>
-                <UserProfileProvider>
-                  <Ribboned />
-                </UserProfileProvider>
-              </CategoryProvider>
-            </SourceProvider>
-          </RibbonProvider>
-        </SnagProvider>
-      </AvatarProvider>
+      <YouTubeProvider>
+        <AvatarProvider>
+          <SnagProvider>
+            <RibbonProvider>
+              <SourceProvider>
+                <CategoryProvider>
+                  <UserProfileProvider>
+                    <Ribboned />
+                  </UserProfileProvider>
+                </CategoryProvider>
+              </SourceProvider>
+            </RibbonProvider>
+          </SnagProvider>
+        </AvatarProvider>
+      </YouTubeProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

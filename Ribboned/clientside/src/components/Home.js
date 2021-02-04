@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { YouTubeSearch } from "./youtube/YouTubeSearch";
 import Logo from "../img/RibbonedWordOnly.png";
 import { SnagContext } from "../providers/SnagProvider";
 import { Link } from "react-router-dom";
+import { YouTubeList } from "./youtube/YouTubeList";
 import Moment from "react-moment";
 import {
   ListGroup,
@@ -25,8 +26,8 @@ export const Home = () => {
         <div className="align-items-center">
           <img alt="ribboned" src={Logo} />
           <YouTubeSearch />
-          <div style={{ height: "30vh", border: "1px solid black" }}>
-            <h3>Show Videos Here</h3>
+          <div>
+            <YouTubeList />
           </div>
 
           <ListGroup className="my-5">

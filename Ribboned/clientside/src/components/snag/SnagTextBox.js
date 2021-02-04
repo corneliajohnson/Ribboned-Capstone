@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { SnagContext } from "../../providers/SnagProvider";
-import { RibbonContext } from "../../providers/RibbonProvider";
 
 export const SnagTextBox = ({
   textBoxToggle,
@@ -10,7 +9,7 @@ export const SnagTextBox = ({
   ribbonId,
   seconds,
 }) => {
-  const { addSnag, updateSnag } = useContext(SnagContext);
+  const { addSnag } = useContext(SnagContext);
   const [snag, setSnag] = useState({});
   const [loading, setLoading] = useState(false);
 
