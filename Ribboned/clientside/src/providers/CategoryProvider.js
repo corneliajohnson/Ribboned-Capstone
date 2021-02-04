@@ -63,6 +63,17 @@ export const CategoryProvider = (props) => {
     });
   };
 
+  const getCategoryById = (id) => {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((resp) => resp.json());
+    });
+  };
+
   return (
     <CategoryContext.Provider
       value={{
@@ -73,6 +84,7 @@ export const CategoryProvider = (props) => {
         deleteCategory,
         setCategory,
         category,
+        getCategoryById,
       }}
     >
       {props.children}
