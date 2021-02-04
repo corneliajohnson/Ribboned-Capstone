@@ -1,17 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Card, CardImg, CardSubtitle, Button } from "reactstrap";
 import { YouTubeContext } from "../../providers/YouTubeProvider";
+import { useHistory } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export const YouTubeList = () => {
-  const { searchTerms, videos, getVideos } = useContext(YouTubeContext);
+  const { searchTerms, videos, getVideos, setYouTubeAdd } = useContext(
+    YouTubeContext
+  );
+  const [newRibbon, setNewRibbon] = useState({});
+
+  const history = useHistory();
 
   // Empty dependency array - useEffect only runs after first render
   useEffect(() => {
     getVideos(searchTerms);
   }, [searchTerms]);
 
+  const handleAdd = (e) => {
+    e.preventDefault(e);
+    setYouTubeAdd(newRibbon);
+    history.push(`/ribbon/create`);
+  };
+
+  //for carousel
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -38,7 +51,7 @@ export const YouTubeList = () => {
     <Carousel responsive={responsive}>
       {videos.map((video) => {
         return (
-          <Card>
+          <Card key={video.etag}>
             <CardImg top width="100%" src={video.snippet.thumbnails.high.url} />
             <CardSubtitle
               tag="h6"
@@ -47,7 +60,23 @@ export const YouTubeList = () => {
             >
               {video.snippet.title}
             </CardSubtitle>
-            <Button>Add Ribbon</Button>
+            <Button
+              onClick={(e) => {
+                setNewRibbon({
+                  title: video.snippet.title,
+                  decription: video.snippet.description,
+                  sourceId: 2,
+                  url: `https://youtu.be/${video.id.videoId}`,
+                  thumbnail: video.snippet.thumbnails.high.url,
+                  categoryId: 0,
+                  isActive: true,
+                  isPublic: false,
+                });
+                handleAdd(e);
+              }}
+            >
+              Add Ribbon
+            </Button>
           </Card>
         );
       })}

@@ -12,12 +12,14 @@ import {
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { SourceContext } from "../../providers/SourceProvider";
 import { RibbonContext } from "../../providers/RibbonProvider";
+import { YouTubeContext } from "../../providers/YouTubeProvider";
 import { useParams, useHistory } from "react-router-dom";
 import "./Ribbon.css";
 import { storage } from "../../firebase";
 
 export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
+  const { addYouTube, setYouTubeAdd } = useContext(YouTubeContext);
   const { getSources, sources } = useContext(SourceContext);
   const { getRibbonById, addRibbon, updateRibbon } = useContext(RibbonContext);
   const [isMakedPublic, setIsPublic] = useState(null);
@@ -78,7 +80,7 @@ export const RibbonForm = (props) => {
     !isMakedPublic ? setIsPublic(true) : setIsPublic(false);
   };
 
-  //return thubnail based on youtube Id
+  //return thumbnail based on youtube Id
   const getYoubeVideoId = (url) => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
@@ -116,6 +118,10 @@ export const RibbonForm = (props) => {
         setRibbon(ribbon);
         setIsLoading(false);
       });
+    } else if (addYouTube) {
+      console.log(addYouTube);
+      // setRibbon(addYouTube);
+      // setIsLoading(false);
     } else {
       setIsLoading(false);
       //clear flieds
@@ -183,7 +189,9 @@ export const RibbonForm = (props) => {
             : parseInt(ribbon.sourceId) === 2
             ? isMakedPublic
             : false,
-        }).then(() => history.push("/ribbons"));
+        })
+          .then(() => setYouTubeAdd({}))
+          .then(() => history.push("/ribbons"));
       }
     }
   };
