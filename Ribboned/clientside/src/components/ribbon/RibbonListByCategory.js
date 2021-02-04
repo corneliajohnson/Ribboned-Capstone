@@ -21,7 +21,7 @@ export const RibbonListByCategory = () => {
 
   return (
     <div className="container">
-      <h1>{category.name} Ribbons</h1>
+      <h1 className="text-center">{category.name} Ribbons</h1>
       {ribbons.length === 0 ? (
         <p className="text-center">None</p>
       ) : (
