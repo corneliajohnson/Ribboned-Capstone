@@ -16,14 +16,15 @@ export const AvatarPicker = (props) => {
     getUserById()
       .then((res) => setUserProfile(res))
       .then(getAvatars);
-  }, [selectedImage, userProfile]);
+  }, []);
 
   const handleAvatar = (e) => {
     e.preventDefault();
     updateUser({ ...userProfile, avatarId: selectedImage })
       .then(getUserById)
       .then(() => toggle())
-      .then(() => setSelectedImage(null));
+      .then(() => setSelectedImage(null))
+      .then(window.location.reload());
   };
 
   if (!avatars) return null;
