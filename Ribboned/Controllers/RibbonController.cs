@@ -116,6 +116,20 @@ namespace Ribboned.Controllers
             return Ok(ribbons);
         }
 
+        [HttpGet("recommendedribbons/{id}")]
+        public IActionResult GetRecommendedRibbons(int userId)
+        {
+            var currentUser = GetCurrentUserProfile();
+            //check that user exist
+            var user = _userRepo.GetById(userId);
+            if (user == null)
+            {
+                BadRequest();
+            }
+            var ribbons = _ribbonRepo.GetRecommendedRibbons(currentUser.Id);
+            return Ok(ribbons);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
