@@ -5,6 +5,7 @@ export const YouTubeContext = createContext();
 export const YouTubeProvider = (props) => {
   const [searchTerms, setSearchTerms] = useState("news");
   const [videos, setVideos] = useState([]);
+  const [youTubeAdd, setYouTubeAdd] = useState({});
 
   const getVideos = (searchTerms) => {
     fetch(
@@ -21,7 +22,14 @@ export const YouTubeProvider = (props) => {
 
   return (
     <YouTubeContext.Provider
-      value={{ getVideos, videos, searchTerms, setSearchTerms }}
+      value={{
+        getVideos,
+        videos,
+        searchTerms,
+        setSearchTerms,
+        youTubeAdd,
+        setYouTubeAdd,
+      }}
     >
       {props.children}
     </YouTubeContext.Provider>

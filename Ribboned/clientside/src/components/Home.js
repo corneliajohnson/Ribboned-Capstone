@@ -3,7 +3,7 @@ import { YouTubeSearch } from "./youtube/YouTubeSearch";
 import Logo from "../img/RibbonedWordOnly.png";
 import { SnagContext } from "../providers/SnagProvider";
 import { Link } from "react-router-dom";
-import { YouTubeList } from "./youtube/YouTubeList";
+import { RibbonRecommendedList } from "./ribbon/RibbonRecommendedList";
 import Moment from "react-moment";
 import {
   ListGroup,
@@ -24,10 +24,17 @@ export const Home = () => {
     <>
       <div className="container">
         <div className="align-items-center">
-          <img alt="ribboned" src={Logo} />
-          <YouTubeSearch />
+          <div className="text-center mt-5">
+            <Link className="m-5" to="/account">
+              <img alt="ribboned logo" src={Logo} />
+            </Link>
+          </div>
+          <div className="mt-3">{/* <YouTubeSearch /> */}</div>
+          <div>{/* <YouTubeList /> */}</div>
           <div>
-            <YouTubeList />
+            {" "}
+            <h3>What's everyone watching</h3>
+            <RibbonRecommendedList />
           </div>
 
           <ListGroup className="my-5">

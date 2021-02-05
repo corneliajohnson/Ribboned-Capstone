@@ -30,6 +30,14 @@ namespace Ribboned.Repositories
             return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.IsActive == false).ToList();
         }
 
+        public List<Ribbon> GetRecommendedRibbons(int id)
+        {
+            return _context.Ribbon
+                .Include(r => r.Category.UserProfile)
+                .Where(r => r.Category.UserProfileId != id && r.IsActive == true && r.IsPublic ==true)
+                .Take(10).ToList();
+        }
+
         public List<Ribbon> GetByMostRecentRibbons(int id)
         {
             var ribbons = GetByUserId(id); //only user ribbons

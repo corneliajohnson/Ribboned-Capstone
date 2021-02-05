@@ -13,7 +13,7 @@ export const SnagList = ({ playerRef, handlePlay }) => {
     getRibbonById(ribbonId).then((response) => {
       setSnags(response.snags);
     });
-  }, []);
+  }, [snags]);
 
   if (!snags) return null;
 

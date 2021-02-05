@@ -71,7 +71,7 @@ export const UserProfileProvider = (props) => {
   const getUserById = () => {
     const user = getCurrentUser();
     return getToken().then((token) => {
-      return fetch(`${apiUrl}/userId/${user.id}`, {
+      return fetch(`${apiUrl}/userId/${user?.id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

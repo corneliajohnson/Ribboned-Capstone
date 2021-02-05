@@ -9,7 +9,7 @@ export const RibbonDelete = ({ ribbon }) => {
   const history = useHistory();
 
   const handleDelete = () => {
-    deleteRibbon(ribbon.id).then(() => history("/ribbons/trash"));
+    deleteRibbon(ribbon.id).then(() => history.push("/ribbons/trash"));
     setPendingDelete(false);
   };
 

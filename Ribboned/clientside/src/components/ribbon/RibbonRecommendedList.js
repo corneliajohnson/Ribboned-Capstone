@@ -1,28 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Card, CardImg, CardSubtitle, Button } from "reactstrap";
-import { YouTubeContext } from "../../providers/YouTubeProvider";
+import { RibbonContext } from "../../providers/RibbonProvider";
 import { useHistory } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-export const YouTubeList = () => {
-  const { searchTerms, videos, getVideos, setYouTubeAdd } = useContext(
-    YouTubeContext
-  );
-  const [newRibbon, setNewRibbon] = useState({});
+export const RibbonRecommendedList = () => {
+  const { getRecommendedRibbons } = useContext(RibbonContext);
+  const user = JSON.parse(localStorage.getItem("userProfile"));
+  const [videos, setVideos] = useState([]);
 
   const history = useHistory();
 
   // Empty dependency array - useEffect only runs after first render
   useEffect(() => {
-    getVideos(searchTerms);
-  }, [searchTerms]);
-
-  const handleAdd = (e) => {
-    e.preventDefault(e);
-    setYouTubeAdd(newRibbon);
-    history.push(`/ribbon/create`);
-  };
+    getRecommendedRibbons(user.id).then((res) => setVideos(res));
+  }, []);
 
   //for carousel
   const responsive = {
@@ -51,32 +44,16 @@ export const YouTubeList = () => {
     <Carousel responsive={responsive}>
       {videos.map((video) => {
         return (
-          <Card key={video.etag}>
-            <CardImg top width="100%" src={video.snippet.thumbnails.high.url} />
+          <Card key={video.id}>
+            <CardImg top width="100%" src={video.thumbnail} />
             <CardSubtitle
               tag="h6"
               className="my-2 text-muted "
               style={{ height: "50px" }}
             >
-              {video.snippet.title}
+              {video.title}
             </CardSubtitle>
-            <Button
-              onClick={(e) => {
-                setNewRibbon({
-                  title: video.snippet.title,
-                  decription: video.snippet.description,
-                  sourceId: 2,
-                  url: `https://youtu.be/${video.id.videoId}`,
-                  thumbnail: video.snippet.thumbnails.high.url,
-                  categoryId: 0,
-                  isActive: true,
-                  isPublic: false,
-                });
-                handleAdd(e);
-              }}
-            >
-              Add Ribbon
-            </Button>
+            <Button>Add Ribbon</Button>
           </Card>
         );
       })}

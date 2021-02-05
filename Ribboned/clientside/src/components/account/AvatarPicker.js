@@ -19,7 +19,6 @@ export const AvatarPicker = (props) => {
   }, [selectedImage, userProfile]);
 
   const handleAvatar = (e) => {
-    //debugger;
     e.preventDefault();
     updateUser({ ...userProfile, avatarId: selectedImage })
       .then(getUserById)

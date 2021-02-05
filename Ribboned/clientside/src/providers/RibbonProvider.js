@@ -59,6 +59,17 @@ export const RibbonProvider = (props) => {
     });
   };
 
+  const getRecommendedRibbons = (id) => {
+    return getToken().then((token) => {
+      return fetch(`${apiUrl}/recommendedribbons/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((res) => res.json());
+    });
+  };
+
   const updateRibbon = (ribbon) => {
     return getToken().then((token) => {
       return fetch(`${apiUrl}/${ribbon.id}`, {
@@ -130,6 +141,7 @@ export const RibbonProvider = (props) => {
         getRibbonById,
         getUserTrashRibbons,
         getRibbonByCategory,
+        getRecommendedRibbons,
       }}
     >
       {props.children}
