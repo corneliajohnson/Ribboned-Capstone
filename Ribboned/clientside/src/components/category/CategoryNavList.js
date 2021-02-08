@@ -42,12 +42,14 @@ export const CategoryNavList = () => {
           {categories.map((c) => (
             <DropdownItem key={c.id}>
               {" "}
-              <Link to={`/ribbon/category/${c.id}`}>{c.name}</Link>
+              <Link to={`/ribbon/category/${c.id}`}>
+                {c.name.toUpperCase()}
+              </Link>
             </DropdownItem>
           ))}
           <DropdownItem>
             <Link to={`/ribbon/category/${defaultCategory}`}>
-              uncategorizedId
+              UNCATEGORIZED
             </Link>
           </DropdownItem>
         </DropdownMenu>

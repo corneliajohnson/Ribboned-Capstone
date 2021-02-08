@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
+import Logo from "../../img/RibbonedWordOnly.png";
+import { Link } from "react-router-dom";
 
 import { RibbonCard } from "./RibbonCard";
 
@@ -16,7 +18,11 @@ export const RibbonList = () => {
 
   return (
     <div className="container">
-      <h1>Ribbons</h1>
+      <div className="text-center my-5">
+        <Link className="m-5" to="/account">
+          <img alt="ribboned logo" src={Logo} />
+        </Link>
+      </div>
       {ribbons.length === 0 ? (
         <p className="text-center">None</p>
       ) : (

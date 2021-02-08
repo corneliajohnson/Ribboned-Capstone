@@ -25,7 +25,7 @@ export const Home = () => {
     <>
       <div className="container">
         <div className="align-items-center">
-          <div className="text-center mt-5">
+          <div className="text-center my-5">
             <Link className="m-5" to="/account">
               <img alt="ribboned logo" src={Logo} />
             </Link>
@@ -36,9 +36,10 @@ export const Home = () => {
           <div>
             <YouTubeList />
           </div>
-          <div>
+          <div className="my-5">
             {" "}
             <h3>What's everyone watching</h3>
+            <small>see public ribbons by other users</small>
             <RibbonRecommendedList />
           </div>
 

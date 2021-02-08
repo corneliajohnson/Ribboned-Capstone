@@ -8,7 +8,7 @@ export const CategoryDetail = ({ category }) => {
   if (!category) return null;
   return (
     <>
-      <div className="col-lg-3 col-md-4 col-sm-6 m-1 border p-2 shadow-lg bg-white rounded">
+      <div className="col-lg-3 col-md-4 col-sm-6 m-1 border p-2 shadow bg-white rounded">
         <h5>{category.name} </h5>
         <span className="float-right">
           <Button

@@ -15,7 +15,7 @@ import {
 export const RibbonCard = ({ ribbon }) => (
   <div className="col-sm-12 col-md-6 col-lg-4">
     <Link to={`/ribbon/${ribbon.id}`}>
-      <Card style={{ height: "550px" }}>
+      <Card className="mt-3" style={{ height: "550px" }}>
         {ribbon.thumbnail ? (
           <CardImg
             top
