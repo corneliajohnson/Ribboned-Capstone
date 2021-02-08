@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
-
 import { RibbonCard } from "./RibbonCard";
+import Logo from "../../img/RibbonedWordOnly.png";
+import { Link } from "react-router-dom";
 
 export const RibbonTrashList = () => {
   const { getUserTrashRibbons, ribbons } = useContext(RibbonContext);
@@ -16,7 +17,12 @@ export const RibbonTrashList = () => {
 
   return (
     <div className="container">
-      <h1>Ribbons</h1>
+      <div className="text-center my-5">
+        <Link className="m-5" to="/account">
+          <img alt="ribboned logo" src={Logo} />
+        </Link>
+      </div>
+      <h1 className="text-center">Trash</h1>
       {ribbons.length === 0 ? (
         <p className="text-center">Trash Empty</p>
       ) : (

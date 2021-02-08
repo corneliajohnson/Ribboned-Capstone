@@ -3,6 +3,8 @@ import { RibbonContext } from "../../providers/RibbonProvider";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { RibbonCard } from "./RibbonCard";
 import { useParams } from "react-router-dom";
+import Logo from "../../img/RibbonedWordOnly.png";
+import { Link } from "react-router-dom";
 
 export const RibbonListByCategory = () => {
   const { getRibbonByCategory, ribbons } = useContext(RibbonContext);
@@ -21,6 +23,11 @@ export const RibbonListByCategory = () => {
 
   return (
     <div className="container">
+      <div className="text-center my-5">
+        <Link className="m-5" to="/account">
+          <img alt="ribboned logo" src={Logo} />
+        </Link>
+      </div>
       <h1 className="text-center">{category.name} Ribbons</h1>
       {ribbons.length === 0 ? (
         <p className="text-center">None</p>

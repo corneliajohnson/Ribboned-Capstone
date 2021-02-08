@@ -55,3 +55,7 @@ input:checked + .switch::before {
 input:checked + .switch:active::before {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(0, 150, 136, 0.2);
 }
+
+.ribbon-card:hover {
+  padding: 2%;
+}

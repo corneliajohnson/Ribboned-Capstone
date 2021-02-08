@@ -13,10 +13,10 @@ export const YouTubeSearch = () => {
 
   return (
     <>
-      <div className="my-3 row">
+      <div className="my-3 row justify-content-center">
         <Input
           type="text"
-          className="w-75 input--wide"
+          className="w-75"
           placeholder="YoutTube Search... "
           onChange={(event) => setSearch(event.target.value)}
         />

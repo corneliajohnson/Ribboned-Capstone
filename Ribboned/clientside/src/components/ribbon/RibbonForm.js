@@ -16,6 +16,8 @@ import { YouTubeContext } from "../../providers/YouTubeProvider";
 import { useParams, useHistory } from "react-router-dom";
 import "./Ribbon.css";
 import { storage } from "../../firebase";
+import Logo from "../../img/RibbonedWordOnly.png";
+import { Link } from "react-router-dom";
 
 export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
@@ -211,6 +213,11 @@ export const RibbonForm = (props) => {
 
   return (
     <div className="container">
+      <div className="text-center my-5">
+        <Link className="m-5" to="/account">
+          <img alt="ribboned logo" src={Logo} />
+        </Link>
+      </div>
       <div className="w-75 mx-auto p-4">
         <Form className="border p-5" onSubmit={handleSaveRibbon}>
           <h2 className="text-center">New Ribbon</h2>
@@ -256,7 +263,7 @@ export const RibbonForm = (props) => {
             <Col md={6}>
               <FormGroup row>
                 <Label htmlFor="source" lg={2}>
-                  Source <span className="text-danger">*</span>
+                  Source<span className="text-danger">*</span>
                 </Label>
                 <Col lg={10}>
                   <Input
