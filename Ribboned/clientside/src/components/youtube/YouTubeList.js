@@ -9,7 +9,6 @@ export const YouTubeList = () => {
   const { searchTerms, videos, getVideos, setYouTubeAdd } = useContext(
     YouTubeContext
   );
-  const [newRibbon, setNewRibbon] = useState({});
 
   const history = useHistory();
 
@@ -20,7 +19,16 @@ export const YouTubeList = () => {
 
   const handleAdd = (e) => {
     e.preventDefault(e);
-    setYouTubeAdd(newRibbon);
+    setYouTubeAdd({
+      title: video.snippet.title,
+      decription: video.snippet.description,
+      sourceId: 2,
+      url: `https://youtu.be/${video.id.videoId}`,
+      thumbnail: video.snippet.thumbnails.high.url,
+      categoryId: 0,
+      isActive: true,
+      isPublic: false,
+    });
     history.push(`/ribbon/create`);
   };
 
@@ -62,17 +70,8 @@ export const YouTubeList = () => {
             </CardSubtitle>
             <Button
               onClick={(e) => {
-                setNewRibbon({
-                  title: video.snippet.title,
-                  decription: video.snippet.description,
-                  sourceId: 2,
-                  url: `https://youtu.be/${video.id.videoId}`,
-                  thumbnail: video.snippet.thumbnails.high.url,
-                  categoryId: 0,
-                  isActive: true,
-                  isPublic: false,
-                });
-                handleAdd(e);
+                e.preventDefault();
+                handleAdd(video);
               }}
             >
               Add Ribbon
