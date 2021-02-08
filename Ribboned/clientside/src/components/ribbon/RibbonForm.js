@@ -19,7 +19,7 @@ import { storage } from "../../firebase";
 
 export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
-  const { addYouTube, setYouTubeAdd } = useContext(YouTubeContext);
+  const { youTubeAdd, setYouTubeAdd } = useContext(YouTubeContext);
   const { getSources, sources } = useContext(SourceContext);
   const {
     getRibbonById,
@@ -119,14 +119,18 @@ export const RibbonForm = (props) => {
   useEffect(() => {
     getSources();
     getCategories();
-    if (recommendedAdd.title) {
+    if (Object.keys(recommendedAdd).length !== 0) {
+      //recommended videos
       setRibbon(recommendedAdd);
       setIsLoading(false);
-    } else if (addYouTube.title) {
-      setRibbon(addYouTube);
+    } else if (Object.keys(youTubeAdd).length !== 0) {
+      //youtub video
+      setRibbon(youTubeAdd);
       setIsLoading(false);
     } else if (ribbonId) {
+      //edit
       getRibbonById(ribbonId).then((ribbon) => {
+        //user entry
         setRibbon(ribbon);
         setIsLoading(false);
       });

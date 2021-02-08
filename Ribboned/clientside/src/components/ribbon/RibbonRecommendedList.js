@@ -24,7 +24,7 @@ export const RibbonRecommendedList = () => {
       thumbnail: video.thumbnail,
       categoryId: 0,
       isActive: true,
-      isPublic: false,
+      isPublic: true,
     });
     history.push("/ribbon/create");
   };

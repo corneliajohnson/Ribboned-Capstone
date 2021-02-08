@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Card, CardImg, CardSubtitle, Button } from "reactstrap";
 import { YouTubeContext } from "../../providers/YouTubeProvider";
 import { useHistory } from "react-router-dom";
@@ -17,8 +17,7 @@ export const YouTubeList = () => {
     getVideos(searchTerms);
   }, [searchTerms]);
 
-  const handleAdd = (e) => {
-    e.preventDefault(e);
+  const handleAdd = (video) => {
     setYouTubeAdd({
       title: video.snippet.title,
       decription: video.snippet.description,
@@ -27,7 +26,7 @@ export const YouTubeList = () => {
       thumbnail: video.snippet.thumbnails.high.url,
       categoryId: 0,
       isActive: true,
-      isPublic: false,
+      isPublic: true,
     });
     history.push(`/ribbon/create`);
   };
