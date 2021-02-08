@@ -6,11 +6,28 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export const RibbonRecommendedList = () => {
-  const { getRecommendedRibbons } = useContext(RibbonContext);
+  const { getRecommendedRibbons, setRecommendedAdd } = useContext(
+    RibbonContext
+  );
   const user = JSON.parse(localStorage.getItem("userProfile"));
   const [videos, setVideos] = useState([]);
+  // const [newRibbon, setNewRibbon] = useState({});
 
   const history = useHistory();
+
+  const handleAdd = (video) => {
+    setRecommendedAdd({
+      title: video.title,
+      decription: video.decription,
+      sourceId: 2,
+      url: video.url,
+      thumbnail: video.thumbnail,
+      categoryId: 0,
+      isActive: true,
+      isPublic: true,
+    });
+    history.push("/ribbon/create");
+  };
 
   // Empty dependency array - useEffect only runs after first render
   useEffect(() => {
@@ -53,7 +70,14 @@ export const RibbonRecommendedList = () => {
             >
               {video.title}
             </CardSubtitle>
-            <Button>Add Ribbon</Button>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                handleAdd(video);
+              }}
+            >
+              Add Ribbon
+            </Button>
           </Card>
         );
       })}

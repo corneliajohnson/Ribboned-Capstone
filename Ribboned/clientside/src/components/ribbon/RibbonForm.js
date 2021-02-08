@@ -19,9 +19,15 @@ import { storage } from "../../firebase";
 
 export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
-  const { addYouTube, setYouTubeAdd } = useContext(YouTubeContext);
+  const { youTubeAdd, setYouTubeAdd } = useContext(YouTubeContext);
   const { getSources, sources } = useContext(SourceContext);
-  const { getRibbonById, addRibbon, updateRibbon } = useContext(RibbonContext);
+  const {
+    getRibbonById,
+    addRibbon,
+    updateRibbon,
+    recommendedAdd,
+    setRecommendedAdd,
+  } = useContext(RibbonContext);
   const [isMakedPublic, setIsPublic] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [disablePublic, setDisablePublic] = useState(true);
@@ -113,15 +119,21 @@ export const RibbonForm = (props) => {
   useEffect(() => {
     getSources();
     getCategories();
-    if (ribbonId) {
+    if (Object.keys(recommendedAdd).length !== 0) {
+      //recommended videos
+      setRibbon(recommendedAdd);
+      setIsLoading(false);
+    } else if (Object.keys(youTubeAdd).length !== 0) {
+      //youtub video
+      setRibbon(youTubeAdd);
+      setIsLoading(false);
+    } else if (ribbonId) {
+      //edit
       getRibbonById(ribbonId).then((ribbon) => {
+        //user entry
         setRibbon(ribbon);
         setIsLoading(false);
       });
-    } else if (addYouTube) {
-      console.log(addYouTube);
-      // setRibbon(addYouTube);
-      // setIsLoading(false);
     } else {
       setIsLoading(false);
       //clear flieds
@@ -191,6 +203,7 @@ export const RibbonForm = (props) => {
             : false,
         })
           .then(() => setYouTubeAdd({}))
+          .then(() => setRecommendedAdd({}))
           .then(() => history.push("/ribbons"));
       }
     }

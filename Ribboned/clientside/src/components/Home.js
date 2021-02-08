@@ -4,6 +4,7 @@ import Logo from "../img/RibbonedWordOnly.png";
 import { SnagContext } from "../providers/SnagProvider";
 import { Link } from "react-router-dom";
 import { RibbonRecommendedList } from "./ribbon/RibbonRecommendedList";
+import { YouTubeList } from "./youtube/YouTubeList";
 import Moment from "react-moment";
 import {
   ListGroup,
@@ -29,8 +30,12 @@ export const Home = () => {
               <img alt="ribboned logo" src={Logo} />
             </Link>
           </div>
-          <div className="mt-3">{/* <YouTubeSearch /> */}</div>
-          <div>{/* <YouTubeList /> */}</div>
+          <div className="mt-3">
+            <YouTubeSearch />
+          </div>
+          <div>
+            <YouTubeList />
+          </div>
           <div>
             {" "}
             <h3>What's everyone watching</h3>

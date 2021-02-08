@@ -8,6 +8,7 @@ export const RibbonContext = createContext();
 export const RibbonProvider = (props) => {
   const getToken = () => firebase.auth().currentUser.getIdToken();
   const [ribbons, setRibbons] = useState([]);
+  const [recommendedAdd, setRecommendedAdd] = useState({});
   const history = useHistory();
 
   const apiUrl = "/api/ribbon";
@@ -142,6 +143,8 @@ export const RibbonProvider = (props) => {
         getUserTrashRibbons,
         getRibbonByCategory,
         getRecommendedRibbons,
+        recommendedAdd,
+        setRecommendedAdd,
       }}
     >
       {props.children}
