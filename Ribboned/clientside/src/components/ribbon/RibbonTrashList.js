@@ -22,6 +22,7 @@ export const RibbonTrashList = () => {
           <img alt="ribboned logo" src={Logo} />
         </Link>
       </div>
+      <h1 className="text-center">Trash</h1>
       {ribbons.length === 0 ? (
         <p className="text-center">Trash Empty</p>
       ) : (

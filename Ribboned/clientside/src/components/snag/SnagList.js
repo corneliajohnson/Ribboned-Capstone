@@ -47,8 +47,7 @@ export const SnagList = ({ playerRef, handlePlay }) => {
                 </td>
                 <td className="text-wrap">{snag.note}</td>
                 <td>
-                  <SnagEdit snag={snag} />
-                  <SnagDelete snag={snag} />
+                  <SnagEdit snag={snag} /> <SnagDelete snag={snag} />
                 </td>
               </tr>
             );

@@ -113,12 +113,12 @@ export const RibbonDetail = () => {
               <PopoverBody>
                 <Link to={`/ribbon/edit/${ribbon.id}`}>
                   <Button>Edit</Button>
-                </Link>
+                </Link>{" "}
                 <RibbonTrashMove ribbon={ribbon} />
               </PopoverBody>
             ) : (
               <PopoverBody>
-                <RibbonRestore ribbon={ribbon} />
+                <RibbonRestore ribbon={ribbon} />{" "}
                 <RibbonDelete ribbon={ribbon} />
               </PopoverBody>
             )}

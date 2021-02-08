@@ -54,7 +54,10 @@ export const Home = () => {
               return (
                 <ListGroupItem key={snag.id} href="#" action>
                   <ListGroupItemHeading>
-                    <Link to={`/ribbon/${snag.ribbon?.id}`}>
+                    <Link
+                      className="home-snags"
+                      to={`/ribbon/${snag.ribbon?.id}`}
+                    >
                       {snag.ribbon?.title}
                     </Link>
                   </ListGroupItemHeading>

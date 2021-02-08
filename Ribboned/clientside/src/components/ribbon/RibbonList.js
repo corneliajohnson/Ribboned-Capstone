@@ -23,6 +23,7 @@ export const RibbonList = () => {
           <img alt="ribboned logo" src={Logo} />
         </Link>
       </div>
+      <h1 className="text-center">All Ribbons</h1>
       {ribbons.length === 0 ? (
         <p className="text-center">None</p>
       ) : (
