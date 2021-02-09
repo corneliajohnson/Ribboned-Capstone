@@ -22,7 +22,7 @@ namespace Ribboned.Repositories
 
         public List<Ribbon> GetByUserId(int id)
         {
-            return _context.Ribbon.Include(r => r.Snags).Where(r => r.Category.UserProfileId == id && r.IsActive == true).ToList();
+            return _context.Ribbon.Include(r => r.Snags).OrderByDescending(r => r.DateCreated).Where(r => r.Category.UserProfileId == id && r.IsActive == true).ToList();
         }
 
         public List<Ribbon> GetUserTrash(int id)
@@ -51,7 +51,7 @@ namespace Ribboned.Repositories
         {
             return _context.Ribbon
                 .Include(r => r.Category.UserProfile)
-                .Include(r => r.Snags.OrderBy(s =>s.DateCreated))
+                .Include(r => r.Snags.OrderBy(s => s.Seconds))
                 .FirstOrDefault(r => r.Id == id);
         }
 

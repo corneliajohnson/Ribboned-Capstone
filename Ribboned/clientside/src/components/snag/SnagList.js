@@ -15,6 +15,12 @@ export const SnagList = ({ playerRef, handlePlay }) => {
     });
   }, [snags]);
 
+  //sort snags by timestamp
+  useEffect(() => {
+    const sorted = snags.sort((a, b) => (a.seconds > b.seconds ? 1 : -1));
+    setSnags(sorted);
+  }, []);
+
   if (!snags) return null;
 
   return (
