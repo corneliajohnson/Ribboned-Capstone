@@ -147,7 +147,8 @@ namespace Ribboned.Controllers
         [HttpGet("search")]
         public IActionResult Search(string q)
         {
-            return Ok(_ribbonRepo.Search(q, 1));
+            var user = GetCurrentUserProfile();
+            return Ok(_ribbonRepo.Search(q, user.Id));
         }
         private UserProfile GetCurrentUserProfile()
         {

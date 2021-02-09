@@ -18,7 +18,6 @@ export const RibbonCard = ({ ribbon }) => (
       <Card className="mt-3 shadow ribbon-card" style={{ height: "550px" }}>
         {ribbon.thumbnail ? (
           <CardImg
-            top
             width="100%"
             height="60%"
             src="/assets/318x180.svg"
@@ -28,7 +27,6 @@ export const RibbonCard = ({ ribbon }) => (
           />
         ) : (
           <ReactPlayer
-            top
             width="100%"
             height="60%"
             src="/assets/318x180.svg"

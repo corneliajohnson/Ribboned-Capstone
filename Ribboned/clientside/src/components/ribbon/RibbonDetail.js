@@ -7,10 +7,11 @@ import { SnagAddButton } from "../snag/SnagAddButton";
 import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
 import { RibbonTrashMove } from "./RibbonTrashMove";
 import Moment from "react-moment";
-import { Link } from "react-router-dom";
 import "./Ribbon.css";
 import { RibbonRestore } from "./RibbonRestore";
 import { RibbonDelete } from "./RibbonDelete";
+import { Link } from "react-router-dom";
+import Logo from "../../img/RibbonedWordOnly.png";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -98,7 +99,7 @@ export const RibbonDetail = () => {
   return (
     <>
       <div className="container">
-        <div className="row d-flex">
+        <div className="row d-flex mt-1">
           <Button className="ml-auto" id="Popover1" type="button">
             Manage Ribbon
           </Button>
@@ -123,6 +124,11 @@ export const RibbonDetail = () => {
               </PopoverBody>
             )}
           </Popover>
+        </div>
+        <div className="text-center">
+          <Link className="m-5" to="/account">
+            <img alt="ribboned logo" src={Logo} />
+          </Link>
         </div>
         <div className="row">
           <h1 className="text-center m-4 mx-auto">{ribbon.title}</h1>

@@ -22,7 +22,7 @@ export const RibbonListByCategory = () => {
   if (!category) return null;
 
   return (
-    <div className="container">
+    <div className="container" style={{ marginBottom: "10%" }}>
       <div className="text-center my-5">
         <Link className="m-5" to="/account">
           <img alt="ribboned logo" src={Logo} />

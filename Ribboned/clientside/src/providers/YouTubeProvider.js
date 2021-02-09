@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const YouTubeContext = createContext();
 
 export const YouTubeProvider = (props) => {
-  const [searchTerms, setSearchTerms] = useState("news");
+  const [searchTerms, setSearchTerms] = useState("tutorial");
   const [videos, setVideos] = useState([]);
   const [youTubeAdd, setYouTubeAdd] = useState({});
 
