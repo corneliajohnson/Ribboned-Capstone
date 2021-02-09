@@ -123,7 +123,7 @@ namespace Ribboned.Repositories
             var query = _context.Ribbon
                                 .Include(r => r.Snags)
                                 .Where(r => (r.Title.ToLower().Contains(queryString) || r.Decription.ToLower().Contains(queryString)) && r.Category.UserProfileId == userId).ToList()
-                                .Concat(foundInSnags)//add the ribbons found in snags
+                               .Concat(foundInSnags)//add the ribbons found in snags
                                 .Distinct() //remove all duplcates
                                 .OrderByDescending(p => p.DateCreated).ToList();
 

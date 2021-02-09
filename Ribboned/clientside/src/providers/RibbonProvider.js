@@ -21,11 +21,7 @@ export const RibbonProvider = (props) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-        .then((res) => res.json())
-        .then((ribbons) => {
-          setRibbons(ribbons);
-        });
+      });
     });
   };
 
@@ -121,12 +117,13 @@ export const RibbonProvider = (props) => {
 
   const searchRibbons = (searchQuery) => {
     return getToken().then((token) => {
-      return fetch(`${apiUrl}/search/${searchQuery}`, {
+      return fetch(`${apiUrl}/search?q=${searchQuery}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((res) => res.json());
+      });
+      //.then((res) => res.json());
     });
   };
 
@@ -145,6 +142,7 @@ export const RibbonProvider = (props) => {
         getRecommendedRibbons,
         recommendedAdd,
         setRecommendedAdd,
+        setRibbons,
       }}
     >
       {props.children}

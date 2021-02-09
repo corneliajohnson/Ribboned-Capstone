@@ -1,15 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import Logo from "../../img/RibbonedWordOnly.png";
 import { Link } from "react-router-dom";
 
 import { RibbonCard } from "./RibbonCard";
+import { RibbonSearch } from "./RibbonSearch";
 
 export const RibbonList = () => {
-  const { getUserRibbons, ribbons } = useContext(RibbonContext);
+  const { getUserRibbons } = useContext(RibbonContext);
+  const [ribbons, setRibbons] = useState([]);
 
   useEffect(() => {
-    getUserRibbons();
+    getUserRibbons()
+      .then((res) => res.json())
+      .then((ribbons) => {
+        setRibbons(ribbons);
+      });
   }, []);
 
   if (!ribbons) {
@@ -24,6 +30,7 @@ export const RibbonList = () => {
         </Link>
       </div>
       <h1 className="text-center">All Ribbons</h1>
+      <RibbonSearch onSearch={(results) => setRibbons(results)} />
       {ribbons.length === 0 ? (
         <p className="text-center">None</p>
       ) : (
