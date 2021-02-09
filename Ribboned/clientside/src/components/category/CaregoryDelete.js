@@ -1,13 +1,22 @@
 import React, { useState, useContext } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const CategoryDelete = ({ category }) => {
   const { deleteCategory, getCategories } = useContext(CategoryContext);
   const [pendingDelete, setPendingDelete] = useState(false);
 
   const handleDelete = () => {
-    deleteCategory(category.id).then(getCategories);
+    deleteCategory(category.id)
+      .then(() =>
+        toast.error(`${category.name.toUpperCase()} Deleted`, {
+          position: "bottom-right",
+          hideProgressBar: true,
+        })
+      )
+      .then(getCategories);
     setPendingDelete(false);
   };
 

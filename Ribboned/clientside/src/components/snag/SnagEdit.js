@@ -11,6 +11,8 @@ import {
   Input,
   FormText,
 } from "reactstrap";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SnagEdit = ({ snag }) => {
   const { getByRibbonById, updateSnag } = useContext(SnagContext);
@@ -28,15 +30,21 @@ export const SnagEdit = ({ snag }) => {
     if (snagToEdit.note.trim() === "") {
       setInputWarning(true);
     } else {
-      updateSnag({ ...snag, note: snagToEdit.note }).then(
-        getByRibbonById(snag.ribbonId)
-      );
+      updateSnag({ ...snag, note: snagToEdit.note })
+        .then(() =>
+          toast("Snag Updated", {
+            position: "bottom-right",
+            hideProgressBar: true,
+          })
+        )
+        .then(getByRibbonById(snag.ribbonId));
       setPendingEdit(false);
     }
   };
 
   return (
     <>
+      <ToastContainer></ToastContainer>
       <Button
         className="btn btn-sm btn-primary"
         onClick={(e) => setPendingEdit(true)}

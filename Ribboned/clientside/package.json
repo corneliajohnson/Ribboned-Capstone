@@ -22,6 +22,7 @@
     "react-player": "^2.8.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-toastify": "^7.0.3",
     "reactstrap": "^8.8.1",
     "redux": "^4.0.5",
     "video-react": "^0.14.1",

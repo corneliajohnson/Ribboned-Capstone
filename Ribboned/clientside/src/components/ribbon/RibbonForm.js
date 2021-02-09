@@ -18,6 +18,8 @@ import "./Ribbon.css";
 import { storage } from "../../firebase";
 import Logo from "../../img/RibbonedWordOnly.png";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RibbonForm = (props) => {
   const { getCategories, categories } = useContext(CategoryContext);
@@ -184,7 +186,14 @@ export const RibbonForm = (props) => {
           isActive: true,
           isPublic: parseInt(ribbon.sourceId) === 2 ? ribbon.isPublic : false,
           dateCreated: ribbon.dateCreated,
-        }).then(() => history.push(`/ribbon/${ribbon.id}`));
+        })
+          .then(() => history.push(`/ribbon/${ribbon.id}`))
+          .then(() =>
+            toast.dark("Ribbon Updated", {
+              position: "bottom-right",
+              hideProgressBar: true,
+            })
+          );
       } else {
         //POST - add
         addRibbon({
@@ -204,6 +213,12 @@ export const RibbonForm = (props) => {
             ? isMakedPublic
             : false,
         })
+          .then(() =>
+            toast.dark("Ribbon Added", {
+              position: "bottom-right",
+              hideProgressBar: true,
+            })
+          )
           .then(() => setYouTubeAdd({}))
           .then(() => setRecommendedAdd({}))
           .then(() => history.push("/ribbons"));
@@ -212,7 +227,8 @@ export const RibbonForm = (props) => {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ marginBottom: "15%" }}>
+      <ToastContainer></ToastContainer>
       <div className="text-center my-5">
         <Link className="m-5" to="/account">
           <img alt="ribboned logo" src={Logo} />

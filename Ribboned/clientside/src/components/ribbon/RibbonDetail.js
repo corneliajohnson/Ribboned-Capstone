@@ -12,6 +12,8 @@ import { RibbonRestore } from "./RibbonRestore";
 import { RibbonDelete } from "./RibbonDelete";
 import { Link } from "react-router-dom";
 import Logo from "../../img/RibbonedWordOnly.png";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RibbonDetail = () => {
   const { getRibbonById } = useContext(RibbonContext);
@@ -99,6 +101,7 @@ export const RibbonDetail = () => {
   return (
     <>
       <div className="container">
+        <ToastContainer></ToastContainer>
         <div className="row d-flex mt-1">
           <Button className="ml-auto" id="Popover1" type="button">
             Manage Ribbon
