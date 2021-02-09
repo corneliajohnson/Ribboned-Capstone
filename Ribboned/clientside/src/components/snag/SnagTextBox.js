@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { SnagContext } from "../../providers/SnagProvider";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SnagTextBox = ({
   textBoxToggle,
@@ -32,7 +34,12 @@ export const SnagTextBox = ({
           note: snag.note,
           timeString: timeDisplayFormat,
           seconds: parseInt(seconds),
-        });
+        }).then(() =>
+          toast("snag Added", {
+            position: "bottom-right",
+            hideProgressBar: true,
+          })
+        );
         handlePlay();
         textBoxToggle();
       }
@@ -43,6 +50,7 @@ export const SnagTextBox = ({
 
   return (
     <Form onSubmit={handleSubmit} className="border mx-auto p-3 w-75">
+      <ToastContainer></ToastContainer>
       <FormGroup>
         <Label for="note">Add A Snag at {timeDisplayFormat}</Label>
         <Input

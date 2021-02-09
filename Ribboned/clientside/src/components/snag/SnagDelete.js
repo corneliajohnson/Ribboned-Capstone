@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SnagContext } from "../../providers/SnagProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SnagDelete = ({ snag }) => {
   const { deleteSnag, getByRibbonById } = useContext(SnagContext);
@@ -12,7 +14,12 @@ export const SnagDelete = ({ snag }) => {
   }, [pendingDelete]);
 
   const handleDelete = () => {
-    deleteSnag(snag.id);
+    deleteSnag(snag.id).then(() =>
+      toast.error("snag Deleted", {
+        position: "bottom-right",
+        hideProgressBar: true,
+      })
+    );
     setPendingDelete(false);
   };
 

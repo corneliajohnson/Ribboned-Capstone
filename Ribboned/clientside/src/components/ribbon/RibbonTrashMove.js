@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RibbonTrashMove = ({ ribbon }) => {
   const { updateRibbon } = useContext(RibbonContext);
@@ -20,7 +22,14 @@ export const RibbonTrashMove = ({ ribbon }) => {
       isActive: false,
       isPublic: ribbon.isPublic,
       dateCreated: ribbon.dateCreated,
-    }).then(() => history.push("/ribbons"));
+    })
+      .then(() =>
+        toast.error("Ribbon Deleted", {
+          position: "bottom-right",
+          hideProgressBar: true,
+        })
+      )
+      .then(() => history.push("/ribbons"));
     setPendingTrash(false);
   };
 

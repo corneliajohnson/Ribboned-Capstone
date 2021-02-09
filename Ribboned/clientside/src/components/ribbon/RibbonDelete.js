@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { RibbonContext } from "../../providers/RibbonProvider";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RibbonDelete = ({ ribbon }) => {
   const { deleteRibbon } = useContext(RibbonContext);
@@ -9,12 +11,20 @@ export const RibbonDelete = ({ ribbon }) => {
   const history = useHistory();
 
   const handleDelete = () => {
-    deleteRibbon(ribbon.id).then(() => history.push("/ribbons/trash"));
+    deleteRibbon(ribbon.id)
+      .then(() =>
+        toast.error("Ribbon Permanently Deleted", {
+          position: "bottom-right",
+          hideProgressBar: true,
+        })
+      )
+      .then(() => history.push("/ribbons/trash"));
     setPendingDelete(false);
   };
 
   return (
     <>
+      <ToastContainer></ToastContainer>
       <Button
         className="btn btn-sm btn-danger"
         onClick={(e) => setPendingDelete(true)}

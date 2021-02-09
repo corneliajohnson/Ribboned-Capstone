@@ -26,14 +26,23 @@ export const CategoryForm = () => {
     if (category.id) {
       category.userProfileId = userId;
       updateCategory(category)
-        //.then(() => console.log("Wow"))
-        .then(() => toast("Wow", { position: "bottom-right" }))
+        .then(() =>
+          toast.dark("Category Updated", {
+            position: "bottom-right",
+            hideProgressBar: true,
+          })
+        )
         .then(getCategories);
     } else {
       category.userProfileId = userId;
       addCategory(category)
-        .then(getCategories)
-        .then(() => toast("Wow", { position: "bottom-right" }));
+        .then(() =>
+          toast.dark("Category Added", {
+            position: "bottom-right",
+            hideProgressBar: true,
+          })
+        )
+        .then(getCategories);
     }
     setCategory({ id: 0, name: "", userProfileId: userId });
   };
