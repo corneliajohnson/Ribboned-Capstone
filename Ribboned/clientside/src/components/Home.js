@@ -23,7 +23,7 @@ export const Home = () => {
   if (!snags) return null;
   return (
     <>
-      <div className="container">
+      <div className="container" style={{ marginBottom: "10%" }}>
         <div className="align-items-center">
           <div className="text-center my-5">
             <Link className="m-5" to="/account">

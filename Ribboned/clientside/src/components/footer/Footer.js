@@ -1,4 +1,3 @@
-import "./Footer.css";
 import Logo from "../../img/RibbonedWordOnly.png";
 
 export const Footer = () => (

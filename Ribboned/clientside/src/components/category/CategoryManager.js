@@ -8,7 +8,7 @@ import "./Category.css";
 export const CategoryManager = () => {
   return (
     <>
-      <div className="container">
+      <div className="container" style={{ marginBottom: "20%" }}>
         <div className="text-center mt-5">
           <Link className="m-5" to="/account">
             <img alt="ribboned logo" src={Logo} />
