@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { Form, FormGroup, Input, Button, FormText, Card } from "reactstrap";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const CategoryForm = () => {
   const {
@@ -23,10 +25,15 @@ export const CategoryForm = () => {
     e.preventDefault();
     if (category.id) {
       category.userProfileId = userId;
-      updateCategory(category).then(getCategories);
+      updateCategory(category)
+        //.then(() => console.log("Wow"))
+        .then(() => toast("Wow", { position: "bottom-right" }))
+        .then(getCategories);
     } else {
       category.userProfileId = userId;
-      addCategory(category).then(getCategories);
+      addCategory(category)
+        .then(getCategories)
+        .then(() => toast("Wow", { position: "bottom-right" }));
     }
     setCategory({ id: 0, name: "", userProfileId: userId });
   };
@@ -35,6 +42,8 @@ export const CategoryForm = () => {
 
   return (
     <div className="col">
+      <ToastContainer></ToastContainer>
+
       <Card className="card mb-3 shadow bg-white rounded">
         <h2 className="my-2 text-center">Add A New Category</h2>
         <Form onSubmit={handleSubmit}>
