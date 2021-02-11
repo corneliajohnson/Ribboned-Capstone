@@ -5,7 +5,7 @@ export const Footer = () => (
     <div className="d-flex justify-content-around">
       <div className="col d-none d-lg-block">
         <p className="text-center font-weight-bold">Tools & Technologies</p>
-        C# | .NET | React | Javascript | ReactStrap | Entity Framework |
+        C# | .NET | React | Javascript | SQL | ReactStrap | Entity Framework |
         Firebase | Youtube API
       </div>
       <div className="col mt-4 text-center">

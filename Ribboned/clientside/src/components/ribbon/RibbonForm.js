@@ -341,7 +341,7 @@ export const RibbonForm = (props) => {
 
           <FormGroup row>
             <Label htmlFor="decription" lg={2}>
-              Decription <span className="text-danger">*</span>
+              Description <span className="text-danger">*</span>
             </Label>
             <Col lg={10}>
               <Input
