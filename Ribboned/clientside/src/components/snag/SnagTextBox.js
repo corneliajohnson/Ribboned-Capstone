@@ -24,26 +24,25 @@ export const SnagTextBox = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (snag.note.trim() === "") {
-      console.log("blank");
+      toast.dark("Must Add Note", {
+        position: "top-center",
+        hideProgressBar: true,
+      });
     } else {
-      if (snag.id) {
-        console.log("foredit");
-      } else {
-        addSnag({
-          ribbonId: ribbonId,
-          note: snag.note,
-          timeString: timeDisplayFormat,
-          seconds: parseInt(seconds),
-        }).then((_) => {
-          snag.note = "";
-          toast("Snag Added", {
-            position: "bottom-right",
-            hideProgressBar: true,
-          }); //clear the message after its been sent
+      addSnag({
+        ribbonId: ribbonId,
+        note: snag.note,
+        timeString: timeDisplayFormat,
+        seconds: parseInt(seconds),
+      }).then(() => {
+        snag.note = "";
+        toast("Snag Added", {
+          position: "bottom-right",
+          hideProgressBar: true,
         });
-        handlePlay();
-        textBoxToggle();
-      }
+      });
+      handlePlay();
+      textBoxToggle();
     }
   };
 
@@ -59,6 +58,7 @@ export const SnagTextBox = ({
           name="note"
           required="required"
           maxLength="255"
+          value={snag.note}
         />
       </FormGroup>
       <FormText className="float-right">{snag.note?.length}/500</FormText>
