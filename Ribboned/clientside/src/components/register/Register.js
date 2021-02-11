@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Button, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 import Logo from "../../img/RibbonedFinger.png";
 import LogoWords from "../../img/RibbonedWordOnly.png";
+import { toast } from "react-toastify";
 import "../login/Login.css";
 
 export const Register = () => {
@@ -21,7 +21,7 @@ export const Register = () => {
     e.preventDefault();
 
     if (password !== confirm) {
-      // toast.error("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
@@ -33,10 +33,12 @@ export const Register = () => {
     register(profile, password)
       .then((user) => {
         setLoading(false);
+        toast.dark(`Welcome ${user.userName}`);
         history.push("/");
       })
       .catch((err) => {
         setLoading(false);
+        toast.error("Invalid email");
       });
   };
 

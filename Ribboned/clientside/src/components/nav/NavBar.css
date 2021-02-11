@@ -73,3 +73,15 @@ nav {
 #root {
   z-index: -1;
 }
+
+.trash-link {
+  position: absolute;
+  top: 80%;
+  margin-bottom: 30%;
+}
+
+.logout-link {
+  position: absolute;
+  top: 83%;
+  margin-bottom: 30%;
+}

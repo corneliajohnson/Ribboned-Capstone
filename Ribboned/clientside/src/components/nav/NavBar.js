@@ -77,14 +77,14 @@ export const NavBar = (props) => {
               </Link>
             </li>
             <li
-              className="navbar__item fixed-bottom ml-2"
+              className="navbar__item trash-link fixed-bottom ml-2"
               style={{ marginBottom: "30%" }}
             >
               <Link className="navbar__link" to="/ribbons/trash">
                 Trash
               </Link>
             </li>
-            <li className="navbar__item fixed-bottom ml-2 mb-5">
+            <li className="navbar__item logout-link fixed-bottom ml-2 mb-5">
               <Link
                 className="navbar__link"
                 to="/login"

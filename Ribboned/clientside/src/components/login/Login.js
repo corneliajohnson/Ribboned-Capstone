@@ -6,6 +6,7 @@ import { UserProfileContext } from "../../providers/UserProfileProvider";
 import Logo from "../../img/RibbonedFinger.png";
 import LogoWords from "../../img/RibbonedWordOnly.png";
 import "./Login.css";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const { login } = useContext(UserProfileContext);
@@ -20,10 +21,12 @@ export const Login = () => {
     login(email, password)
       .then((user) => {
         setLoading(false);
+        toast.dark(`Welcome back ${user.userName}`);
         history.push("/");
       })
       .catch((err) => {
         setLoading(false);
+        toast.error("Invalid email or password");
       });
   };
 
