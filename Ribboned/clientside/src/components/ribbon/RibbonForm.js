@@ -228,7 +228,6 @@ export const RibbonForm = (props) => {
 
   return (
     <div className="container" style={{ marginBottom: "15%" }}>
-      <ToastContainer></ToastContainer>
       <div className="text-center my-5">
         <Link className="m-5" to="/account">
           <img alt="ribboned logo" src={Logo} />

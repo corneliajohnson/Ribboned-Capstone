@@ -4,6 +4,7 @@ import { CategoryContext } from "../../providers/CategoryProvider";
 import { RibbonCard } from "./RibbonCard";
 import { useParams } from "react-router-dom";
 import Logo from "../../img/RibbonedWordOnly.png";
+import Empty from "../../img/Empty.png";
 import { Link } from "react-router-dom";
 
 export const RibbonListByCategory = () => {
@@ -29,8 +30,10 @@ export const RibbonListByCategory = () => {
         </Link>
       </div>
       <h1 className="text-center">{category.name} Ribbons</h1>
-      {ribbons.length === 0 ? (
-        <p className="text-center">None</p>
+      {ribbons.length === 0 && !ribbons[0] ? (
+        <div className="text-center">
+          <img src={Empty} alt="empty" />
+        </div>
       ) : (
         <div className="row">
           {ribbons.map((ribbon) => (

@@ -34,12 +34,13 @@ export const SnagTextBox = ({
           note: snag.note,
           timeString: timeDisplayFormat,
           seconds: parseInt(seconds),
-        }).then(() =>
-          toast("snag Added", {
+        }).then((_) => {
+          snag.note = "";
+          toast("Snag Added", {
             position: "bottom-right",
             hideProgressBar: true,
-          })
-        );
+          }); //clear the message after its been sent
+        });
         handlePlay();
         textBoxToggle();
       }
@@ -50,7 +51,6 @@ export const SnagTextBox = ({
 
   return (
     <Form onSubmit={handleSubmit} className="border mx-auto p-3 w-75">
-      <ToastContainer></ToastContainer>
       <FormGroup>
         <Label for="note">Add A Snag at {timeDisplayFormat}</Label>
         <Input

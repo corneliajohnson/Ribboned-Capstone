@@ -44,7 +44,6 @@ export const SnagEdit = ({ snag }) => {
 
   return (
     <>
-      <ToastContainer></ToastContainer>
       <Button
         className="btn btn-sm btn-primary"
         onClick={(e) => setPendingEdit(true)}

@@ -24,7 +24,6 @@ export const RibbonDelete = ({ ribbon }) => {
 
   return (
     <>
-      <ToastContainer></ToastContainer>
       <Button
         className="btn btn-sm btn-danger"
         onClick={(e) => setPendingDelete(true)}
