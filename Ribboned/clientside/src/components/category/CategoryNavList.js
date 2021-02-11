@@ -35,7 +35,7 @@ export const CategoryNavList = () => {
       >
         <DropdownToggle caret>Categories</DropdownToggle>
         <DropdownMenu>
-          <Link className="navbar__link" to="/categories">
+          <Link className="navbar__link pl-2" to="/categories">
             Manager Categories
           </Link>
           <DropdownItem divider />

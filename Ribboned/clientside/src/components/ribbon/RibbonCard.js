@@ -15,7 +15,7 @@ import {
 export const RibbonCard = ({ ribbon }) => (
   <div className="col-sm-12 col-md-6 col-lg-4">
     <Link to={`/ribbon/${ribbon.id}`}>
-      <Card className="mt-3 shadow ribbon-card" style={{ height: "550px" }}>
+      <Card className="mt-3 shadow ribbon-card" style={{ height: "590px" }}>
         {ribbon.thumbnail ? (
           <CardImg
             width="100%"
@@ -46,7 +46,7 @@ export const RibbonCard = ({ ribbon }) => (
             {ribbon.decription}
           </CardText>
           {ribbon.snags.length === 0 ? (
-            "No Ribbon Snags"
+            <CardText className="p-0 m-0">No Ribbon Snags</CardText>
           ) : (
             <>
               <div>
